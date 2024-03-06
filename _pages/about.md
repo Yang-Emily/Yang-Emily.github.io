@@ -22,12 +22,12 @@ Research Interests
 Publication
 ======
 - **Automated Data Visualization from Natural Language via Large Language Models: An Exploratory Study**  
-  Yang Wu, Yao Wan*, Hongyu Zhang, Yulei Sui, Wucai Wei, Wei Zhao, Guandong Xu, Hai Jin  
+  **Yang Wu**, Yao Wan\*, Hongyu Zhang, Yulei Sui, Wucai Wei, Wei Zhao, Guandong Xu, Hai Jin  
   **SIGMOD 2024**. *ACM Special Interest Group on Management of Data*  
   [PDF](#) | [CCF-A](#)
-  
+
 - **Graph Neural Networks for Vulnerability Detection - A Counterfactual Explanation**  
-  Zhaoyang Chu, Yao Wan*, Qian Li, Yang Wu, Hongyu Zhang, Yulei Sui, Guandong Xu, Hai Jin  
+  Zhaoyang Chu, Yao Wan\*, Qian Li, **Yang Wu**, Hongyu Zhang, Yulei Sui, Guandong Xu, Hai Jin  
   **ISSTA 2024**. *The ACM SIGSOFT International Symposium on Software Testing and Analysis*  
   [PDF](#) | [CCF-A](#)
 Honors
