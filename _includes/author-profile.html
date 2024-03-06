@@ -38,9 +38,6 @@
       {% endif %}
 
       <!-- Font Awesome and Academicons icons / Academic websites -->
-      {% if author.blog %}
-        <li><a href="{{ author.blog }}"><img src="/images/logo.png" alt="Bitbucket">Blog</a></li>
-      {% endif %}
       {% if author.arxiv %}
         <li><a href="{{ author.arxiv }}"><i class="ai ai-arxiv ai-fw icon-pad-right"></i>arXiv</a></li>
       {% endif %}      
@@ -72,6 +69,9 @@
       {% endif %}      
       {% if author.github %}
         <li><a href="https://github.com/{{ author.github }}"><i class="fab fa-fw fa-github icon-pad-right" aria-hidden="true"></i>Github</a></li>
+      {% endif %}
+      {% if author.blog %}
+        <li><a href="{{ author.blog }}"><a href="https://www.flaticon.com/free-icons/blog" title="blog icons"></a>Blog</a></li>
       {% endif %}
       {% if author.kaggle %}
         <li><a href="https://kaggle.com/{{ author.kaggle }}"><i class="fab fa-fw fa-kaggle icon-pad-right" aria-hidden="true"></i>Kaggle</a></li>
