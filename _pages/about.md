@@ -8,15 +8,15 @@ redirect_from:
 ---
 About Me
 ======
-I am currently pursuing my Master's degree in the School of Computer Science and Technology at Huazhong University of Science and Technology ([HUST](https://www.hust.edu.cn/)), under the guidance of Prof. [Yao Wan](http://wanyao.me/). 
+I am currently pursuing my Master's degree in the School of Computer Science and Technology at Huazhong University of Science and Technology ([HUST](https://www.hust.edu.cn/)), advised by Prof. [Yao Wan](http://wanyao.me/). 
 
-I am actively seeking a PhD position in Software Engineering for 2025 fall.    
+I am actively seeking a PhD position in SE for 2025 fall.    
 You’re welcome to download my CV [here]().       
 Contact: wuyang_emily@hust.edu.cn
 
 Research Interests
 ======
-My primary research interest lies in code intelligence (e.g., code generation, code summarization), with a specific focus on natural language to visualization (NL2Vis). I am particularly interested in leveraging artificial intelligence in the applications of tabular data and visualization.
+My primary research interest lies in code intelligence, including code generation and code summarization, with a specific focus on natural language to visualization (NL2Vis). I am particularly interested in leveraging AI in the applications of tabular data and visualization.
 
 Publication
 ======
@@ -37,5 +37,5 @@ Honors
 
 Hobbies
 ======
-- I enjoy playing various musical instruments such as the guzheng, guitar, drums, and piano.
+- playing musical instruments such as the guzheng, guitar, drums, and piano.
 - Sports, like skateboarding, fitness, and mountain climbing.
