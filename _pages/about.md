@@ -8,8 +8,7 @@ redirect_from:
 ---
 About Me
 ======
-- 
-- 
+...
 
 Research Interests
 ======
@@ -18,18 +17,18 @@ Research Interests
 
 Publication
 ======
--
--
--
+- 
+- 
+- 
 
 Honors
 ======
--
--
--
+- 
+- 
+- 
 
 Hobbies
 ======
--
--
--
+- 
+- 
+- 
