@@ -22,11 +22,11 @@ repository               : "Yang-Emily/Yang-Emily.github.io"
 author:
   # Biographic information
   avatar           : "profile.png"
-  name             : "Yang Wu(吴漾)"
+  name             : "Yang Wu (吴漾)"
   pronouns         : # example: "she/her"  
   bio              : "Master@HUST CS"
   location         : "Wuhan, China"
-  employer         : "Huazhong University of Science and Technology"
+  employer         : #"Huazhong University of Science and Technology"
   uri              : # URL
   email            : "wuyang_emily@hust.edu.cn" 
 
@@ -64,7 +64,7 @@ author:
   steam            : # Username
   telegram         : # URL
   tumblr           : # Username
-  twitter          : "YangWu00506105"  # Replace this with your X / Twitter handle
+  twitter          : #"YangWu00506105"  # Replace this with your X / Twitter handle
   vine             : # Username
   weibo            : # Username
   wikipedia        : # Username
