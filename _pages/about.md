@@ -34,6 +34,8 @@ Honors
 ======
 - Excellent Student Cadre (2022-2023)
 - First-class Scholarship for Postgraduates (2022-2023)
+- Outstanding Undergraduate (2022)
+- National Inspirational Scholarship (2018-2021)
 
 Hobbies
 ======
