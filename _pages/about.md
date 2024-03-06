@@ -12,7 +12,7 @@ I am currently pursuing my Master's degree in the School of Computer Science and
 
 I am actively seeking a PhD position in SE for 2025 fall.    
 You’re welcome to download my **CV** [here](../assets/).       
-Contact: <u>wuyang_emily@hust.edu.cn</u>
+Contact: *wuyang_emily@hust.edu.cn*
 
 Research Interests
 ======
