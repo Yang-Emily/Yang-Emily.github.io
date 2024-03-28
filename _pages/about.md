@@ -41,5 +41,4 @@ Honors
 
 Hobbies
 ======
-- Playing musical instruments: guzheng, guitar, drums, and piano.
-- Sports: skateboarding, fitness training, mountain climbing.
+- Playing guzheng and guitar, climbing, hiking, reading.
