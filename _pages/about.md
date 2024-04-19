@@ -41,4 +41,4 @@ Honors
 
 Hobbies
 ======
-- Playing guzheng and guitar, climbing, hiking, reading.
+- Playing guzheng and guitar.
