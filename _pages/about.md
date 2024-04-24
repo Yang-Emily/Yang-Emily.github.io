@@ -11,7 +11,7 @@ About Me
 I am currently pursuing my Master's degree in the School of Computer Science and Technology at **Huazhong University of Science and Technology** ([**HUST**](https://www.hust.edu.cn/)), advised by Prof. [**Yao Wan**](http://wanyao.me/). 
 
 I am actively seeking a PhD position in SE/ML/HCI for 2025 fall.    
-You’re welcome to download my **CV** [here](../assets/YangWu_CV.pdf).       
+You’re welcome to download my **CV** [here](../assets/YangWu_CV.pdf) and **Transcript** [here](../assets/Transcript.pdf).       
 <!-- Contact: wuyang_emily@hust.edu.cn -->
 Contact: wuyang991107@gmail.com
 
