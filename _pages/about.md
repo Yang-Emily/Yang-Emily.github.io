@@ -6,7 +6,8 @@ redirect_from:
   - /about/
   - /about.html
 ---
-<h2 style="color:red; background:pink;">I will be in Santiago, Chile in June for SIGMOD 2024!</h2>
+<h2 style="background-color: #f4f4f4; margin: 20px; padding: 20px; color: red; background: black;">
+I will be in Santiago, Chile in June for SIGMOD 2024!</h2>
 
 About Me
 ======
