@@ -6,8 +6,6 @@ redirect_from:
   - /about/
   - /about.html
 ---
-<h2 style="background-color: #f4f4f4; margin: 5px; padding: 5px; color: #CC3300; background: #FFFFCC;">
-I will be in Santiago, Chile in June for SIGMOD 2024!</h2>
 
 About Me
 ======
@@ -17,6 +15,9 @@ I am actively seeking a PhD position in SE/ML/HCI for 2025 fall.
 You’re welcome to download my **CV** [here](../assets/YangWu_CV.pdf) and **Transcript** [here](../assets/Transcript.pdf).       
 <!-- Contact: wuyang_emily@hust.edu.cn -->
 Contact: wuyang991107@gmail.com
+
+<h2 style="background-color: #f4f4f4; margin: 0px; padding: 5px; color: #CC3300; background: #FFFFCC;">
+I will be in Santiago, Chile in June for SIGMOD 2024!</h2>
 
 Research Interests
 ======
