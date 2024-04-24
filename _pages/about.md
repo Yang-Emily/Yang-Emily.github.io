@@ -6,6 +6,8 @@ redirect_from:
   - /about/
   - /about.html
 ---
+<h2 style="color:red; background:pink;">I will be in Santiago, Chile in June for SIGMOD 2024!</h2>
+
 About Me
 ======
 I am currently pursuing my Master's degree in the School of Computer Science and Technology at **Huazhong University of Science and Technology** ([**HUST**](https://www.hust.edu.cn/)), advised by Prof. [**Yao Wan**](http://wanyao.me/). 
