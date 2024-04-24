@@ -9,7 +9,7 @@ redirect_from:
 
 About Me
 ======
-<h2 style="background-color: #f4f4f4; margin: 20px; padding: 20px;padding-left=0px; color: #CC3300; background: #FFFFCC;">I will present my paper in Santiago, Chile this June for SIGMOD 2024!</h2>
+<h2 style="background-color: #f4f4f4; margin-bottom: 20px; padding: 20px; color: #CC3300; background: #FFFFCC;">I will present my paper in Santiago, Chile this June for SIGMOD 2024!</h2>
 
 I am currently pursuing my Master's degree in the School of Computer Science and Technology at **Huazhong University of Science and Technology** ([**HUST**](https://www.hust.edu.cn/)), advised by Prof. [**Yao Wan**](http://wanyao.me/). 
 
