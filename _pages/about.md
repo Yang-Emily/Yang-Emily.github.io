@@ -46,4 +46,4 @@ Honors
 
 Hobbies
 ======
-- Playing guitar, reading, hiking.
+- Reading, hiking.
