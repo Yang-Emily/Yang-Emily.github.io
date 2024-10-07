@@ -27,7 +27,7 @@ My primary research interest lies in the intersection between Software Engineeri
 
 Publication
 ======
-<!-- - **Automated Data Visualization from Natural Language via Large Language Models: An Exploratory Study**  
+- **Automated Data Visualization from Natural Language via Large Language Models: An Exploratory Study**  
   **Yang Wu**, Yao Wan\*, Hongyu Zhang, Yulei Sui, Wucai Wei, Wei Zhao, Guandong Xu, Hai Jin  
   [**SIGMOD 2024**](https://2024.sigmod.org/). *ACM Special Interest Group on Management of Data*  
   [PDF](../files/Automated_Data_Visualization_from_Natural_Language_via_Large_Language_Models_An_Exploratory_Study.pdf) | [CCF-A](#) | [Arxiv](https://arxiv.org/abs/2404.17136)
@@ -36,8 +36,8 @@ Publication
   Zhaoyang Chu, Yao Wan\*, Qian Li, **Yang Wu**, Hongyu Zhang, Yulei Sui, Guandong Xu, Hai Jin  
   [**ISSTA 2024**](https://2024.issta.org/). *The ACM SIGSOFT International Symposium on Software Testing and Analysis*  
   [PDF](../files/istta24_code_gnn_explainer.pdf) | [CCF-A](#) | [Arxiv](https://arxiv.org/abs/2404.15687)
-====== -->
-<div style="display: flex; align-items: center; margin-bottom: 20px;">
+<!-- ======  -->
+<!-- <div style="display: flex; align-items: center; margin-bottom: 20px;">
     <img src="../assets/publication_image.png" alt="Automated Data Visualization" style="width: 150px; height: auto; margin-right: 20px;" />
     <div>
         <h3>Automated Data Visualization from Natural Language via Large Language Models: An Exploratory Study</h3>
@@ -71,7 +71,7 @@ Publication
         </p>
         <a href="../files/istta24_code_gnn_explainer.pdf" style="text-decoration: none; color: #FF9999;">Paper</a>
     </div>
-</div>
+</div> -->
 
 News
 ======
