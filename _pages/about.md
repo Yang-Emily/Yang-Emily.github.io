@@ -36,6 +36,7 @@ Publication
   Zhaoyang Chu, Yao Wan\*, Qian Li, **Yang Wu**, Hongyu Zhang, Yulei Sui, Guandong Xu, Hai Jin  
   [**ISSTA 2024**](https://2024.issta.org/). *The ACM SIGSOFT International Symposium on Software Testing and Analysis*  
   [PDF](../files/istta24_code_gnn_explainer.pdf) | [CCF-A](#) | [Arxiv](https://arxiv.org/abs/2404.15687)
+  
 <!-- ======  -->
 <!-- <div style="display: flex; align-items: center; margin-bottom: 20px;">
     <img src="../assets/publication_image.png" alt="Automated Data Visualization" style="width: 150px; height: auto; margin-right: 20px;" />
