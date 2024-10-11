@@ -23,6 +23,71 @@ Research Interests
 ======
 <!-- My primary research interest lies in code intelligence, including code summarization and code generation, with a specific focus on natural language to visualization (NL2Vis). I am particularly interested in leveraging AI in the applications of tabular data and visualization. -->
 My primary research interest lies in the intersection between Software Engineering and Human-Computer Interaction, including source code generation and summarization, with a specific focus on the universality of natural language, source code and data visualizations with AI tools.
+<div>
+    <svg id="vennDiagram" width="500" height="400"></svg>
+</div>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script>
+    var svg = d3.select("#vennDiagram");
+
+    var circlesData = [
+        { cx: 200, cy: 200, r: 100, color: "orange", label: "Programming" },
+        { cx: 300, cy: 200, r: 100, color: "lightblue", label: "Education" },
+        { cx: 250, cy: 280, r: 100, color: "lightcoral", label: "Collaboration" }
+    ];
+
+    var circles = svg.selectAll("circle")
+        .data(circlesData)
+        .enter()
+        .append("circle")
+        .attr("cx", d => d.cx)
+        .attr("cy", d => d.cy)
+        .attr("r", d => d.r)
+        .attr("fill", d => d.color)
+        .attr("class", "circle")
+        .on("click", function (event, d) {
+            circles.classed("highlight", false);
+            d3.select(this).classed("highlight", true);
+        });
+
+    svg.selectAll("text")
+        .data(circlesData)
+        .enter()
+        .append("text")
+        .attr("x", d => d.cx)
+        .attr("y", d => d.cy)
+        .attr("text-anchor", "middle")
+        .attr("dy", ".35em")
+        .text(d => d.label)
+        .style("font-size", "14px");
+
+    // Tooltip for hover effect
+    circles.on("mouseover", function(event, d) {
+        svg.append("text")
+            .attr("id", "tooltip")
+            .attr("x", d.cx)
+            .attr("y", d.cy - d.r - 10)
+            .attr("text-anchor", "middle")
+            .text(`This is ${d.label}`);
+    }).on("mouseout", function() {
+        d3.select("#tooltip").remove();
+    });
+</script>
+
+<style>
+    .circle {
+        fill-opacity: 0.5;
+        transition: transform 0.3s ease, fill-opacity 0.3s ease;
+    }
+    .circle:hover {
+        cursor: pointer;
+    }
+    .highlight {
+        fill-opacity: 1;
+        transform: scale(1.1);
+    }
+</style>
 
 News
 ======
