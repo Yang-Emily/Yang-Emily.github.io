@@ -13,9 +13,9 @@ About Me
 I am currently pursuing my Master's degree in the School of Computer Science and Technology at **Huazhong University of Science and Technology** ([**HUST**](https://www.hust.edu.cn/)), advised by Prof. [**Yao Wan**](http://wanyao.me/). I am a member of the CGCL laboratory led by Prof. [**Hai Jin**](https://scholar.google.ca/citations?user=o02W0aEAAAAJ&hl=en).
 
 I am actively seeking a PhD position in SE/ML/HCI for 2025 fall.    
-You’re welcome to download my **CV** [here](../assets/YangWu_CV.pdf) and **Transcript** [here](../assets/Transcript.pdf).       
+You’re welcome to download my **CV** [here](../assets/YangWu_CV.pdf) and **Transcript** [here](../assets/Transcript.pdf). Contact: [wuyang991107@gmail.com](mailto:wuyang991107@gmail.com)    
 <!-- Contact: wuyang_emily@hust.edu.cn -->
-Contact: [wuyang991107@gmail.com](mailto:wuyang991107@gmail.com)
+
 
 
 
@@ -23,6 +23,10 @@ Research Interests
 ======
 <!-- My primary research interest lies in code intelligence, including code summarization and code generation, with a specific focus on natural language to visualization (NL2Vis). I am particularly interested in leveraging AI in the applications of tabular data and visualization. -->
 My primary research interest lies in the intersection between Software Engineering and Human-Computer Interaction, including source code generation and summarization, with a specific focus on the universality of natural language, source code and data visualizations with AI tools.
+
+News
+======
+- [2024-05-14] I am awarded the Student Support Scholarship at SIGMOD 2024.
 
 Publication
 ======
@@ -73,9 +77,7 @@ Publication
     </div>
 </div> -->
 
-News
-======
-- [2024-05-14] I am awarded the Student Support Scholarship at SIGMOD 2024.
+
 
 Honors
 ======
