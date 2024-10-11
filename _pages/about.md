@@ -30,7 +30,7 @@ My primary research interest lies in the intersection between Software Engineeri
     <div style="display: flex; justify-content: space-between; margin-top: -300px;">
         <div style="text-align: left;"> 
             <p>NL2Vis, SIGMOD'24</p>
-            <p>CodeSum-Eval, TSE'25</p>
+            <p>CFExplainer, ISSTA'24</p>
         </div>
         <div style="text-align: right;">
             <p>ExplainVis, CHI'25</p>
@@ -131,11 +131,30 @@ News
 
 Publication
 ======
-- **Automated Data Visualization from Natural Language via Large Language Models: An Exploratory Study**  
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CVPR 2016</div><img src='../assets/p1.png' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**Automated Data Visualization from Natural Language via Large Language Models: An Exploratory Study**  
   **Yang Wu**, Yao Wan\*, Hongyu Zhang, Yulei Sui, Wucai Wei, Wei Zhao, Guandong Xu, Hai Jin  
   [**SIGMOD 2024**](https://2024.sigmod.org/). *ACM Special Interest Group on Management of Data*  
   [PDF](../files/Automated_Data_Visualization_from_Natural_Language_via_Large_Language_Models_An_Exploratory_Study.pdf) | [CCF-A](#) | [Arxiv](https://arxiv.org/abs/2404.17136)
-- **Graph Neural Networks for Vulnerability Detection - A Counterfactual Explanation**  
+<!-- 
+<div style="display: flex; align-items: center; margin-bottom: 20px;">
+    <img src="../assets/p1.png" alt="Automated Data Visualization" style="width: 150px; height: auto; margin-right: 20px;" />
+    <div>
+        <h3>Automated Data Visualization from Natural Language via Large Language Models: An Exploratory Study</h3>
+        <p>
+            **Yang Wu**, Yao Wan*, Hongyu Zhang, Yulei Sui, Wucai Wei, Wei Zhao, Guandong Xu, Hai Jin<br />
+            [**SIGMOD 2024**](https://2024.sigmod.org/). *ACM Special Interest Group on Management of Data*<br />
+            This study explores automated data visualization techniques using large language models.
+        </p>
+        <a href="../files/Automated_Data_Visualization_from_Natural_Language_via_Large_Language_Models_An_Exploratory_Study.pdf" style="text-decoration: none; color: #FF9999;">Paper</a>
+    </div>
+</div> -->
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CVPR 2016</div><img src='../assets/p2.png' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+**Graph Neural Networks for Vulnerability Detection - A Counterfactual Explanation**  
   Zhaoyang Chu, Yao Wan\*, Qian Li, **Yang Wu**, Hongyu Zhang, Yulei Sui, Guandong Xu, Hai Jin  
   [**ISSTA 2024**](https://2024.issta.org/). *The ACM SIGSOFT International Symposium on Software Testing and Analysis*  
   [PDF](../files/istta24_code_gnn_explainer.pdf) | [CCF-A](#) | [Arxiv](https://arxiv.org/abs/2404.15687)
@@ -148,6 +167,9 @@ First Author, Submitted to [**ICSE 2025**](https://conf.researchr.org/home/icse-
 First Author, Submitted to [**CHI 2025**](https://chi2025.acm.org/).
 - **Interactive Data Visualization Through Sign Language**
 Second Author (Advisor listed first), Submitted to [**CHI 2025**](https://chi2025.acm.org/).
+
+# 💻 Internships
+- *2024.06 - 2024.09*, [ETH Zurich](https://ethz.ch/en.html).
 
 <!-- ======  -->
 <!-- <div style="display: flex; align-items: center; margin-bottom: 20px;">
