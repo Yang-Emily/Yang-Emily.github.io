@@ -39,7 +39,7 @@ My primary research interest lies in the intersection between Software Engineeri
     </div>
 
     <div style="text-align: center; margin-top: 220px;">
-        <p>CodeSum-Eval, TSE'25</p>
+        <p>CodeSum-Eval, ICSE'25</p>
     </div>
 </div>
 
