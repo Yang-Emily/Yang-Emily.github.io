@@ -33,9 +33,9 @@ My primary research interest lies in the intersection between Software Engineeri
     var svg = d3.select("#vennDiagram");
 
     var circlesData = [
-        { cx: 200, cy: 200, r: 100, color: "orange", label: "Programming" },
-        { cx: 300, cy: 200, r: 100, color: "lightblue", label: "Education" },
-        { cx: 250, cy: 280, r: 100, color: "lightcoral", label: "Collaboration" }
+        { cx: 250, cy: 150, r: 100, color: "orange", label: "Human-Computer Interaction" },
+        { cx: 200, cy: 250, r: 100, color: "lightblue", label: "Software Engineering" },
+        { cx: 300, cy: 250, r: 100, color: "lightcoral", label: "Artificial Intelligence" }
     ];
 
     var circles = svg.selectAll("circle")
@@ -61,6 +61,24 @@ My primary research interest lies in the intersection between Software Engineeri
         .attr("text-anchor", "middle")
         .attr("dy", ".35em")
         .text(d => d.label)
+        .style("font-size", "18px")  // Increased font size
+        .style("font-weight", "bold");  // Bold font
+
+    // Add labels for the intersection areas
+    var intersectionLabels = [
+        { x: 150, y: 100, text: "NL2Vis, CodeSum-Eval" },
+        { x: 350, y: 100, text: "Sign2Vis, ExplainVis" },
+        { x: 250, y: 370, text: "CFExplainer" }
+    ];
+
+    svg.selectAll(".intersection-text")
+        .data(intersectionLabels)
+        .enter()
+        .append("text")
+        .attr("x", d => d.x)
+        .attr("y", d => d.y)
+        .attr("text-anchor", "middle")
+        .text(d => d.text)
         .style("font-size", "14px");
 
     // Tooltip for hover effect
@@ -89,6 +107,7 @@ My primary research interest lies in the intersection between Software Engineeri
         transform: scale(1.1);
     }
 </style>
+
 
 Publication
 ======
