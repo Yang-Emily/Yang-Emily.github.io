@@ -39,7 +39,7 @@ My primary research interest lies in the intersection between Software Engineeri
         { cx: 340, cy: 250, r: 100, color: "lightcoral", label: "Artificial Intelligence" }
     ];
 
-    // Add circles
+    // Add circles to the Venn diagram
     var circles = svg.selectAll("circle")
         .data(circlesData)
         .enter()
@@ -50,7 +50,7 @@ My primary research interest lies in the intersection between Software Engineeri
         .attr("fill", d => d.color)
         .attr("class", "circle");
 
-    // Add labels inside the circles
+    // Add labels inside the circles (for the main labels)
     svg.selectAll("text")
         .data(circlesData)
         .enter()
@@ -63,22 +63,22 @@ My primary research interest lies in the intersection between Software Engineeri
         .style("font-size", "18px")
         .style("font-weight", "bold");
 
-    // Add external text around the Venn diagram
-    var vennText = [
-        { x: 80, y: 100, text: "Reuse analysis code, ICSE'22" },
-        { x: 70, y: 130, text: "DITL, CHI'22" },
-        { x: 70, y: 160, text: "NB2Slide, CHI'22" },
-        { x: 60, y: 190, text: "Themisto, TOCHI'21" },
-        { x: 60, y: 220, text: "Multidisciplinary teams, CSCW'21" },
-        { x: 60, y: 250, text: "Ziva, IUI'21" },
-        { x: 340, y: 100, text: "PuzzleMe, CSCW'21" },
-        { x: 340, y: 130, text: "EdCode, VL/HCC'20" },
-        { x: 240, y: 340, text: "JargonLite, VL/HCC'19" },
-        { x: 240, y: 370, text: "Conversational programmers, CHI'18" }
+    // Add external text around the Venn diagram (outside the circles)
+    var externalText = [
+        { x: 50, y: 70, text: "Reuse analysis code, ICSE'22" },
+        { x: 50, y: 100, text: "DITL, CHI'22" },
+        { x: 50, y: 130, text: "NB2Slide, CHI'22" },
+        { x: 50, y: 160, text: "Themisto, TOCHI'21" },
+        { x: 50, y: 190, text: "Multidisciplinary teams, CSCW'21" },
+        { x: 50, y: 220, text: "Ziva, IUI'21" },
+        { x: 380, y: 70, text: "PuzzleMe, CSCW'21" },
+        { x: 380, y: 100, text: "EdCode, VL/HCC'20" },
+        { x: 240, y: 370, text: "JargonLite, VL/HCC'19" },
+        { x: 240, y: 400, text: "Conversational programmers, CHI'18" }
     ];
 
-    svg.selectAll(".venn-text")
-        .data(vennText)
+    svg.selectAll(".external-text")
+        .data(externalText)
         .enter()
         .append("text")
         .attr("x", d => d.x)
@@ -87,17 +87,6 @@ My primary research interest lies in the intersection between Software Engineeri
         .style("font-size", "12px")
         .style("font-family", "Arial, sans-serif");
 
-    // Tooltip for hover effect
-    circles.on("mouseover", function(event, d) {
-        svg.append("text")
-            .attr("id", "tooltip")
-            .attr("x", d.cx)
-            .attr("y", d.cy - d.r - 10)
-            .attr("text-anchor", "middle")
-            .text(`This is ${d.label}`);
-    }).on("mouseout", function() {
-        d3.select("#tooltip").remove();
-    });
 </script>
 
 <style>
