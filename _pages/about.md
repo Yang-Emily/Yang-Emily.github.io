@@ -131,13 +131,22 @@ News
 
 Publication
 ======
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge"></div><img src='../assets/p1.png' alt="sym" width="100%"></div></div>
+<div class='paper-box'>
+<div class='paper-box-image'>
+<div>
+<div class="badge">
+</div>
+<img src='../assets/p1.png' alt="sym" width="100%">
+</div>
+</div>
 <div class='paper-box-text' markdown="1">
 
 **Automated Data Visualization from Natural Language via Large Language Models: An Exploratory Study**  
   **Yang Wu**, Yao Wan\*, Hongyu Zhang, Yulei Sui, Wucai Wei, Wei Zhao, Guandong Xu, Hai Jin  
   [**SIGMOD 2024**](https://2024.sigmod.org/). *ACM Special Interest Group on Management of Data*  
   [PDF](../files/Automated_Data_Visualization_from_Natural_Language_via_Large_Language_Models_An_Exploratory_Study.pdf) | [CCF-A](#) | [Arxiv](https://arxiv.org/abs/2404.17136)
+</div>
+</div>
 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge"></div><img src='../assets/p2.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
@@ -147,6 +156,9 @@ Publication
   [**ISSTA 2024**](https://2024.issta.org/). *The ACM SIGSOFT International Symposium on Software Testing and Analysis*  
   [PDF](../files/istta24_code_gnn_explainer.pdf) | [CCF-A](#) | [Arxiv](https://arxiv.org/abs/2404.15687)
   
+  </div>
+</div>
+
 Project
 ======
 - **Exploring LLMs as Evaluator for Code Summarization**
