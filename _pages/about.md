@@ -131,7 +131,7 @@ News
 
 Publication
 ======
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">SIGMOD 2025</div><img src='../assets/p1.png' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge"></div><img src='../assets/p1.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 **Automated Data Visualization from Natural Language via Large Language Models: An Exploratory Study**  
@@ -139,8 +139,9 @@ Publication
   [**SIGMOD 2024**](https://2024.sigmod.org/). *ACM Special Interest Group on Management of Data*  
   [PDF](../files/Automated_Data_Visualization_from_Natural_Language_via_Large_Language_Models_An_Exploratory_Study.pdf) | [CCF-A](#) | [Arxiv](https://arxiv.org/abs/2404.17136)
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ISSTA 2025</div><img src='../assets/p2.png' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge"></div><img src='../assets/p2.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
+
 **Graph Neural Networks for Vulnerability Detection - A Counterfactual Explanation**  
   Zhaoyang Chu, Yao Wan\*, Qian Li, **Yang Wu**, Hongyu Zhang, Yulei Sui, Guandong Xu, Hai Jin  
   [**ISSTA 2024**](https://2024.issta.org/). *The ACM SIGSOFT International Symposium on Software Testing and Analysis*  
