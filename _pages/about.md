@@ -33,9 +33,9 @@ My primary research interest lies in the intersection between Software Engineeri
     var svg = d3.select("#vennDiagram");
 
     var circlesData = [
-        { cx: 240, cy: 150, r: 100, color: "orange", label: "Human-Computer Interaction" },
-        { cx: 170, cy: 250, r: 100, color: "lightblue", label: "Software Engineering" },
-        { cx: 310, cy: 250, r: 100, color: "lightcoral", label: "Artificial Intelligence" }
+        { cx: 240, cy: 150, r: 200, color: "orange", label: "Human-Computer Interaction" },
+        { cx: 170, cy: 250, r: 200, color: "lightblue", label: "Software Engineering" },
+        { cx: 310, cy: 250, r: 200, color: "lightcoral", label: "Artificial Intelligence" }
     ];
 
     var circles = svg.selectAll("circle")
