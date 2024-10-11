@@ -23,20 +23,18 @@ Research Interests
 ======
 <!-- My primary research interest lies in code intelligence, including code summarization and code generation, with a specific focus on natural language to visualization (NL2Vis). I am particularly interested in leveraging AI in the applications of tabular data and visualization. -->
 My primary research interest lies in the intersection between Software Engineering and Human-Computer Interaction, including source code generation and summarization, with a specific focus on the universality of natural language, source code and data visualizations with AI tools.
-<div>
-    <svg id="vennDiagram" width="500" height="400"></svg>
-</div>
-
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script>
     var svg = d3.select("#vennDiagram");
 
+    // 定义三个圆的位置和标签
     var circlesData = [
-        { cx: 200, cy: 200, r: 100, color: "orange", label: "Programming" },
-        { cx: 300, cy: 200, r: 100, color: "lightblue", label: "Education" },
-        { cx: 250, cy: 280, r: 100, color: "lightcoral", label: "Collaboration" }
+        { cx: 275, cy: 150, r: 120, color: "lightcoral", label: "Human-Computer Interaction" },  // 顶部的圆
+        { cx: 175, cy: 300, r: 120, color: "orange", label: "Software Engineering" },              // 左下的圆
+        { cx: 375, cy: 300, r: 120, color: "lightblue", label: "Artificial Intelligence" }         // 右下的圆
     ];
 
+    // 创建圆
     var circles = svg.selectAll("circle")
         .data(circlesData)
         .enter()
@@ -51,6 +49,7 @@ My primary research interest lies in the intersection between Software Engineeri
             d3.select(this).classed("highlight", true);
         });
 
+    // 添加标签
     svg.selectAll("text")
         .data(circlesData)
         .enter()
@@ -60,32 +59,50 @@ My primary research interest lies in the intersection between Software Engineeri
         .attr("text-anchor", "middle")
         .attr("dy", ".35em")
         .text(d => d.label)
-        .style("font-size", "14px");
+        .style("font-size", "16px")
+        .style("font-weight", "bold");
 
-    // Tooltip for hover effect
-    circles.on("mouseover", function(event, d) {
-        svg.append("text")
-            .attr("id", "tooltip")
-            .attr("x", d.cx)
-            .attr("y", d.cy - d.r - 10)
-            .attr("text-anchor", "middle")
-            .text(`This is ${d.label}`);
-    }).on("mouseout", function() {
-        d3.select("#tooltip").remove();
-    });
+    // 添加交叉处对应的paper标注
+    svg.append("text")
+        .attr("x", 175)
+        .attr("y", 220)
+        .attr("class", "label")
+        .text("NL2Vis");
+
+    svg.append("text")
+        .attr("x", 375)
+        .attr("y", 220)
+        .attr("class", "label")
+        .text("Sign2Vis");
+
+    svg.append("text")
+        .attr("x", 275)
+        .attr("y", 380)
+        .attr("class", "label")
+        .text("ExplainVis");
+
+    svg.append("text")
+        .attr("x", 275)
+        .attr("y", 270)
+        .attr("class", "label")
+        .text("CFExplainer");
+
 </script>
 
 <style>
     .circle {
-        fill-opacity: 0.5;
+        fill-opacity: 0.3; /* 调整透明度 */
         transition: transform 0.3s ease, fill-opacity 0.3s ease;
     }
     .circle:hover {
         cursor: pointer;
     }
     .highlight {
-        fill-opacity: 1;
+        fill-opacity: 0.5; /* 点击时突出显示，增加透明度 */
         transform: scale(1.1);
+    }
+    .label {
+        font-size: 14px;
     }
 </style>
 
