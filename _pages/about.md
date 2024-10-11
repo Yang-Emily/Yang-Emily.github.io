@@ -25,7 +25,7 @@ Research Interests
 My primary research interest lies in the intersection between Software Engineering and Human-Computer Interaction, including source code generation and summarization, with a specific focus on the universality of natural language, source code and data visualizations with AI tools.
 
 <div style="text-align:center;">
-    <svg id="vennDiagram" width="500" height="400"></svg>
+    <svg id="vennDiagram" width="600" height="500"></svg>
 <!-- External text placed using divs outside the Venn diagram -->
     <div style="display: flex; justify-content: space-between; margin-top: -300px;">
         <div style="text-align: left;"> 
@@ -48,9 +48,9 @@ My primary research interest lies in the intersection between Software Engineeri
     var svg = d3.select("#vennDiagram");
 
     var circlesData = [
-        { cx: 240, cy: 150, r: 110, color: "orange", label: "Human-Computer Interaction" },
-        { cx: 140, cy: 250, r: 110, color: "lightblue", label: "Software Engineering" },
-        { cx: 340, cy: 250, r: 110, color: "lightcoral", label: "Artificial Intelligence" }
+        { cx: 240, cy: 150, r: 120, color: "orange", label: "Human-Computer Interaction" },
+        { cx: 140, cy: 250, r: 120, color: "lightblue", label: "Software Engineering" },
+        { cx: 340, cy: 250, r: 120, color: "lightcoral", label: "Artificial Intelligence" }
     ];
 
     var circles = svg.selectAll("circle")
@@ -125,8 +125,7 @@ My primary research interest lies in the intersection between Software Engineeri
 
 News
 ======
-- [2024-05-14] Awarded the **_Student Support Scholarship_** at **<span style="color: #FF9999;">SIGMOD 2024</span>**.  
-Traveling to **<span style="color: #FF9999;">Chile</span>** to present my paper.
+- [2024-05-14] Awarded the **_Student Support Scholarship_** at **<span style="color: #FF9999;">SIGMOD 2024</span>**. Traveling to **<span style="color: #FF9999;">Chile</span>** to present my paper.
 
 
 
