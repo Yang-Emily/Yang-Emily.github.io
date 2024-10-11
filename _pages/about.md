@@ -25,7 +25,7 @@ Research Interests
 My primary research interest lies in the intersection between Software Engineering and Human-Computer Interaction, including source code generation and summarization, with a specific focus on the universality of natural language, source code and data visualizations with AI tools.
 
 <div style="text-align:center;">
-    <svg id="vennDiagram" width="600" height="500"></svg>
+    <svg id="vennDiagram" width="500" height="400"></svg>
 <!-- External text placed using divs outside the Venn diagram -->
     <div style="display: flex; justify-content: space-between; margin-top: -300px;">
         <div style="text-align: left;"> 
@@ -135,12 +135,16 @@ Publication
   **Yang Wu**, Yao Wan\*, Hongyu Zhang, Yulei Sui, Wucai Wei, Wei Zhao, Guandong Xu, Hai Jin  
   [**SIGMOD 2024**](https://2024.sigmod.org/). *ACM Special Interest Group on Management of Data*  
   [PDF](../files/Automated_Data_Visualization_from_Natural_Language_via_Large_Language_Models_An_Exploratory_Study.pdf) | [CCF-A](#) | [Arxiv](https://arxiv.org/abs/2404.17136)
-- **On-going**, First Author, Submitted to [**ICSE 2025**](https://conf.researchr.org/home/icse-2025).
 - **Graph Neural Networks for Vulnerability Detection - A Counterfactual Explanation**  
   Zhaoyang Chu, Yao Wan\*, Qian Li, **Yang Wu**, Hongyu Zhang, Yulei Sui, Guandong Xu, Hai Jin  
   [**ISSTA 2024**](https://2024.issta.org/). *The ACM SIGSOFT International Symposium on Software Testing and Analysis*  
   [PDF](../files/istta24_code_gnn_explainer.pdf) | [CCF-A](#) | [Arxiv](https://arxiv.org/abs/2404.15687)
   
+Project
+======
+- **Exploring LLMs as Evaluator for Code Summarization**, First Author, Submitted to [**ICSE 2025**](https://conf.researchr.org/home/icse-2025).
+- **Explainable NL2Vis: Opening the Black Box of Automated Visualizations**, First Author, Submitted to [**CHI 2025**](https://chi2025.acm.org/).
+- **Interactive Data Visualization Through Sign Language**, Second Author (Advisor listed first), Submitted to [**CHI 2025**](https://chi2025.acm.org/).
 <!-- ======  -->
 <!-- <div style="display: flex; align-items: center; margin-bottom: 20px;">
     <img src="../assets/publication_image.png" alt="Automated Data Visualization" style="width: 150px; height: auto; margin-right: 20px;" />
