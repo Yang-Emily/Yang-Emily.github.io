@@ -33,9 +33,9 @@ My primary research interest lies in the intersection between Software Engineeri
     var svg = d3.select("#vennDiagram");
 
     var circlesData = [
-        { cx: 240, cy: 150, r: 200, color: "orange", label: "Human-Computer Interaction" },
-        { cx: 170, cy: 250, r: 200, color: "lightblue", label: "Software Engineering" },
-        { cx: 310, cy: 250, r: 200, color: "lightcoral", label: "Artificial Intelligence" }
+        { cx: 240, cy: 150, r: 120, color: "orange", label: "Human-Computer Interaction" },
+        { cx: 140, cy: 250, r: 120, color: "lightblue", label: "Software Engineering" },
+        { cx: 340, cy: 250, r: 120, color: "lightcoral", label: "Artificial Intelligence" }
     ];
 
     var circles = svg.selectAll("circle")
@@ -80,7 +80,28 @@ My primary research interest lies in the intersection between Software Engineeri
         .attr("text-anchor", "middle")
         .text(d => d.text)
         .style("font-size", "14px");
+ // Add external text boxes outside the circles
+    var textBoxes = [
+        { x: 50, y: 50, text: "NL2Vis, CodeSum-Eval" },
+        { x: 400, y: 50, text: "Sign2Vis, ExplainVis" },
+        { x: 250, y: 370, text: "CFExplainer" }
+    ];
 
+    svg.selectAll(".text-box")
+        .data(textBoxes)
+        .enter()
+        .append("foreignObject")
+        .attr("x", d => d.x)
+        .attr("y", d => d.y)
+        .attr("width", 120)
+        .attr("height", 50)
+        .append("xhtml:div")
+        .style("border", "1px solid black")
+        .style("padding", "5px")
+        .style("background-color", "#f9f9f9")
+        .style("font-size", "12px")
+        .style("text-align", "center")
+        .html(d => d.text);
     // Tooltip for hover effect
     circles.on("mouseover", function(event, d) {
         svg.append("text")
