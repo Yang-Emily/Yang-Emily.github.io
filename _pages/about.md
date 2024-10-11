@@ -27,7 +27,7 @@ My primary research interest lies in the intersection between Software Engineeri
 <div style="text-align:center;">
     <svg id="vennDiagram" width="500" height="400"></svg>
 <!-- External text placed using divs outside the Venn diagram -->
-    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+    <div style="display: flex; justify-content: space-between; margin-top: -300px;">
         <div style="text-align: left;">
             <p>NL2Vis, SIGMOD'24</p>
             <p>CFExplainer, ISSTA'24</p>
@@ -38,7 +38,7 @@ My primary research interest lies in the intersection between Software Engineeri
         </div>
     </div>
 
-    <div style="text-align: center; margin-top: 20px;">
+    <div style="text-align: center; margin-top: 230px;">
         <p>CodeSum-Eval, TSE'25</p>
     </div>
 </div>
@@ -49,8 +49,8 @@ My primary research interest lies in the intersection between Software Engineeri
 
     var circlesData = [
         { cx: 240, cy: 150, r: 120, color: "orange", label: "Human-Computer Interaction" },
-        { cx: 170, cy: 250, r: 120, color: "lightblue", label: "Software Engineering" },
-        { cx: 310, cy: 250, r: 120, color: "lightcoral", label: "Artificial Intelligence" }
+        { cx: 140, cy: 250, r: 120, color: "lightblue", label: "Software Engineering" },
+        { cx: 340, cy: 250, r: 120, color: "lightcoral", label: "Artificial Intelligence" }
     ];
 
     var circles = svg.selectAll("circle")
