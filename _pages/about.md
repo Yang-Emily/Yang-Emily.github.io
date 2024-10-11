@@ -142,9 +142,13 @@ Publication
   
 Project
 ======
-- **Exploring LLMs as Evaluator for Code Summarization**, First Author, Submitted to [**ICSE 2025**](https://conf.researchr.org/home/icse-2025).
-- **Explainable NL2Vis: Opening the Black Box of Automated Visualizations**, First Author, Submitted to [**CHI 2025**](https://chi2025.acm.org/).
-- **Interactive Data Visualization Through Sign Language**, Second Author (Advisor listed first), Submitted to [**CHI 2025**](https://chi2025.acm.org/).
+- **Exploring LLMs as Evaluator for Code Summarization**
+First Author, Submitted to [**ICSE 2025**](https://conf.researchr.org/home/icse-2025).
+- **Explainable NL2Vis: Opening the Black Box of Automated Visualizations**
+First Author, Submitted to [**CHI 2025**](https://chi2025.acm.org/).
+- **Interactive Data Visualization Through Sign Language**
+Second Author (Advisor listed first), Submitted to [**CHI 2025**](https://chi2025.acm.org/).
+
 <!-- ======  -->
 <!-- <div style="display: flex; align-items: center; margin-bottom: 20px;">
     <img src="../assets/publication_image.png" alt="Automated Data Visualization" style="width: 150px; height: auto; margin-right: 20px;" />
