@@ -23,6 +23,11 @@ Research Interests
 ======
 <!-- My primary research interest lies in code intelligence, including code summarization and code generation, with a specific focus on natural language to visualization (NL2Vis). I am particularly interested in leveraging AI in the applications of tabular data and visualization. -->
 My primary research interest lies in the intersection between Software Engineering and Human-Computer Interaction, including source code generation and summarization, with a specific focus on the universality of natural language, source code and data visualizations with AI tools.
+
+<div>
+    <svg id="vennDiagram" width="600" height="500"></svg>
+</div>
+
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script>
     var svg = d3.select("#vennDiagram");
