@@ -24,16 +24,15 @@ Research Interests
 <!-- My primary research interest lies in code intelligence, including code summarization and code generation, with a specific focus on natural language to visualization (NL2Vis). I am particularly interested in leveraging AI in the applications of tabular data and visualization. -->
 My primary research interest lies in the intersection between Software Engineering and Human-Computer Interaction, including source code generation and summarization, with a specific focus on the universality of natural language, source code and data visualizations with AI tools.
 
-<script src="https://d3js.org/d3.v5.min.js"></script>
-
 <div>
-    <svg id="vennDiagram" width="600" height="500"></svg>
+    <svg id="vennDiagram" width="600" height="500" style="border:1px solid black;"></svg>
 </div>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
 
 <script>
     var svg = d3.select("#vennDiagram");
 
-    // 定义三个圆的位置和标签
     var circlesData = [
         { cx: 275, cy: 150, r: 120, color: "lightcoral", label: "Human-Computer Interaction" },  // 顶部的圆
         { cx: 175, cy: 300, r: 120, color: "orange", label: "Software Engineering" },             // 左下的圆
@@ -41,71 +40,16 @@ My primary research interest lies in the intersection between Software Engineeri
     ];
 
     // 创建圆
-    var circles = svg.selectAll("circle")
+    svg.selectAll("circle")
         .data(circlesData)
         .enter()
         .append("circle")
         .attr("cx", d => d.cx)
         .attr("cy", d => d.cy)
         .attr("r", d => d.r)
-        .attr("fill", d => d.color)
-        .attr("class", "circle")
-        .on("click", function (event, d) {
-            circles.classed("highlight", false);
-            d3.select(this).classed("highlight", true);
-        });
-
-    // 添加标签
-    svg.selectAll("text")
-        .data(circlesData)
-        .enter()
-        .append("text")
-        .attr("x", d => d.cx)
-        .attr("y", d => d.cy)
-        .attr("text-anchor", "middle")
-        .attr("dy", ".35em")
-        .text(d => d.label)
-        .style("font-size", "18px")  // 增加字体大小
-        .style("font-weight", "bold");  // 加粗字体
-
-    // 添加交叉处对应的论文标注
-    svg.append("text")
-        .attr("x", 175)
-        .attr("y", 220)
-        .attr("class", "label")
-        .text("NL2Vis, CodeSum-Eval");
-
-    svg.append("text")
-        .attr("x", 375)
-        .attr("y", 220)
-        .attr("class", "label")
-        .text("Sign2Vis, ExplainVis");
-
-    svg.append("text")
-        .attr("x", 275)
-        .attr("y", 380)
-        .attr("class", "label")
-        .text("CFExplainer");
+        .attr("fill", d => d.color);
 
 </script>
-
-<style>
-    .circle {
-        fill-opacity: 0.2;  /* 增加透明度 */
-        transition: transform 0.3s ease, fill-opacity 0.3s ease;
-    }
-    .circle:hover {
-        cursor: pointer;
-    }
-    .highlight {
-        fill-opacity: 0.5;  /* 点击时提高透明度 */
-        transform: scale(1.1);  /* 放大效果 */
-    }
-    .label {
-        font-size: 14px;
-        font-weight: bold;
-    }
-</style>
 
 Publication
 ======
