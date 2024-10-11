@@ -9,8 +9,7 @@ redirect_from:
 
 About Me
 ======
-<h2 style="background-color: #f4f4f4; margin-bottom: 20px; padding: 10px; color: #FF9999; background: #FFFFFF;">I will be in Santiago, Chile in June for SIGMOD 2024!</h2>
-
+<!-- <h2 style="background-color: #f4f4f4; margin-bottom: 20px; padding: 10px; color: #FF9999; background: #FFFFFF;">I will be in Santiago, Chile in June for SIGMOD 2024!</h2> -->
 I am currently pursuing my Master's degree in the School of Computer Science and Technology at **Huazhong University of Science and Technology** ([**HUST**](https://www.hust.edu.cn/)), advised by Prof. [**Yao Wan**](http://wanyao.me/). I am a member of the CGCL laboratory led by Prof. [**Hai Jin**](https://scholar.google.ca/citations?user=o02W0aEAAAAJ&hl=en).
 
 I am actively seeking a PhD position in SE/ML/HCI for 2025 fall.    
@@ -24,6 +23,10 @@ Research Interests
 ======
 <!-- My primary research interest lies in code intelligence, including code summarization and code generation, with a specific focus on natural language to visualization (NL2Vis). I am particularly interested in leveraging AI in the applications of tabular data and visualization. -->
 My primary research interest lies in the intersection between Software Engineering and Human-Computer Interaction, including source code generation and summarization, with a specific focus on the universality of natural language, source code and data visualizations with AI tools.
+
+News
+======
+- [2024-05-14] I am awarded the Student Support Scholarship at SIGMOD 2024.
 
 Publication
 ======
@@ -73,10 +76,6 @@ Publication
         <a href="../files/istta24_code_gnn_explainer.pdf" style="text-decoration: none; color: #FF9999;">Paper</a>
     </div>
 </div> -->
-
-News
-======
-- [2024-05-14] I am awarded the Student Support Scholarship at SIGMOD 2024.
 
 Honors
 ======
