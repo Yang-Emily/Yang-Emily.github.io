@@ -124,6 +124,10 @@ My primary research interest lies in the intersection between Software Engineeri
     }
 </style>
 
+News
+======
+- [2024-05-14] I am awarded the Student Support Scholarship at SIGMOD 2024.
+
 Publication
 ======
 - **Automated Data Visualization from Natural Language via Large Language Models: An Exploratory Study**  
