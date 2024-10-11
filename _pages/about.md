@@ -34,8 +34,8 @@ My primary research interest lies in the intersection between Software Engineeri
 
     var circlesData = [
         { cx: 250, cy: 150, r: 100, color: "orange", label: "Human-Computer Interaction" },
-        { cx: 170, cy: 250, r: 100, color: "lightblue", label: "Software Engineering" },
-        { cx: 330, cy: 250, r: 100, color: "lightcoral", label: "Artificial Intelligence" }
+        { cx: 170, cy: 260, r: 100, color: "lightblue", label: "Software Engineering" },
+        { cx: 330, cy: 260, r: 100, color: "lightcoral", label: "Artificial Intelligence" }
     ];
 
     var circles = svg.selectAll("circle")
@@ -64,9 +64,9 @@ My primary research interest lies in the intersection between Software Engineeri
 
     // Add labels for the intersection areas
     var intersectionLabels = [
-        { x: 210, y: 180, text: "NL2Vis, CodeSum-Eval" },   // Intersection of HCI and SE
-        { x: 290, y: 180, text: "Sign2Vis, ExplainVis" },    // Intersection of HCI and AI
-        { x: 250, y: 310, text: "CFExplainer" }              // Intersection of all three
+        { x: 210, y: 200, text: "NL2Vis, CodeSum-Eval" },   // Intersection of HCI and SE
+        { x: 290, y: 200, text: "Sign2Vis, ExplainVis" },    // Intersection of HCI and AI
+        { x: 250, y: 320, text: "CFExplainer" }              // Intersection of all three
     ];
 
     svg.selectAll(".intersection-label")
@@ -92,7 +92,6 @@ My primary research interest lies in the intersection between Software Engineeri
         fill-opacity: 0.7;
     }
 </style>
-
 
 
 Publication
