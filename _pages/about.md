@@ -30,25 +30,44 @@ My primary research interest lies in the intersection between Software Engineeri
 
 <script src="https://d3js.org/d3.v5.min.js"></script>
 
+<div>
+    <svg id="vennDiagram" width="600" height="500" style="border:1px solid black;"></svg>
+</div>
+
 <script>
-    var svg = d3.select("#vennDiagram");
+    document.addEventListener("DOMContentLoaded", function() {
+        var svg = d3.select("#vennDiagram");
 
-    var circlesData = [
-        { cx: 275, cy: 150, r: 120, color: "lightcoral", label: "Human-Computer Interaction" },  // 顶部的圆
-        { cx: 175, cy: 300, r: 120, color: "orange", label: "Software Engineering" },             // 左下的圆
-        { cx: 375, cy: 300, r: 120, color: "lightblue", label: "Artificial Intelligence" }        // 右下的圆
-    ];
+        // 定义三个圆的位置和标签
+        var circlesData = [
+            { cx: 275, cy: 150, r: 120, color: "lightcoral", label: "Human-Computer Interaction" },  // 顶部的圆
+            { cx: 175, cy: 300, r: 120, color: "orange", label: "Software Engineering" },             // 左下的圆
+            { cx: 375, cy: 300, r: 120, color: "lightblue", label: "Artificial Intelligence" }        // 右下的圆
+        ];
 
-    // 创建圆
-    svg.selectAll("circle")
-        .data(circlesData)
-        .enter()
-        .append("circle")
-        .attr("cx", d => d.cx)
-        .attr("cy", d => d.cy)
-        .attr("r", d => d.r)
-        .attr("fill", d => d.color);
+        // 创建圆
+        var circles = svg.selectAll("circle")
+            .data(circlesData)
+            .enter()
+            .append("circle")
+            .attr("cx", d => d.cx)
+            .attr("cy", d => d.cy)
+            .attr("r", d => d.r)
+            .attr("fill", d => d.color);
 
+        // 添加标签
+        svg.selectAll("text")
+            .data(circlesData)
+            .enter()
+            .append("text")
+            .attr("x", d => d.cx)
+            .attr("y", d => d.cy)
+            .attr("text-anchor", "middle")
+            .attr("dy", ".35em")
+            .text(d => d.label)
+            .style("font-size", "18px")
+            .style("font-weight", "bold");
+    });
 </script>
 
 Publication
@@ -112,5 +131,4 @@ Honors
 Hobbies
 ======
 - Reading, hiking.
-
 <script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=54e0ojatafc&amp;m=7&amp;c=e63100&amp;cr1=ffffff&amp;f=arial&amp;l=0&amp;bv=90&amp;lx=-420&amp;ly=420&amp;hi=20&amp;he=7&amp;hc=a8ddff&amp;rs=80" async="async"></script>
