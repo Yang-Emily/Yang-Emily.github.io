@@ -24,51 +24,76 @@ Research Interests
 <!-- My primary research interest lies in code intelligence, including code summarization and code generation, with a specific focus on natural language to visualization (NL2Vis). I am particularly interested in leveraging AI in the applications of tabular data and visualization. -->
 My primary research interest lies in the intersection between Software Engineering and Human-Computer Interaction, including source code generation and summarization, with a specific focus on the universality of natural language, source code and data visualizations with AI tools.
 
-<div>
-    <svg id="vennDiagram" width="600" height="500" style="border:1px solid black;"></svg>
-</div>
-
 <script src="https://d3js.org/d3.v5.min.js"></script>
 
 <div>
-    <svg id="vennDiagram" width="600" height="500" style="border:1px solid black;"></svg>
+    <svg id="vennDiagram" width="600" height="500"></svg>
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        var svg = d3.select("#vennDiagram");
+    var svg = d3.select("#vennDiagram");
 
-        // 定义三个圆的位置和标签
-        var circlesData = [
-            { cx: 275, cy: 150, r: 120, color: "lightcoral", label: "Human-Computer Interaction" },  // 顶部的圆
-            { cx: 175, cy: 300, r: 120, color: "orange", label: "Software Engineering" },             // 左下的圆
-            { cx: 375, cy: 300, r: 120, color: "lightblue", label: "Artificial Intelligence" }        // 右下的圆
-        ];
+    // 定义三个圆的位置和标签
+    var circlesData = [
+        { cx: 275, cy: 150, r: 120, color: "lightcoral", label: "Human-Computer Interaction" },  // 顶部的圆
+        { cx: 175, cy: 300, r: 120, color: "orange", label: "Software Engineering" },              // 左下的圆
+        { cx: 375, cy: 300, r: 120, color: "lightblue", label: "Artificial Intelligence" }         // 右下的圆
+    ];
 
-        // 创建圆
-        var circles = svg.selectAll("circle")
-            .data(circlesData)
-            .enter()
-            .append("circle")
-            .attr("cx", d => d.cx)
-            .attr("cy", d => d.cy)
-            .attr("r", d => d.r)
-            .attr("fill", d => d.color);
+    // 创建圆
+    var circles = svg.selectAll("circle")
+        .data(circlesData)
+        .enter()
+        .append("circle")
+        .attr("cx", d => d.cx)
+        .attr("cy", d => d.cy)
+        .attr("r", d => d.r)
+        .attr("fill", d => d.color)
+        .attr("class", "circle")
+        .on("click", function (event, d) {
+            circles.classed("highlight", false);
+            d3.select(this).classed("highlight", true);
+        });
 
-        // 添加标签
-        svg.selectAll("text")
-            .data(circlesData)
-            .enter()
-            .append("text")
-            .attr("x", d => d.cx)
-            .attr("y", d => d.cy)
+    // 添加标签
+    svg.selectAll("text")
+        .data(circlesData)
+        .enter()
+        .append("text")
+        .attr("x", d => d.cx)
+        .attr("y", d => d.cy)
+        .attr("text-anchor", "middle")
+        .attr("dy", ".35em")
+        .text(d => d.label)
+        .style("font-size", "18px")   // 字体加大
+        .style("font-weight", "bold"); // 字体加粗
+
+    // Tooltip for hover effect
+    circles.on("mouseover", function(event, d) {
+        svg.append("text")
+            .attr("id", "tooltip")
+            .attr("x", d.cx)
+            .attr("y", d.cy - d.r - 10)
             .attr("text-anchor", "middle")
-            .attr("dy", ".35em")
-            .text(d => d.label)
-            .style("font-size", "18px")
-            .style("font-weight", "bold");
+            .text(`This is ${d.label}`);
+    }).on("mouseout", function() {
+        d3.select("#tooltip").remove();
     });
 </script>
+
+<style>
+    .circle {
+        fill-opacity: 0.2;  /* 设置透明度更低 */
+        transition: transform 0.3s ease, fill-opacity 0.3s ease;
+    }
+    .circle:hover {
+        cursor: pointer;
+    }
+    .highlight {
+        fill-opacity: 0.5;  /* 点击时稍微增加透明度 */
+        transform: scale(1.1);
+    }
+</style>
 
 Publication
 ======
