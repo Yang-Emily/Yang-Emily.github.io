@@ -38,7 +38,7 @@ My primary research interest lies in the intersection between Software Engineeri
         </div>
     </div>
 
-    <div style="text-align: center; margin-top: 230px;">
+    <div style="text-align: center; margin-top: 220px;">
         <p>CodeSum-Eval, TSE'25</p>
     </div>
 </div>
@@ -125,7 +125,10 @@ My primary research interest lies in the intersection between Software Engineeri
 
 News
 ======
-- [2024-05-14] I am awarded the Student Support Scholarship at SIGMOD 2024.
+- [2024-05-14] Awarded the **_Student Support Scholarship_** at **<span style="color: #FF9999;">SIGMOD 2024</span>**.  
+Traveling to **<span style="color: #FF9999;">Chile</span>** to present my paper.
+
+
 
 Publication
 ======
