@@ -28,12 +28,14 @@ My primary research interest lies in the intersection between Software Engineeri
 <script>
     var svg = d3.select("#vennDiagram");
 
+    // 更新为 Software Engineering, Artificial Intelligence, HCI
     var circlesData = [
-        { cx: 200, cy: 200, r: 100, color: "orange", label: "Programming" },
-        { cx: 300, cy: 200, r: 100, color: "lightblue", label: "Education" },
-        { cx: 250, cy: 280, r: 100, color: "lightcoral", label: "Collaboration" }
+        { cx: 175, cy: 300, r: 100, color: "orange", label: "Software Engineering" },
+        { cx: 375, cy: 300, r: 100, color: "lightblue", label: "Artificial Intelligence" },
+        { cx: 275, cy: 150, r: 100, color: "lightcoral", label: "Human-Computer Interaction" }
     ];
 
+    // 创建圆
     var circles = svg.selectAll("circle")
         .data(circlesData)
         .enter()
@@ -48,6 +50,7 @@ My primary research interest lies in the intersection between Software Engineeri
             d3.select(this).classed("highlight", true);
         });
 
+    // 添加标签并加粗字体，增大字号
     svg.selectAll("text")
         .data(circlesData)
         .enter()
@@ -57,16 +60,17 @@ My primary research interest lies in the intersection between Software Engineeri
         .attr("text-anchor", "middle")
         .attr("dy", ".35em")
         .text(d => d.label)
-        .style("font-size", "14px");
+        .style("font-size", "18px")  // 增大字体
+        .style("font-weight", "bold");  // 加粗字体
 
-    // Tooltip for hover effect
+    // 鼠标悬停显示提示信息
     circles.on("mouseover", function(event, d) {
         svg.append("text")
             .attr("id", "tooltip")
             .attr("x", d.cx)
             .attr("y", d.cy - d.r - 10)
             .attr("text-anchor", "middle")
-            .text(This is ${d.label});
+            .text(`This is ${d.label}`);
     }).on("mouseout", function() {
         d3.select("#tooltip").remove();
     });
@@ -74,7 +78,7 @@ My primary research interest lies in the intersection between Software Engineeri
 
 <style>
     .circle {
-        fill-opacity: 0.5;
+        fill-opacity: 0.5;  /* 设置透明度 */
         transition: transform 0.3s ease, fill-opacity 0.3s ease;
     }
     .circle:hover {
@@ -82,9 +86,10 @@ My primary research interest lies in the intersection between Software Engineeri
     }
     .highlight {
         fill-opacity: 1;
-        transform: scale(1.1);
+        transform: scale(1.1);  /* 点击时放大 */
     }
 </style>
+
 
 Publication
 ======
