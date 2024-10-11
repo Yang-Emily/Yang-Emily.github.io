@@ -27,6 +27,20 @@ My primary research interest lies in the intersection between Software Engineeri
 <div style="text-align:center;">
     <svg id="vennDiagram" width="500" height="400"></svg>
 </div>
+<div style="display: flex; justify-content: space-around; margin-top: 20px;">
+    <div style="border: 1px solid black; padding: 10px; background-color: #f9f9f9;">
+        <strong>NL2Vis, CodeSum-Eval</strong><br>
+        This section represents the overlap between Human-Computer Interaction and Software Engineering.
+    </div>
+    <div style="border: 1px solid black; padding: 10px; background-color: #f9f9f9;">
+        <strong>Sign2Vis, ExplainVis</strong><br>
+        This section represents the overlap between Human-Computer Interaction and Artificial Intelligence.
+    </div>
+    <div style="border: 1px solid black; padding: 10px; background-color: #f9f9f9;">
+        <strong>CFExplainer</strong><br>
+        This section represents the intersection of all three domains.
+    </div>
+</div>
 
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script>
@@ -34,8 +48,8 @@ My primary research interest lies in the intersection between Software Engineeri
 
     var circlesData = [
         { cx: 240, cy: 150, r: 100, color: "orange", label: "Human-Computer Interaction" },
-        { cx: 140, cy: 250, r: 100, color: "lightblue", label: "Software Engineering" },
-        { cx: 340, cy: 250, r: 100, color: "lightcoral", label: "Artificial Intelligence" }
+        { cx: 160, cy: 250, r: 100, color: "lightblue", label: "Software Engineering" },
+        { cx: 320, cy: 250, r: 100, color: "lightcoral", label: "Artificial Intelligence" }
     ];
 
     var circles = svg.selectAll("circle")
