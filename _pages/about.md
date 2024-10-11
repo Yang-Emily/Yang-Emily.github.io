@@ -169,7 +169,7 @@ First Author, Submitted to [**CHI 2025**](https://chi2025.acm.org/).
 Second Author (Advisor listed first), Submitted to [**CHI 2025**](https://chi2025.acm.org/).
 
 # Internships
-- *June 2024 - September 2024*, [ETH Zurich](https://ethz.ch/en.html), in the Programming, Education, and Computer-Human Interaction Lab ([PEACH Lab](https://peachlab.inf.ethz.ch/)), supervised by Prof. April Yi Wang.
+- *June 2024 - September 2024*, [**ETH Zurich**](https://ethz.ch/en.html), in the Programming, Education, and Computer-Human Interaction Lab ([**PEACH Lab**](https://peachlab.inf.ethz.ch/#/peach)), supervised by Prof. [**April Yi Wang**](https://peachlab.inf.ethz.ch/#/home).
 
 <!-- ======  -->
 <!-- <div style="display: flex; align-items: center; margin-bottom: 20px;">
