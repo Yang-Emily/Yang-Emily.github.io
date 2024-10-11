@@ -26,20 +26,37 @@ My primary research interest lies in the intersection between Software Engineeri
 
 <div style="text-align:center;">
     <svg id="vennDiagram" width="500" height="400"></svg>
+<!-- External text placed using divs outside the Venn diagram -->
+    <div style="position: absolute; top: 20px; left: 30px; text-align: left;">
+        <p>Reuse analysis code, ICSE'22</p>
+        <p>DITL, CHI'22</p>
+        <p>NB2Slide, CHI'22</p>
+        <p>Themisto, TOCHI'21</p>
+        <p>Multidisciplinary teams, CSCW'21</p>
+        <p>Ziva, IUI'21</p>
+    </div>
+
+    <div style="position: absolute; top: 20px; right: 30px; text-align: left;">
+        <p>PuzzleMe, CSCW'21</p>
+        <p>EdCode, VL/HCC'20</p>
+    </div>
+
+    <div style="position: absolute; bottom: 20px; left: 200px; text-align: center;">
+        <p>JargonLite, VL/HCC'19</p>
+        <p>Conversational programmers, CHI'18</p>
+    </div>
 </div>
 
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <script>
     var svg = d3.select("#vennDiagram");
 
-    // Circle data for the Venn diagram
     var circlesData = [
-        { cx: 240, cy: 150, r: 100, color: "orange", label: "Human-Computer Interaction" },
-        { cx: 140, cy: 250, r: 100, color: "lightblue", label: "Software Engineering" },
-        { cx: 340, cy: 250, r: 100, color: "lightcoral", label: "Artificial Intelligence" }
+        { cx: 240, cy: 150, r: 120, color: "orange", label: "Human-Computer Interaction" },
+        { cx: 140, cy: 250, r: 120, color: "lightblue", label: "Software Engineering" },
+        { cx: 340, cy: 250, r: 120, color: "lightcoral", label: "Artificial Intelligence" }
     ];
 
-    // Add circles to the Venn diagram
     var circles = svg.selectAll("circle")
         .data(circlesData)
         .enter()
@@ -48,9 +65,12 @@ My primary research interest lies in the intersection between Software Engineeri
         .attr("cy", d => d.cy)
         .attr("r", d => d.r)
         .attr("fill", d => d.color)
-        .attr("class", "circle");
+        .attr("class", "circle")
+        .on("click", function (event, d) {
+            circles.classed("highlight", false);
+            d3.select(this).classed("highlight", true);
+        });
 
-    // Add labels inside the circles (for the main labels)
     svg.selectAll("text")
         .data(circlesData)
         .enter()
@@ -60,33 +80,58 @@ My primary research interest lies in the intersection between Software Engineeri
         .attr("text-anchor", "middle")
         .attr("dy", ".35em")
         .text(d => d.label)
-        .style("font-size", "18px")
-        .style("font-weight", "bold");
+        .style("font-size", "18px")  // Increased font size
+        .style("font-weight", "bold");  // Bold font
 
-    // Add external text around the Venn diagram (outside the circles)
-    var externalText = [
-        { x: 50, y: 70, text: "Reuse analysis code, ICSE'22" },
-        { x: 50, y: 100, text: "DITL, CHI'22" },
-        { x: 50, y: 130, text: "NB2Slide, CHI'22" },
-        { x: 50, y: 160, text: "Themisto, TOCHI'21" },
-        { x: 50, y: 190, text: "Multidisciplinary teams, CSCW'21" },
-        { x: 50, y: 220, text: "Ziva, IUI'21" },
-        { x: 380, y: 70, text: "PuzzleMe, CSCW'21" },
-        { x: 380, y: 100, text: "EdCode, VL/HCC'20" },
-        { x: 240, y: 370, text: "JargonLite, VL/HCC'19" },
-        { x: 240, y: 400, text: "Conversational programmers, CHI'18" }
+    // Add labels for the intersection areas
+    var intersectionLabels = [
+        { x: 130, y: 100, text: "NL2Vis, CodeSum-Eval" },
+        { x: 370, y: 100, text: "Sign2Vis, ExplainVis" },
+        { x: 240, y: 370, text: "CFExplainer" }
     ];
 
-    svg.selectAll(".external-text")
-        .data(externalText)
+    svg.selectAll(".intersection-text")
+        .data(intersectionLabels)
         .enter()
         .append("text")
         .attr("x", d => d.x)
         .attr("y", d => d.y)
+        .attr("text-anchor", "middle")
         .text(d => d.text)
-        .style("font-size", "12px")
-        .style("font-family", "Arial, sans-serif");
+        .style("font-size", "14px");
+ // Add external text boxes outside the circles
+    var textBoxes = [
+        { x: 50, y: 50, text: "NL2Vis, CodeSum-Eval" },
+        { x: 400, y: 50, text: "Sign2Vis, ExplainVis" },
+        { x: 250, y: 370, text: "CFExplainer" }
+    ];
 
+    svg.selectAll(".text-box")
+        .data(textBoxes)
+        .enter()
+        .append("foreignObject")
+        .attr("x", d => d.x)
+        .attr("y", d => d.y)
+        .attr("width", 120)
+        .attr("height", 50)
+        .append("xhtml:div")
+        .style("border", "1px solid black")
+        .style("padding", "5px")
+        .style("background-color", "#f9f9f9")
+        .style("font-size", "12px")
+        .style("text-align", "center")
+        .html(d => d.text);
+    // Tooltip for hover effect
+    circles.on("mouseover", function(event, d) {
+        svg.append("text")
+            .attr("id", "tooltip")
+            .attr("x", d.cx)
+            .attr("y", d.cy - d.r - 10)
+            .attr("text-anchor", "middle")
+            .text(`This is ${d.label}`);
+    }).on("mouseout", function() {
+        d3.select("#tooltip").remove();
+    });
 </script>
 
 <style>
@@ -97,8 +142,11 @@ My primary research interest lies in the intersection between Software Engineeri
     .circle:hover {
         cursor: pointer;
     }
+    .highlight {
+        fill-opacity: 1;
+        transform: scale(1.1);
+    }
 </style>
-
 
 Publication
 ======
