@@ -2,34 +2,36 @@
    MASTHEAD
    ========================================================================== */
 
-.masthead {
-  position: relative;
-  border-bottom: 1px solid $border-color;
-  -webkit-animation: intro 0.3s both;
-          animation: intro 0.3s both;
-  -webkit-animation-delay: 0.15s;
-          animation-delay: 0.15s;
-  z-index: 20;
-
-  &__inner-wrap {
-    @include container;
-    @include clearfix;
-    padding: 1em 1em 1em;
-    font-family: $sans-serif-narrow;
-
-    @include breakpoint($x-large) {
-      max-width: $x-large;
-    }
-
-    nav {
-      z-index: 10;
-    }
-
-    a {
-      text-decoration: none;
+   .masthead {
+    position: relative;
+    border-bottom: 1px solid transparent; // 隐藏边框
+    -webkit-animation: intro 0.3s both;
+            animation: intro 0.3s both;
+    -webkit-animation-delay: 0.15s;
+            animation-delay: 0.15s;
+    z-index: 20;
+    min-height: 0;
+  
+    &__inner-wrap {
+      @include container;
+      @include clearfix;
+      padding: 0.1em 0.1em 0.1em; // 几乎没有 padding
+      font-family: $sans-serif-narrow;
+  
+      @include breakpoint($x-large) {
+        max-width: $x-large;
+      }
+  
+      nav {
+        z-index: 10;
+      }
+  
+      a {
+        text-decoration: none;
+      }
     }
   }
-}
+  
 
 .masthead__menu {
 
