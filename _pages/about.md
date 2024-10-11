@@ -25,7 +25,7 @@ Research Interests
 My primary research interest lies in the intersection between Software Engineering and Human-Computer Interaction, including source code generation and summarization, with a specific focus on the universality of natural language, source code and data visualizations with AI tools.
 
 <div style="text-align:center;">
-    <svg id="vennDiagram" width="500" height="400"></svg>
+    <svg id="vennDiagram" width="600" height="500"></svg>
 </div>
 
 <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -33,9 +33,9 @@ My primary research interest lies in the intersection between Software Engineeri
     var svg = d3.select("#vennDiagram");
 
     var circlesData = [
-        { cx: 240, cy: 150, r: 100, color: "orange", label: "Human-Computer Interaction" },
+        { cx: 250, cy: 150, r: 100, color: "orange", label: "Human-Computer Interaction" },
         { cx: 170, cy: 250, r: 100, color: "lightblue", label: "Software Engineering" },
-        { cx: 310, cy: 250, r: 100, color: "lightcoral", label: "Artificial Intelligence" }
+        { cx: 330, cy: 250, r: 100, color: "lightcoral", label: "Artificial Intelligence" }
     ];
 
     var circles = svg.selectAll("circle")
@@ -47,12 +47,10 @@ My primary research interest lies in the intersection between Software Engineeri
         .attr("r", d => d.r)
         .attr("fill", d => d.color)
         .attr("class", "circle")
-        .on("click", function (event, d) {
-            circles.classed("highlight", false);
-            d3.select(this).classed("highlight", true);
-        });
+        .attr("fill-opacity", 0.5);  // Make the circles semi-transparent
 
-    svg.selectAll("text")
+    // Add the labels inside each circle
+    svg.selectAll("text.circle-label")
         .data(circlesData)
         .enter()
         .append("text")
@@ -61,17 +59,17 @@ My primary research interest lies in the intersection between Software Engineeri
         .attr("text-anchor", "middle")
         .attr("dy", ".35em")
         .text(d => d.label)
-        .style("font-size", "18px")  // Increased font size
-        .style("font-weight", "bold");  // Bold font
+        .style("font-size", "18px")
+        .style("font-weight", "bold");
 
     // Add labels for the intersection areas
     var intersectionLabels = [
-        { x: 130, y: 100, text: "NL2Vis, CodeSum-Eval" },
-        { x: 370, y: 100, text: "Sign2Vis, ExplainVis" },
-        { x: 240, y: 370, text: "CFExplainer" }
+        { x: 210, y: 180, text: "NL2Vis, CodeSum-Eval" },   // Intersection of HCI and SE
+        { x: 290, y: 180, text: "Sign2Vis, ExplainVis" },    // Intersection of HCI and AI
+        { x: 250, y: 310, text: "CFExplainer" }              // Intersection of all three
     ];
 
-    svg.selectAll(".intersection-text")
+    svg.selectAll(".intersection-label")
         .data(intersectionLabels)
         .enter()
         .append("text")
@@ -79,32 +77,19 @@ My primary research interest lies in the intersection between Software Engineeri
         .attr("y", d => d.y)
         .attr("text-anchor", "middle")
         .text(d => d.text)
-        .style("font-size", "14px");
+        .style("font-size", "14px")
+        .style("font-weight", "bold")
+        .style("fill", "black");
 
-    // Tooltip for hover effect
-    circles.on("mouseover", function(event, d) {
-        svg.append("text")
-            .attr("id", "tooltip")
-            .attr("x", d.cx)
-            .attr("y", d.cy - d.r - 10)
-            .attr("text-anchor", "middle")
-            .text(`This is ${d.label}`);
-    }).on("mouseout", function() {
-        d3.select("#tooltip").remove();
-    });
 </script>
 
 <style>
     .circle {
-        fill-opacity: 0.5;
         transition: transform 0.3s ease, fill-opacity 0.3s ease;
     }
     .circle:hover {
         cursor: pointer;
-    }
-    .highlight {
-        fill-opacity: 1;
-        transform: scale(1.1);
+        fill-opacity: 0.7;
     }
 </style>
 
