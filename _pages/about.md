@@ -131,28 +131,15 @@ News
 
 Publication
 ======
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CVPR 2016</div><img src='../assets/p1.png' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">SIGMOD 2025</div><img src='../assets/p1.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 
 **Automated Data Visualization from Natural Language via Large Language Models: An Exploratory Study**  
   **Yang Wu**, Yao Wan\*, Hongyu Zhang, Yulei Sui, Wucai Wei, Wei Zhao, Guandong Xu, Hai Jin  
   [**SIGMOD 2024**](https://2024.sigmod.org/). *ACM Special Interest Group on Management of Data*  
   [PDF](../files/Automated_Data_Visualization_from_Natural_Language_via_Large_Language_Models_An_Exploratory_Study.pdf) | [CCF-A](#) | [Arxiv](https://arxiv.org/abs/2404.17136)
-<!-- 
-<div style="display: flex; align-items: center; margin-bottom: 20px;">
-    <img src="../assets/p1.png" alt="Automated Data Visualization" style="width: 150px; height: auto; margin-right: 20px;" />
-    <div>
-        <h3>Automated Data Visualization from Natural Language via Large Language Models: An Exploratory Study</h3>
-        <p>
-            **Yang Wu**, Yao Wan*, Hongyu Zhang, Yulei Sui, Wucai Wei, Wei Zhao, Guandong Xu, Hai Jin<br />
-            [**SIGMOD 2024**](https://2024.sigmod.org/). *ACM Special Interest Group on Management of Data*<br />
-            This study explores automated data visualization techniques using large language models.
-        </p>
-        <a href="../files/Automated_Data_Visualization_from_Natural_Language_via_Large_Language_Models_An_Exploratory_Study.pdf" style="text-decoration: none; color: #FF9999;">Paper</a>
-    </div>
-</div> -->
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CVPR 2016</div><img src='../assets/p2.png' alt="sym" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ISSTA 2025</div><img src='../assets/p2.png' alt="sym" width="100%"></div></div>
 <div class='paper-box-text' markdown="1">
 **Graph Neural Networks for Vulnerability Detection - A Counterfactual Explanation**  
   Zhaoyang Chu, Yao Wan\*, Qian Li, **Yang Wu**, Hongyu Zhang, Yulei Sui, Guandong Xu, Hai Jin  
@@ -168,8 +155,8 @@ First Author, Submitted to [**CHI 2025**](https://chi2025.acm.org/).
 - **Interactive Data Visualization Through Sign Language**
 Second Author (Advisor listed first), Submitted to [**CHI 2025**](https://chi2025.acm.org/).
 
-# 💻 Internships
-- *2024.06 - 2024.09*, [ETH Zurich](https://ethz.ch/en.html).
+# Internships
+- *June 2024 - September 2024*, [ETH Zurich](https://ethz.ch/en.html), in the Programming, Education, and Computer-Human Interaction Lab ([PEACH Lab](https://peachlab.inf.ethz.ch/)), supervised by Prof. April Yi Wang.
 
 <!-- ======  -->
 <!-- <div style="display: flex; align-items: center; margin-bottom: 20px;">
