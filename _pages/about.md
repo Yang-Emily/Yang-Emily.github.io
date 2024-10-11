@@ -27,17 +27,18 @@ My primary research interest lies in the intersection between Software Engineeri
 <div style="text-align:center;">
     <svg id="vennDiagram" width="500" height="400"></svg>
 <!-- External text placed using divs outside the Venn diagram -->
-    <div style="position: absolute; top: 20px; left: 30px; text-align: left;">
-        <p>NL2Vis, SIGMOD'24</p>
-        <p>CFExplainer, ISSTA'24</p>
+    <div style="display: flex; justify-content: space-between; margin-top: 10px;">
+        <div style="text-align: left;">
+            <p>NL2Vis, SIGMOD'24</p>
+            <p>CFExplainer, ISSTA'24</p>
+        </div>
+        <div style="text-align: right;">
+            <p>ExplainVis, CHI'25</p>
+            <p>Sign Visualizer, CHI'25</p>
+        </div>
     </div>
 
-    <div style="position: absolute; top: 20px; right: 30px; text-align: left;">
-        <p>ExplainVis, CHI'25</p>
-        <p>Sign Visualizer, CHI'25</p>
-    </div>
-
-    <div style="position: absolute; bottom: 20px; left: 200px; text-align: center;">
+    <div style="text-align: center; margin-top: 20px;">
         <p>CodeSum-Eval, TSE'25</p>
     </div>
 </div>
