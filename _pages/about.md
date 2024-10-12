@@ -28,7 +28,7 @@ My primary research interest lies in the intersection between <span style="color
 
 
 <div style="text-align:center;">
-    <svg id="vennDiagram" width="500" height="400"></svg>
+    <svg id="vennDiagram" width="500" height="360"></svg>
 <!-- External text placed using divs outside the Venn diagram -->
     <div style="display: flex; justify-content: space-between; margin-top: -300px;">
         <div style="text-align: left;"> 
