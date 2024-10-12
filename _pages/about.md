@@ -23,9 +23,9 @@ Research Interests
 ======
 <!-- My primary research interest lies in code intelligence, including code summarization and code generation, with a specific focus on natural language to visualization (NL2Vis). I am particularly interested in leveraging AI in the applications of tabular data and visualization. -->
 <!-- My primary research interest lies in the intersection between Software Engineering and Human-Computer Interaction, including source code generation and summarization, with a specific focus on the universality of natural language, source code and data visualizations with AI tools. -->
-## Research Interest
 
-My primary research interest lies at the **intersection between _Software Engineering_ and _Human-Computer Interaction_**, including **source code generation** and **summarization**. I have a specific focus on the **universality** of _natural language_, _source code_, and _data visualizations_ with the integration of **AI tools**.
+My primary research interest lies in the intersection between <span style="color:lightblue;">**Software Engineering**</span> and <span style="color:orange;">**Human-Computer Interaction**</span>, including *source code generation* and *summarization*, with a specific focus on the universality of *natural language*, *source code*, and *data visualizations* with <span style="color:lightcoral;">**AI tools**</span>.
+
 
 <div style="text-align:center;">
     <svg id="vennDiagram" width="500" height="400"></svg>
