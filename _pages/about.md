@@ -52,9 +52,9 @@ My primary research interest lies in the intersection between <span style="color
     var svg = d3.select("#vennDiagram");
 
     var circlesData = [
-        { cx: 240, cy: 150, r: 120, color: "orange", label: "Human-Computer Interaction" },
-        { cx: 140, cy: 250, r: 120, color: "lightblue", label: "Software Engineering" },
-        { cx: 340, cy: 250, r: 120, color: "lightcoral", label: "Artificial Intelligence" }
+        { cx: 240, cy: 150, r: 110, color: "orange", label: "Human-Computer Interaction" },
+        { cx: 140, cy: 250, r: 110, color: "lightblue", label: "Software Engineering" },
+        { cx: 340, cy: 250, r: 110, color: "lightcoral", label: "Artificial Intelligence" }
     ];
 
     var circles = svg.selectAll("circle")
