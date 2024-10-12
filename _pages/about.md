@@ -171,7 +171,7 @@ First Author, Submitted to [**ICSE 2025**](https://conf.researchr.org/home/icse-
 - **Explainable NL2Vis: Opening the Black Box of Automated Visualizations**
 First Author, Submitted to [**CHI 2025**](https://chi2025.acm.org/).
 - **Interactive Data Visualization Through Sign Language**
-Second Author (Advisor listed first), Submitted to [**CHI 2025**](https://chi2025.acm.org/).
+First Author after advisor, Submitted to [**CHI 2025**](https://chi2025.acm.org/).
 
 # Internships
 - *June 2024 - September 2024*, [**ETH Zurich**](https://ethz.ch/en.html), in the Programming, Education, and Computer-Human Interaction Lab ([**PEACH Lab**](https://peachlab.inf.ethz.ch/#/peach)), supervised by Prof. [**April Yi Wang**](https://peachlab.inf.ethz.ch/#/home).
