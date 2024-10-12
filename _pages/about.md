@@ -33,7 +33,7 @@ My primary research interest lies in the intersection between <span style="color
     <div style="display: flex; justify-content: space-between; margin-top: -300px;">
         <div style="text-align: left;"> 
             <p>NL2Vis, SIGMOD'24</p>
-            <p>CFExplainer, ISSTA'24</p>
+            <!-- <p>CFExplainer, ISSTA'24</p> -->
             <p>CodeSum-Eval, ICSE'25</p>
         </div>
         <div style="text-align: right;">
@@ -42,8 +42,8 @@ My primary research interest lies in the intersection between <span style="color
         </div>
     </div>
 
-    <div style="text-align: center; margin-top: 200px;">
-        <!-- <p>CodeSum-Eval, ICSE'25</p> -->
+    <div style="text-align: center; margin-top: 220px;">
+        <p>CFExplainer, ISSTA'24</p>
     </div>
 </div>
 
