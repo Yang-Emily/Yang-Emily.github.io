@@ -43,7 +43,7 @@ My primary research interest lies in the intersection between <span style="color
         </div>
     </div>
 
-    <div style="text-align: center; margin-top: 200px;">
+    <div style="text-align: center; margin-top: 180px;">
         <!-- <p>CFExplainer, ISSTA'24</p> -->
     </div>
 </div>
