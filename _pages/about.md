@@ -32,18 +32,19 @@ My primary research interest lies in the intersection between <span style="color
 <!-- External text placed using divs outside the Venn diagram -->
     <div style="display: flex; justify-content: space-between; margin-top: -300px;">
         <div style="text-align: left;"> 
-            <p>NL2Vis, SIGMOD'24</p>
-            <!-- <p>CFExplainer, ISSTA'24</p> -->
+            <!-- <p>NL2Vis, SIGMOD'24</p> -->
+            <p>CFExplainer, ISSTA'24</p>
             <p>CodeSum-Eval, ICSE'25</p>
         </div>
         <div style="text-align: right;">
+            <p>NL2Vis, SIGMOD'24</p>
             <p>ExplainVis, CHI'25</p>
             <p>Sign Visualizer, CHI'25</p>
         </div>
     </div>
 
-    <div style="text-align: center; margin-top: 220px;">
-        <p>CFExplainer, ISSTA'24</p>
+    <div style="text-align: center; margin-top: 200px;">
+        <!-- <p>CFExplainer, ISSTA'24</p> -->
     </div>
 </div>
 
