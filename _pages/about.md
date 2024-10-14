@@ -137,10 +137,10 @@ News
 Publication
 ======
 <div style="display: flex; justify-content: left; align-items: center; flex-wrap: wrap; padding: 0 0 1.5em 0;">
-  <div style="justify-content: center; display: flex; width: 100%; order: 2;">
+  <div style="justify-content: center; display: flex; width: 100%; order: 1;">
     <img src='../assets/p1.png' alt="sym" style="max-width: 400px; box-shadow: 3px 3px 6px #888; object-fit: cover; width: 100%;">
   </div>
-  <div style="max-width: 100%; order: 1;">
+  <div style="max-width: 100%; order: 2;">
     <strong>Automated Data Visualization from Natural Language via Large Language Models: An Exploratory Study</strong><br>
     <strong>Yang Wu</strong>, Yao Wan*, Hongyu Zhang, Yulei Sui, Wucai Wei, Wei Zhao, Guandong Xu, Hai Jin<br>
     <a href="https://2024.sigmod.org/">SIGMOD 2024</a>. ACM Special Interest Group on Management of Data<br>
@@ -149,10 +149,10 @@ Publication
 </div>
 
 <div style="display: flex; justify-content: left; align-items: center; flex-wrap: wrap; padding: 0 0 1.5em 0;">
-  <div style="justify-content: center; display: flex; width: 100%; order: 2;">
+  <div style="justify-content: center; display: flex; width: 100%; order: 1;">
     <img src='../assets/p2.png' alt="sym" style="max-width: 400px; box-shadow: 3px 3px 6px #888; object-fit: cover; width: 100%;">
   </div>
-  <div style="max-width: 100%; order: 1;">
+  <div style="max-width: 100%; order: 2;">
     <strong>Graph Neural Networks for Vulnerability Detection - A Counterfactual Explanation</strong><br>
     Zhaoyang Chu, Yao Wan*, Qian Li, <strong>Yang Wu</strong>, Hongyu Zhang, Yulei Sui, Guandong Xu, Hai Jin<br>
     <a href="https://2024.issta.org/">ISSTA 2024</a>. The ACM SIGSOFT International Symposium on Software Testing and Analysis<br>
@@ -163,16 +163,17 @@ Publication
 <style>
   @media (min-width: 768px) {
     div[style*="display: flex"] {
-      justify-content: left;
-    }
-    div[style*="max-width: 100%"] {
-      padding-left: 2em;
-      max-width: 60%;
+      flex-direction: row;
     }
     div[style*="justify-content: center"] {
       min-width: 200px;
       max-width: 40%;
       order: 1;
+    }
+    div[style*="max-width: 100%"] {
+      padding-left: 2em;
+      max-width: 60%;
+      order: 2;
     }
   }
 </style>
