@@ -136,47 +136,33 @@ News
 
 Publication
 ======
-<div style="display: flex; justify-content: left; align-items: center; flex-wrap: wrap; padding: 0 0 1.5em 0;">
-  <div style="justify-content: center; display: flex; width: 100%; order: 1;">
-    <img src='../assets/p1.png' alt="sym" style="max-width: 400px; box-shadow: 3px 3px 6px #888; object-fit: cover; width: 100%;">
-  </div>
-  <div style="max-width: 100%; order: 2;">
-    <strong>Automated Data Visualization from Natural Language via Large Language Models: An Exploratory Study</strong><br>
-    <strong>Yang Wu</strong>, Yao Wan*, Hongyu Zhang, Yulei Sui, Wucai Wei, Wei Zhao, Guandong Xu, Hai Jin<br>
-    <a href="https://2024.sigmod.org/">SIGMOD 2024</a>. ACM Special Interest Group on Management of Data<br>
-    <a href="../files/Automated_Data_Visualization_from_Natural_Language_via_Large_Language_Models_An_Exploratory_Study.pdf">PDF</a> | <a href="#">CCF-A</a> | <a href="https://arxiv.org/abs/2404.17136">Arxiv</a>
-  </div>
+<div class='paper-box'>
+<div class='paper-box-image'>
+<div>
+<div class="badge">
+</div>
+<img src='../assets/p1.png' alt="sym" width="100%">
+</div>
+</div>
+<div class='paper-box-text' markdown="1">
+
+**Automated Data Visualization from Natural Language via Large Language Models: An Exploratory Study**  
+  **Yang Wu**, Yao Wan\*, Hongyu Zhang, Yulei Sui, Wucai Wei, Wei Zhao, Guandong Xu, Hai Jin  
+  [**SIGMOD 2024**](https://2024.sigmod.org/). *ACM Special Interest Group on Management of Data*  
+  [PDF](../files/Automated_Data_Visualization_from_Natural_Language_via_Large_Language_Models_An_Exploratory_Study.pdf) | [CCF-A](#) | [Arxiv](https://arxiv.org/abs/2404.17136)
+</div>
 </div>
 
-<div style="display: flex; justify-content: left; align-items: center; flex-wrap: wrap; padding: 0 0 1.5em 0;">
-  <div style="justify-content: center; display: flex; width: 100%; order: 1;">
-    <img src='../assets/p2.png' alt="sym" style="max-width: 400px; box-shadow: 3px 3px 6px #888; object-fit: cover; width: 100%;">
-  </div>
-  <div style="max-width: 100%; order: 2;">
-    <strong>Graph Neural Networks for Vulnerability Detection - A Counterfactual Explanation</strong><br>
-    Zhaoyang Chu, Yao Wan*, Qian Li, <strong>Yang Wu</strong>, Hongyu Zhang, Yulei Sui, Guandong Xu, Hai Jin<br>
-    <a href="https://2024.issta.org/">ISSTA 2024</a>. The ACM SIGSOFT International Symposium on Software Testing and Analysis<br>
-    <a href="../files/istta24_code_gnn_explainer.pdf">PDF</a> | <a href="#">CCF-A</a> | <a href="https://arxiv.org/abs/2404.15687">Arxiv</a>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge"></div><img src='../assets/p2.png' alt="sym" width="100%"></div></div>
+<div class='paper-box-text' markdown="1">
+
+**Graph Neural Networks for Vulnerability Detection - A Counterfactual Explanation**  
+  Zhaoyang Chu, Yao Wan\*, Qian Li, **Yang Wu**, Hongyu Zhang, Yulei Sui, Guandong Xu, Hai Jin  
+  [**ISSTA 2024**](https://2024.issta.org/). *The ACM SIGSOFT International Symposium on Software Testing and Analysis*  
+  [PDF](../files/istta24_code_gnn_explainer.pdf) | [CCF-A](#) | [Arxiv](https://arxiv.org/abs/2404.15687)
+  
   </div>
 </div>
-
-<style>
-  @media (min-width: 768px) {
-    div[style*="display: flex"] {
-      flex-direction: row;
-    }
-    div[style*="justify-content: center"] {
-      min-width: 200px;
-      max-width: 40%;
-      order: 1;
-    }
-    div[style*="max-width: 100%"] {
-      padding-left: 2em;
-      max-width: 60%;
-      order: 2;
-    }
-  }
-</style>
 
 Project
 ======
