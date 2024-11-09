@@ -167,10 +167,10 @@ Project
 ======
 - **Exploring LLMs as Evaluator for Code Summarization**
 First Author, Submitted to [**ICSE 2025**](https://conf.researchr.org/home/icse-2025).
-- **Explainable NL2Vis: Opening the Black Box of Automated Visualizations**
+<!-- - **Explainable NL2Vis: Opening the Black Box of Automated Visualizations**
 First Author, Submitted to [**CHI 2025**](https://chi2025.acm.org/).
 - **Interactive Data Visualization Through Sign Language**
-First Author after advisor, Submitted to [**CHI 2025**](https://chi2025.acm.org/).
+First Author after advisor, Submitted to [**CHI 2025**](https://chi2025.acm.org/). -->
 
 # Internships
 - *June 2024 - September 2024*, [**ETH Zurich**](https://ethz.ch/en.html), in the Programming, Education, and Computer-Human Interaction Lab ([**PEACH Lab**](https://peachlab.inf.ethz.ch/#/peach)), supervised by Prof. [**April Yi Wang**](https://peachlab.inf.ethz.ch/#/home).
