@@ -87,7 +87,7 @@ My primary research interest lies in the intersection between <span style="color
     // Add labels for the intersection areas
     var intersectionLabels = [
         { x: 130, y: 100, text: "NL2Vis, CodeSum-Eval" },
-        { x: 370, y: 100, text: "Sign2Vis, ExplainVis" },
+        <!-- { x: 370, y: 100, text: "Sign2Vis, ExplainVis" }, -->
         { x: 240, y: 370, text: "CFExplainer" }
     ];
 
@@ -167,6 +167,8 @@ Project
 ======
 - **Exploring LLMs as Evaluator for Code Summarization**
 First Author, Submitted to [**ICSE 2025**](https://conf.researchr.org/home/icse-2025).
+
+
 <!-- - **Explainable NL2Vis: Opening the Black Box of Automated Visualizations**
 First Author, Submitted to [**CHI 2025**](https://chi2025.acm.org/).
 - **Interactive Data Visualization Through Sign Language**
