@@ -219,6 +219,7 @@ First Author after advisor, Submitted to [**CHI 2025**](https://chi2025.acm.org/
 
 Honors
 ======
+- National Scholarship (2023-2024)
 - Excellent Student Cadre (2022-2023)
 - First-class Scholarship for Postgraduates (2022-2023)
 - Outstanding Undergraduate (2022)
