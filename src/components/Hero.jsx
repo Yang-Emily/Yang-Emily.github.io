@@ -49,7 +49,7 @@ const Hero = () => {
             <div className="mt-12">
               <h3 className="text-base font-semibold text-pink-600 mb-2">Get in Touch</h3>
               <p className="text-sm text-gray-700 leading-relaxed italic">
-                Always happy to connect with <span className="font-medium text-gray-900">PL + X</span> researchers.
+                Always happy to connect with <span className="font-medium text-gray-900">PL + HCI</span> researchers.
               </p>
             </div>
           </div>
@@ -81,7 +81,7 @@ const Hero = () => {
               </p>
               
               <p className="text-sm text-gray-600 leading-relaxed italic">
-                I'm currently exploring sketching interfaces, AR/VR, and multimodal interaction in HCI, 
+                I'm currently exploring embodied representations, sketching interfaces, data visualization, AR/VR, and multimodal interaction in HCI, 
                 as well as program verification, program analysis, and bidirectional model transformation in PL. 
                 If you'd like to chat, collaborate, or just share ideas, feel free to <a href="mailto:yangwu@ethz.ch" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">drop me an email</a>!
               </p>
