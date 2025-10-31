@@ -1,19 +1,5 @@
 # Yang Wu - Academic Homepage
 
-A professional academic homepage for PhD students and researchers, featuring a clean design with subtle hand-drawn sketch elements.
-
-## ✨ Features
-
-- 🎓 **Professional academic layout** - Clean and focused on research
-- 🌸 **Subtle sketch background** - Hand-drawn azalea flowers in the background
-- 📱 **Fully responsive** design that works on all devices
-- 📰 **News section** - Highlight recent achievements and updates
-- 📚 **Publications** - Organized publication list with filtering by year
-- 🎯 **Interactive elements** - Smooth animations and hover effects
-- ✏️ **Rough notation** - Hand-drawn underlines for emphasis
-- 🚀 **Fast and modern** built with React + Vite
-- 📄 **GitHub Pages ready** for easy deployment
-
 ## 🛠️ Tech Stack
 
 - **React 18** - UI framework
@@ -164,23 +150,6 @@ personal-website/
 └── README.md           # This file
 ```
 
-## 🎯 Key Features Explained
-
-### Hand-Drawn Aesthetic
-- Sketch-style borders using CSS transforms
-- Rough Notation library for animated underlines and highlights
-- Custom animations and transitions
-
-### Smooth Scrolling
-- Navigation automatically highlights active section
-- Smooth scroll behavior between sections
-- Mobile-friendly hamburger menu
-
-### Interactive Elements
-- Hover effects on cards and links
-- Animated annotations that appear on scroll
-- Bouncing scroll indicator
-
 ## 🐛 Troubleshooting
 
 ### Build fails
@@ -207,7 +176,7 @@ Feel free to fork this project and customize it for your own use!
 
 ## 📧 Contact
 
-Yang Wu - yangwu@example.edu
+Yang Wu - yangwu@eethz.ch
 
 ---
 
