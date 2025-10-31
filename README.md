@@ -1,4 +1,4 @@
-# Yang Wu - Academic Homepage
+
 
 ## 🛠️ Tech Stack
 
