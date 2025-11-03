@@ -6,7 +6,7 @@ const Publications = () => {
     {
       title: 'Can Large Language Models Serve as Evaluators for Code Summarization?',
       authors: ['Yang Wu', 'Yao Wan', 'Zhaoyang Chu', 'Wenting Zhao', 'Ye Liu', 'Hongyu Zhang', 'Xuanhua Shi', 'Hai Jin', 'Philip S. Yu'],
-      venue: 'IEEE TSE',
+      venue: 'TSE 2025',
       venueLevel: 'CCF-A',
       year: '2025',
       tags: ['LLM', 'Code Summarization', 'Evaluation'],
