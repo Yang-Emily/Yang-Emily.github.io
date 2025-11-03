@@ -4,9 +4,9 @@ const Hero = () => {
   return (
     <section className="pt-24 pb-4 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-5xl mx-auto">
-        <div className="grid md:grid-cols-[200px_1fr] gap-10 items-start">
+        <div className="flex flex-col md:grid md:grid-cols-[200px_1fr] gap-10 items-start">
           {/* 左侧：照片和联系信息 */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 order-1">
             <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-gray-200 shadow-sm mx-auto md:mx-0 mb-4">
               <img 
                 src={`${import.meta.env.BASE_URL}me.jpg`}
@@ -46,7 +46,7 @@ const Hero = () => {
             </div>
             
             {/* Collaboration section */}
-            <div className="mt-12">
+            <div className="mt-6 md:mt-12 order-3 md:order-none">
               <h3 className="text-base font-semibold text-pink-600 mb-2">Get in Touch</h3>
               <p className="text-sm text-gray-700 leading-relaxed italic">
                 Always happy to connect with <span className="font-medium text-gray-900">PL + HCI</span> researchers.
@@ -55,14 +55,14 @@ const Hero = () => {
           </div>
 
           {/* 右侧：个人信息 */}
-          <div>
+          <div className="order-2 flex flex-col">
             {/* 名字 */}
             {/* <h1 className="text-4xl font-serif font-bold mb-4 text-gray-900">
               Yang Wu 
             </h1> */}
 
             {/* 学术身份与研究简介 */}
-            <div className="mb-5 space-y-4">
+            <div className="mb-5 space-y-4 order-1">
               <p className="text-base text-gray-700 leading-relaxed">
                 Hi! I'm Yang Wu, a first-year PhD student in the <a href="https://lse.ethz.ch/doctoral-program-in-learning-sciences.html" target="_blank" rel="noopener noreferrer" className="font-semibold text-gray-900 hover:text-gray-600 transition-colors">ETH Zurich – EPFL Joint Doctoral Program in Learning Sciences</a>. 
                 I'm deeply grateful to be advised by <a href="https://aprilwang.me/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">Prof. April Wang</a> and <a href="https://pit-claudel.fr/clement/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">Prof. Clément Pit-Claudel</a>, 
@@ -79,13 +79,14 @@ const Hero = () => {
                 My research lies at the intersection of <span className="font-semibold text-gray-900">Human–Computer Interaction</span> and <span className="font-semibold text-gray-900">Programming Languages</span>, 
                 where I explore how programming can be made more <strong>inclusive</strong>, <strong>engaging</strong>, and <strong>accessible</strong> for diverse learners.
               </p>
-              
-              <p className="text-sm text-gray-600 leading-relaxed italic">
-                I'm currently exploring embodied representations, sketching interfaces, data visualization, AR/VR, and multimodal interaction in HCI, 
-                as well as program verification, program analysis, and bidirectional model transformation in PL. 
-                If you'd like to chat, collaborate, or just share ideas, feel free to <a href="mailto:yangwu@ethz.ch" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">drop me an email</a>!
-              </p>
             </div>
+            
+            {/* Currently exploring section - order-4 on mobile, after "Get in Touch" */}
+            <p className="text-sm text-gray-600 leading-relaxed italic mb-5 order-4 md:order-2">
+              I'm currently exploring embodied representations, sketching interfaces, data visualization, AR/VR, and multimodal interaction in HCI, 
+              as well as program verification, program analysis, and bidirectional model transformation in PL. 
+              If you'd like to chat, collaborate, or just share ideas, feel free to <a href="mailto:yangwu@ethz.ch" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">drop me an email</a>!
+            </p>
 
           </div>
         </div>
