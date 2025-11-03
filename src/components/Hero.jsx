@@ -9,7 +9,7 @@ const Hero = () => {
           <div className="flex-shrink-0">
             <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-gray-200 shadow-sm mx-auto md:mx-0 mb-4">
               <img 
-                src={`${import.meta.env.BASE_URL}me.png`}
+                src={`${import.meta.env.BASE_URL}me.jpg`}
                 alt="Yang Wu" 
                 className="w-full h-full object-cover scale-125"
                 style={{ objectPosition: 'center 20%' }}
