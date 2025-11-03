@@ -84,10 +84,10 @@ const Publications = () => {
           {publications.map((pub, index) => (
             <div
               key={index}
-              className="flex gap-6 pb-8 border-b border-gray-200 last:border-0"
+              className="flex flex-col md:flex-row gap-4 md:gap-6 pb-8 border-b border-gray-200 last:border-0"
             >
               {/* Thumbnail */}
-              <div className="flex-shrink-0 w-64 h-32">
+              <div className="flex-shrink-0 w-full md:w-64 h-48 md:h-32">
                 <div className="w-full h-full bg-gray-100 rounded border border-gray-200 overflow-hidden">
                   <img 
                     src={`${import.meta.env.BASE_URL}${pub.thumbnail}`}
