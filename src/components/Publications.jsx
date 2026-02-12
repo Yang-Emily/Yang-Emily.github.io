@@ -2,7 +2,19 @@ import { ExternalLink } from 'lucide-react'
 
 const Publications = () => {
   const publications = [
-    
+    {
+      title: 'StepMIND: A Visual Framework for Stepwise, Multimodal, and Bidirectional Explanations of AI-Generated Data Analysis Pipeline',
+      authors: ['Yang Wu', 'Yao Wan', 'Mennatallah El-Assady', 'April Yi Wang'],
+      venue: 'IUI 2026',
+      venueLevel: 'CCF-A',
+      year: '2026',
+      tags: ['LLM', 'Visualization', 'Multimodal', 'Explanations', 'Data Analysis Pipeline'],
+      thumbnail: 'stepmind.jpg',
+      links: {
+        paper: 'https://doi.org/10.1145/3742413.3789070',
+        doi: 'https://doi.org/10.1145/3742413.3789070',
+      },
+    },
     {
       title: 'Can Large Language Models Serve as Evaluators for Code Summarization?',
       authors: ['Yang Wu', 'Yao Wan', 'Zhaoyang Chu', 'Wenting Zhao', 'Ye Liu', 'Hongyu Zhang', 'Xuanhua Shi', 'Hai Jin', 'Philip S. Yu'],
@@ -113,23 +125,17 @@ const Publications = () => {
                   {renderAuthors(pub.authors)}
                 </p>
 
-                {/* Venue and Level */}
-                <div className="flex items-center gap-2 mb-3 text-sm">
+                {/* Venue and Links */}
+                <div className="flex flex-wrap items-center gap-3 text-sm">
                   <span className="font-medium text-gray-900">{pub.venue}</span>
-                  <span className="px-2 py-0.5 text-xs font-semibold bg-red-100 text-red-700 rounded">
-                    {pub.venueLevel}
-                  </span>
-                </div>
-
-                {/* Links */}
-                <div className="flex flex-wrap gap-2">
                   {pub.links.paper && (
                     <a
                       href={pub.links.paper}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 transition-colors"
                     >
-                      <ExternalLink size={14} />
-                      Paper
+                      [Paper]
                     </a>
                   )}
                   {pub.links.doi && (
@@ -137,10 +143,9 @@ const Publications = () => {
                       href={pub.links.doi}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm border border-gray-300 text-gray-700 rounded hover:border-gray-400 hover:bg-gray-50 transition-colors"
+                      className="text-blue-600 hover:text-blue-800 transition-colors"
                     >
-                      <ExternalLink size={14} />
-                      DOI
+                      [DOI]
                     </a>
                   )}
                 </div>

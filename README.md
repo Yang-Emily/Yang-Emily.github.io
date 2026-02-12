@@ -176,7 +176,7 @@ Feel free to fork this project and customize it for your own use!
 
 ## 📧 Contact
 
-Yang Wu - yangwu@eethz.ch
+Yang Wu - yangwu@ethz.ch
 
 ---
 

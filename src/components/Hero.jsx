@@ -9,18 +9,14 @@ const Hero = () => {
           <div className="flex-shrink-0 order-1">
             <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-gray-200 shadow-sm mx-auto md:mx-0 mb-4">
               <img 
-                src={`${import.meta.env.BASE_URL}me.jpg`}
+                src={`${import.meta.env.BASE_URL}me_profile.png`}
                 alt="Yang Wu" 
                 className="w-full h-full object-cover scale-125"
                 style={{ objectPosition: 'center 20%' }}
               />
             </div>
             
-            {/* 位置和机构 */}
-            {/* <div className="text-center md:text-left mb-4 text-sm text-gray-600">
-              <p>Zurich, Switzerland</p>
-              <p className="font-medium text-gray-900">ETH Zurich</p>
-            </div> */}
+         
             
             {/* 联系方式图标 */}
             <div className="flex flex-wrap gap-3 justify-center mb-6">
@@ -45,13 +41,19 @@ const Hero = () => {
               </a>
             </div>
             
+               {/* 位置和机构 */}
+            <div className="text-center mb-4 text-sm text-gray-600">
+              <p>Zurich, Switzerland</p>
+              <p className="font-medium text-gray-900">ETH Zurich</p>
+            </div>
+            
             {/* Collaboration section */}
-            <div className="mt-6 md:mt-12 order-3 md:order-none">
+            {/* <div className="mt-6 md:mt-12 order-3 md:order-none">
               <h3 className="text-base font-semibold text-pink-600 mb-2">Get in Touch</h3>
               <p className="text-sm text-gray-700 leading-relaxed italic">
                 Always happy to connect with <span className="font-medium text-gray-900">PL + HCI</span> researchers.
               </p>
-            </div>
+            </div> */}
           </div>
 
           {/* 右侧：个人信息 */}
@@ -64,15 +66,10 @@ const Hero = () => {
             {/* 学术身份与研究简介 */}
             <div className="mb-5 space-y-4 order-1">
               <p className="text-base text-gray-700 leading-relaxed">
-                Hi! I'm Yang Wu, a first-year PhD student in the <a href="https://lse.ethz.ch/doctoral-program-in-learning-sciences.html" target="_blank" rel="noopener noreferrer" className="font-semibold text-gray-900 hover:text-gray-600 transition-colors">ETH Zurich – EPFL Joint Doctoral Program in Learning Sciences</a>. 
-                I'm deeply grateful to be advised by <a href="https://aprilwang.me/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">Prof. April Wang</a> and <a href="https://pit-claudel.fr/clement/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">Prof. Clément Pit-Claudel</a>, 
+                Hi! I'm Yang Wu, a first-year PhD student in the <a href="https://lse.ethz.ch/doctoral-program-in-learning-sciences.html" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">ETH Zurich – EPFL Joint Doctoral Program in Learning Sciences</a>. 
+                I'm grateful to be advised by <a href="https://aprilwang.me/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">Prof. April Wang</a> and <a href="https://pit-claudel.fr/clement/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">Prof. Clément Pit-Claudel</a>, 
                 and to learn from the wonderful communities in the <a href="https://peachlab.inf.ethz.ch/#/home" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">PEACH</a> and <a href="https://systemf.epfl.ch/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">SystemF</a> labs.
-              </p>
-              
-              <p className="text-base text-gray-700 leading-relaxed">
-                I completed my master's degree at the <a href="http://english.cs.hust.edu.cn/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">School of Computer Science and Technology, Huazhong University of Science and Technology (HUST)</a>, 
-                advised by <a href="https://wanyao.me/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">Prof. Yao Wan</a>. 
-                I would also like to thank <a href="https://hongyujohn.github.io/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">Prof. Hongyu Zhang</a>, <a href="https://yuleisui.github.io/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">Prof. Yulei Sui</a>, <a href="https://scholar.google.com/citations?user=o02W0aEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">Prof. Hai Jin</a>, and <a href="https://cs.uic.edu/profiles/philip-yu/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">Prof. Philip S. Yu</a> for their invaluable guidance and support.
+                Previously, I obtained an MSc in Computer Science at <a href="http://english.hust.edu.cn/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">HUST</a>, advised by <a href="https://wanyao.me/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">Prof. Yao Wan</a>.
               </p>
               
               <p className="text-base text-gray-700 leading-relaxed">

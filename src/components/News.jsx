@@ -3,6 +3,14 @@ import { Calendar, Award, Presentation, BookOpen, Star } from 'lucide-react'
 const News = () => {
   const newsItems = [
     {
+      date: 'Jan 2026',
+      title: 'Paper accepted at IUI 2026',
+      description: 'Our paper "StepMIND: A Visual Framework for Stepwise, Multimodal, and Bidirectional Explanations of AI-Generated Data Analysis Pipeline" has been accepted to IUI 2026! Looking forward to seeing you in Cyprus!',
+      icon: <Award size={20} />,
+      type: 'publication',
+      color: 'yellow',
+    },
+    {
       date: 'Jul 2025',
       title: 'Paper accepted at IEEE TSE',
       description: 'Our paper on "Can Large Language Models Serve as Evaluators for Code Summarization?" has been accepted to IEEE Transactions on Software Engineering!',
