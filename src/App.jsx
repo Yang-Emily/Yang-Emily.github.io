@@ -35,14 +35,16 @@ function App() {
       <FireworksCursor />
       
       {/* 导航栏 */}
-      <Navigation activeSection={activeSection} />
+      <Navigation 
+        activeSection={activeSection} 
+      />
       
       {/* 主要内容 - 单页布局 */}
       <main>
         <div id="home">
           <Hero />
         </div>
-        
+
         {/* News 和 Publications 两栏布局 */}
         <section className="py-4 px-4 sm:px-6 lg:px-8 bg-white">
           <div className="max-w-5xl mx-auto">

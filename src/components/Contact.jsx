@@ -5,8 +5,8 @@ const Contact = () => {
     {
       icon: <Mail size={24} />,
       label: 'Email',
-      value: 'yangwu@example.edu',
-      link: 'mailto:yangwu@example.edu',
+      value: 'yang.wu@inf.ethz.ch',
+      link: 'mailto:yang.wu@inf.ethz.ch',
       color: 'blue',
     },
     {

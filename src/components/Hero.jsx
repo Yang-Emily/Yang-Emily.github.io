@@ -1,4 +1,4 @@
-import { Mail, Github, Linkedin, GraduationCap } from 'lucide-react'
+import { Mail, Github, Linkedin, GraduationCap, Calendar } from 'lucide-react'
 
 const Hero = () => {
   return (
@@ -20,7 +20,7 @@ const Hero = () => {
             
             {/* 联系方式图标 */}
             <div className="flex flex-wrap gap-3 justify-center mb-6">
-              <a href="mailto:yangwu@ethz.ch" className="text-gray-700 hover:text-blue-700 transition-colors" title="Email">
+              <a href="mailto:yang.wu@inf.ethz.ch" className="text-gray-700 hover:text-blue-700 transition-colors" title="Email">
                 <Mail size={18} />
               </a>
               <a href="https://scholar.google.com/citations?user=2RdXwUwAAAAJ" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-700 transition-colors" title="Google Scholar">
@@ -39,12 +39,22 @@ const Hero = () => {
               <a href="https://www.linkedin.com/in/yangwu-emily/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-700 transition-colors" title="LinkedIn">
                 <Linkedin size={18} />
               </a>
+              <a 
+                href="https://doodle.com/bp/yangwu/60-mins-meeting" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-700 hover:text-blue-700 transition-colors" 
+                title="Book a Meeting"
+              >
+                <Calendar size={18} />
+              </a>
             </div>
             
                {/* 位置和机构 */}
             <div className="text-center mb-4 text-sm text-gray-600">
               <p>Zurich, Switzerland</p>
               <p className="font-medium text-gray-900">ETH Zurich</p>
+              <p>Office: CAB F66</p>
             </div>
             
             {/* Collaboration section */}
@@ -66,24 +76,26 @@ const Hero = () => {
             {/* 学术身份与研究简介 */}
             <div className="mb-5 space-y-4 order-1">
               <p className="text-base text-gray-700 leading-relaxed">
-                Hi! I'm Yang Wu, a first-year PhD student in the <a href="https://lse.ethz.ch/doctoral-program-in-learning-sciences.html" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">ETH Zurich – EPFL Joint Doctoral Program in Learning Sciences</a>. 
-                I'm grateful to be advised by <a href="https://aprilwang.me/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">Prof. April Wang</a> at ETH Zurich, and co-advised by <a href="https://pit-claudel.fr/clement/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">Prof. Clément Pit-Claudel</a> at EPFL, 
-                and to learn from the wonderful communities in the <a href="https://peachlab.inf.ethz.ch/#/home" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">PEACH</a> and <a href="https://systemf.epfl.ch/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">SystemF</a> labs.
-                Previously, I obtained an MSc in Computer Science at <a href="http://english.hust.edu.cn/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">HUST</a>, advised by <a href="https://wanyao.me/" target="_blank" rel="noopener noreferrer" className="text-blue-700 hover:text-blue-900 transition-colors font-medium">Prof. Yao Wan</a>.
+                Hi! I'm Yang Wu, a first-year PhD student in the <a href="https://lse.ethz.ch/doctoral-program-in-learning-sciences.html" target="_blank" rel="noopener noreferrer" className="text-gray-900 hover:text-gray-600 transition-colors font-medium">ETH Zurich – EPFL Joint Doctoral Program in Learning Sciences</a>, 
+                advised by <a href="https://aprilwang.me/" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">Prof. April Wang</a> at <a href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer" className="text-gray-900 hover:text-gray-600 transition-colors font-medium">ETH Zurich</a> and co-advised by <a href="https://pit-claudel.fr/clement/" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">Prof. Clément Pit-Claudel</a> at <a href="https://www.epfl.ch/en/" target="_blank" rel="noopener noreferrer" className="text-gray-900 hover:text-gray-600 transition-colors font-medium">EPFL</a>.
+                I'm grateful to learn from the wonderful communities in the <a href="https://peachlab.inf.ethz.ch/#/home" target="_blank" rel="noopener noreferrer" className="text-gray-900 hover:text-gray-600 transition-colors font-medium">PEACH</a> and <a href="https://systemf.epfl.ch/" target="_blank" rel="noopener noreferrer" className="text-gray-900 hover:text-gray-600 transition-colors font-medium">SystemF</a> labs.
+                Previously, I obtained an MSc in Computer Science at <a href="http://english.hust.edu.cn/" target="_blank" rel="noopener noreferrer" className="text-gray-900 hover:text-gray-600 transition-colors font-medium">HUST</a> focusing on code intelligence, advised by <a href="https://wanyao.me/" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">Prof. Yao Wan</a>.
+              I would also like to thank <a href="https://hongyujohn.github.io/" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">Prof. Hongyu Zhang</a>, <a href="https://yuleisui.github.io/" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">Prof. Yulei Sui</a>, <a href="https://scholar.google.com/citations?user=o02W0aEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">Prof. Hai Jin</a>, and <a href="https://cs.uic.edu/profiles/philip-yu/" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">Prof. Philip S. Yu</a> for their invaluable guidance and support.
               </p>
               
               <p className="text-base text-gray-700 leading-relaxed">
                 My research lies at the intersection of <span className="font-semibold text-gray-900">Human–Computer Interaction</span> and <span className="font-semibold text-gray-900">Programming Languages</span>, 
-                where I explore how programming can be made more <strong>inclusive</strong>, <strong>engaging</strong>, and <strong>accessible</strong> for diverse learners.
+                where I explore how programming can be made more inclusive, engaging, and accessible for diverse learners.
+                I'm particularly interested in exploring AI-independent and AI-assisted methods, with a focus on programming education and algorithm visualization.
               </p>
             </div>
             
             {/* Currently exploring section - order-4 on mobile, after "Get in Touch" */}
-            <p className="text-sm text-gray-600 leading-relaxed italic mb-5 order-4 md:order-2">
+            {/* <p className="text-sm text-gray-600 leading-relaxed italic mb-5 order-4 md:order-2">
               I'm currently exploring embodied representations, sketching interfaces, data visualization, AR/VR, and multimodal interaction in HCI, 
               as well as program verification, program analysis, and bidirectional model transformation in PL. 
-              If you'd like to chat, collaborate, or just share ideas, feel free to <a href="mailto:yangwu@ethz.ch" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">drop me an email</a>!
-            </p>
+              If you'd like to chat, collaborate, or just share ideas, feel free to <a href="mailto:yang.wu@inf.ethz.ch" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">drop me an email</a>!
+            </p> */}
 
           </div>
         </div>
