@@ -1,16 +1,33 @@
 import { Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
-const Navigation = ({ activeSection }) => {
+const Navigation = ({ activeSection, currentPage = 'home' }) => {
   const [isOpen, setIsOpen] = useState(false)
 
-  const navItems = [
-    { id: 'home', label: 'Home' },
-    { id: 'publications', label: 'Publications' },
+  const navItems = currentPage === 'trial'
+    ? [
+      { id: 'home', label: 'Home', route: '#/' },
+      { id: 'trial', label: 'Trial' },
+    ]
+    : [
+      { id: 'home', label: 'Home' },
+      { id: 'publications', label: 'Publications' },
+    ]
+
+  const allNavItems = [
+    ...navItems,
     { id: 'blog', label: "🐏's Blog", external: true, url: 'https://wuyang.run' },
   ]
 
   const scrollToSection = (id) => {
+    if (currentPage === 'trial') {
+      if (id === 'home') {
+        window.location.hash = '#/'
+      }
+      setIsOpen(false)
+      return
+    }
+
     const element = document.getElementById(id)
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
@@ -28,12 +45,17 @@ const Navigation = ({ activeSection }) => {
             className="text-xl font-serif font-bold text-gray-900 hover:text-blue-700 transition-colors flex items-baseline gap-2"
           >
             <span>Yang Wu</span>
-            <span className="text-lg text-gray-500 font-light tracking-wide" style={{ fontFamily: "'Noto Serif SC', 'LXGW WenKai', 'Source Han Serif SC', serif" }}>吴漾</span>
+            <span className="text-lg text-gray-500 font-light tracking-wide" style={{ fontFamily: "'Noto Serif SC', 'LXGW WenKai', 'Source Han Serif SC', serif" }}>
+              吴漾
+            </span>
+            <span className="text-sm text-gray-400 font-normal">
+              /wúyàng/
+            </span>
           </button>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-6">
-            {navItems.map((item) => (
+            {allNavItems.map((item) => (
               item.external ? (
                 <a
                   key={item.id}
@@ -72,7 +94,7 @@ const Navigation = ({ activeSection }) => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden py-4 space-y-2">
-            {navItems.map((item) => (
+            {allNavItems.map((item) => (
               item.external ? (
                 <a
                   key={item.id}

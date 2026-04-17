@@ -4,11 +4,28 @@ import Hero from './components/Hero'
 import News from './components/News'
 import Publications from './components/Publications'
 import FireworksCursor from './components/FireworksCursor'
+import TrialPage from './components/TrialPage'
 
 function App() {
-  const [activeSection, setActiveSection] = useState('home')
+  const getCurrentPage = () => (window.location.hash === '#/trial' ? 'trial' : 'home')
+  const [currentPage, setCurrentPage] = useState(getCurrentPage)
+  const [activeSection, setActiveSection] = useState(getCurrentPage() === 'trial' ? 'trial' : 'home')
 
   useEffect(() => {
+    const handleHashChange = () => {
+      const page = getCurrentPage()
+      setCurrentPage(page)
+      setActiveSection(page === 'trial' ? 'trial' : 'home')
+      window.scrollTo({ top: 0, behavior: 'auto' })
+    }
+
+    window.addEventListener('hashchange', handleHashChange)
+    return () => window.removeEventListener('hashchange', handleHashChange)
+  }, [])
+
+  useEffect(() => {
+    if (currentPage === 'trial') return
+
     const handleScroll = () => {
       const sections = ['home', 'news', 'publications']
       const scrollPosition = window.scrollY + 100
@@ -27,7 +44,7 @@ function App() {
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [currentPage])
 
   return (
     <div className="min-h-screen bg-white">
@@ -37,31 +54,36 @@ function App() {
       {/* 导航栏 */}
       <Navigation 
         activeSection={activeSection} 
+        currentPage={currentPage}
       />
       
       {/* 主要内容 - 单页布局 */}
-      <main>
-        <div id="home">
-          <Hero />
-        </div>
+      {currentPage === 'trial' ? (
+        <TrialPage />
+      ) : (
+        <main>
+          <div id="home">
+            <Hero />
+          </div>
 
-        {/* News 和 Publications 两栏布局 */}
-        <section className="py-4 px-4 sm:px-6 lg:px-8 bg-white">
-          <div className="max-w-5xl mx-auto">
-            <div className="grid md:grid-cols-[200px_1fr] gap-10">
-              {/* 左侧：News */}
-              <div id="news">
-                <News />
-              </div>
-              
-              {/* 右侧：Publications */}
-              <div id="publications">
-                <Publications />
+          {/* News 和 Publications 两栏布局 */}
+        <section className="pt-1 pb-4 px-4 sm:px-6 lg:px-8 bg-white">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-[200px_1fr] gap-10">
+                {/* 左侧：News */}
+                <div id="news">
+                  <News />
+                </div>
+                
+                {/* 右侧：Publications */}
+                <div id="publications">
+                  <Publications />
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-      </main>
+          </section>
+        </main>
+      )}
       
       {/* 页脚 - 紧凑 */}
       <footer className="py-6 text-center text-sm text-gray-600 border-t border-gray-200">

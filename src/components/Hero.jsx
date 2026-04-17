@@ -2,7 +2,7 @@ import { Mail, Github, Linkedin, GraduationCap, Calendar } from 'lucide-react'
 
 const Hero = () => {
   return (
-    <section className="pt-24 pb-4 px-4 sm:px-6 lg:px-8 bg-white">
+    <section className="pt-24 pb-1 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col md:grid md:grid-cols-[200px_1fr] gap-10 items-start">
           {/* 左侧：照片和联系信息 */}
@@ -67,27 +67,41 @@ const Hero = () => {
           </div>
 
           {/* 右侧：个人信息 */}
-          <div className="order-2 flex flex-col">
+          <div className="order-2 flex flex-col mt-4 md:mt-8">
             {/* 名字 */}
             {/* <h1 className="text-4xl font-serif font-bold mb-4 text-gray-900">
               Yang Wu 
             </h1> */}
 
             {/* 学术身份与研究简介 */}
-            <div className="mb-5 space-y-4 order-1">
+            <div className="mb-5 space-y-2.5 order-1">
               <p className="text-base text-gray-700 leading-relaxed">
-                Hi! I'm Yang Wu, a first-year PhD student in the <a href="https://lse.ethz.ch/doctoral-program-in-learning-sciences.html" target="_blank" rel="noopener noreferrer" className="text-gray-900 hover:text-gray-600 transition-colors font-medium">ETH Zurich – EPFL Joint Doctoral Program in Learning Sciences</a>, 
-                advised by <a href="https://aprilwang.me/" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">Prof. April Wang</a> at <a href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer" className="text-gray-900 hover:text-gray-600 transition-colors font-medium">ETH Zurich</a> and co-advised by <a href="https://pit-claudel.fr/clement/" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">Prof. Clément Pit-Claudel</a> at <a href="https://www.epfl.ch/en/" target="_blank" rel="noopener noreferrer" className="text-gray-900 hover:text-gray-600 transition-colors font-medium">EPFL</a>.
-                I'm grateful to learn from the wonderful communities in the <a href="https://peachlab.inf.ethz.ch/#/home" target="_blank" rel="noopener noreferrer" className="text-gray-900 hover:text-gray-600 transition-colors font-medium">PEACH</a> and <a href="https://systemf.epfl.ch/" target="_blank" rel="noopener noreferrer" className="text-gray-900 hover:text-gray-600 transition-colors font-medium">SystemF</a> labs.
-                Previously, I obtained an MSc in Computer Science at <a href="http://english.hust.edu.cn/" target="_blank" rel="noopener noreferrer" className="text-gray-900 hover:text-gray-600 transition-colors font-medium">HUST</a> focusing on code intelligence, advised by <a href="https://wanyao.me/" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">Prof. Yao Wan</a>.
-              I would also like to thank <a href="https://hongyujohn.github.io/" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">Prof. Hongyu Zhang</a>, <a href="https://yuleisui.github.io/" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">Prof. Yulei Sui</a>, <a href="https://scholar.google.com/citations?user=o02W0aEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">Prof. Hai Jin</a>, and <a href="https://cs.uic.edu/profiles/philip-yu/" target="_blank" rel="noopener noreferrer" className="text-pink-600 hover:text-pink-800 transition-colors font-medium">Prof. Philip S. Yu</a> for their invaluable guidance and support.
+                Hi! I'm Yang (pronounced like "young" with a falling tone). You can also call me Emily.
               </p>
-              
+
               <p className="text-base text-gray-700 leading-relaxed">
-                My research lies at the intersection of <span className="font-semibold text-gray-900">Human–Computer Interaction</span> and <span className="font-semibold text-gray-900">Programming Languages</span>, 
-                where I explore how programming can be made more inclusive, engaging, and accessible for diverse learners.
-                I'm particularly interested in exploring AI-independent and AI-assisted methods, with a focus on programming education and algorithm visualization.
+                I'm a first-year PhD student at <a href="https://ethz.ch/en.html" target="_blank" rel="noopener noreferrer" className="text-[#FF9FB8] hover:text-[#FF85A6] transition-colors">ETH Zurich</a>, jointly enrolled at <a href="https://www.epfl.ch/en/" target="_blank" rel="noopener noreferrer" className="text-[#FF9FB8] hover:text-[#FF85A6] transition-colors">EPFL</a>, advised by <a href="https://aprilwang.me/" target="_blank" rel="noopener noreferrer" className="text-[#FF9FB8] hover:text-[#FF85A6] transition-colors">Prof. April Wang</a> and co-advised by <a href="https://pit-claudel.fr/clement/" target="_blank" rel="noopener noreferrer" className="text-[#FF9FB8] hover:text-[#FF85A6] transition-colors">Prof. Clément Pit-Claudel</a>. I'm grateful to be part of the <a href="https://peachlab.inf.ethz.ch/#/home" target="_blank" rel="noopener noreferrer" className="text-[#FF9FB8] hover:text-[#FF85A6] transition-colors">PEACH</a> and <a href="https://systemf.epfl.ch/" target="_blank" rel="noopener noreferrer" className="text-[#FF9FB8] hover:text-[#FF85A6] transition-colors">SystemF</a> labs.
               </p>
+
+              <p className="text-base text-gray-700 leading-relaxed">
+                My research lies at the intersection of Human–Computer Interaction (HCI) and Programming Languages (PL). I'm particularly interested in using formal methods to address aspects of programming education, and to improve interaction and learning experiences, with a focus on algorithm visualization.
+              </p>
+
+              <p className="text-base text-gray-700 leading-relaxed">
+                Previously, I obtained an MSc in Computer Science at <a href="http://english.hust.edu.cn/" target="_blank" rel="noopener noreferrer" className="text-[#FF9FB8] hover:text-[#FF85A6] transition-colors">Huazhong University of Science and Technology</a> focusing on code intelligence, advised by <a href="https://wanyao.me/" target="_blank" rel="noopener noreferrer" className="text-[#FF9FB8] hover:text-[#FF85A6] transition-colors">Prof. Yao Wan</a>.
+                {/* I would also like to thank <a href="https://hongyujohn.github.io/" target="_blank" rel="noopener noreferrer" className="text-[#FF9FB8] hover:text-[#FF85A6] transition-colors">Prof. Hongyu Zhang</a>, <a href="https://yuleisui.github.io/" target="_blank" rel="noopener noreferrer" className="text-[#FF9FB8] hover:text-[#FF85A6] transition-colors">Prof. Yulei Sui</a>, <a href="https://scholar.google.com/citations?user=o02W0aEAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" className="text-[#FF9FB8] hover:text-[#FF85A6] transition-colors">Prof. Hai Jin</a>, and <a href="https://cs.uic.edu/profiles/philip-yu/" target="_blank" rel="noopener noreferrer" className="text-[#FF9FB8] hover:text-[#FF85A6] transition-colors">Prof. Philip S. Yu</a> for their invaluable guidance and support. */}
+              </p>
+
+              <a
+                href="#/trial"
+                className="group inline-flex flex-col items-center self-center pt-1 text-center magic-wand-cursor"
+              >
+                <p className="inline-flex items-center justify-center gap-1.5 px-3 py-2 text-center font-handwriting text-base text-[#A78BFA] leading-none transition-colors group-hover:text-[#8B5CF6]">
+                  <span aria-hidden="true">🔮</span>
+                  <span>My Corner for Thoughts & Trials</span>
+                  <span aria-hidden="true">🧙</span>
+                </p>
+              </a>
             </div>
             
             {/* Currently exploring section - order-4 on mobile, after "Get in Touch" */}
