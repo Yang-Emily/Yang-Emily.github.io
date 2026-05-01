@@ -13,6 +13,7 @@ const Publications = () => {
       links: {
         paper: 'https://doi.org/10.1145/3742413.3789070',
         doi: 'https://doi.org/10.1145/3742413.3789070',
+        system: 'https://stage.peachlab-cntr1.inf.ethz.ch/',
       },
     },
     {
@@ -127,15 +128,15 @@ const Publications = () => {
 
                 {/* Venue and Links */}
                 <div className="flex flex-wrap items-center gap-3 text-sm">
-                  <span className="font-medium text-gray-900">{pub.venue}</span>
+                  <span className="font-semibold text-gray-900">{pub.venue}</span>
                   {pub.links.paper && (
                     <a
                       href={pub.links.paper}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-600 hover:text-blue-800 transition-colors"
+                      className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-200 hover:text-gray-800"
                     >
-                      [Paper]
+                      Paper
                     </a>
                   )}
                   {pub.links.doi && (
@@ -143,9 +144,19 @@ const Publications = () => {
                       href={pub.links.doi}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-600 hover:text-blue-800 transition-colors"
+                      className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-200 hover:text-gray-800"
                     >
-                      [DOI]
+                      DOI
+                    </a>
+                  )}
+                  {pub.links.system && (
+                    <a
+                      href={pub.links.system}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-200 hover:text-gray-800"
+                    >
+                      Demo
                     </a>
                   )}
                 </div>

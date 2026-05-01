@@ -20,7 +20,7 @@ const Contact = () => {
       icon: <Linkedin size={24} />,
       label: 'LinkedIn',
       value: 'Yang Wu',
-      link: 'https://linkedin.com',
+      link: 'https://ch.linkedin.com/in/yangwu-emily',
       color: 'blue',
     },
     {
@@ -37,6 +37,7 @@ const Contact = () => {
       blue: 'bg-blue-50 text-blue-600 border-blue-200',
       gray: 'bg-gray-50 text-gray-600 border-gray-200',
       sky: 'bg-sky-50 text-sky-600 border-sky-200',
+      indigo: 'bg-indigo-50 text-indigo-600 border-indigo-200',
     }
     return colors[color] || colors.blue
   }

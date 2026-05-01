@@ -36,7 +36,7 @@ const Hero = () => {
               <a href="https://github.com/Yang-Emily" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-700 transition-colors" title="Github">
                 <Github size={18} />
               </a>
-              <a href="https://www.linkedin.com/in/yangwu-emily/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-700 transition-colors" title="LinkedIn">
+              <a href="https://ch.linkedin.com/in/yangwu-emily/" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-700 transition-colors" title="LinkedIn">
                 <Linkedin size={18} />
               </a>
               <a 
@@ -101,6 +101,22 @@ const Hero = () => {
                   <span>My Corner for Thoughts & Trials</span>
                   <span aria-hidden="true">🧙</span>
                 </p>
+                <svg
+                  className="-mt-1"
+                  width="170"
+                  height="12"
+                  viewBox="0 0 170 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2 6C10 2 18 10 26 6C34 2 42 10 50 6C58 2 66 10 74 6C82 2 90 10 98 6C106 2 114 10 122 6C130 2 138 10 146 6C154 2 162 10 168 6"
+                    stroke="#A78BFA"
+                    strokeWidth="1.4"
+                    strokeLinecap="round"
+                  />
+                </svg>
               </a>
             </div>
             

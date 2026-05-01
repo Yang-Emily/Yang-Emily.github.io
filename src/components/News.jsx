@@ -3,9 +3,17 @@ import { Calendar, Award, Presentation, BookOpen, Star, FileText, GraduationCap 
 const News = () => {
   const newsItems = [
     {
+      date: 'Feb 2026',
+      title: 'Presented at SwissCHI',
+      description: 'February 10, 2026: SwissCHI presents our recent IUI paper, "StepMIND."',
+      icon: <Presentation size={20} />,
+      type: 'talk',
+      color: 'purple',
+    },
+    {
       date: 'Jan 2026',
       title: 'Paper accepted at IUI 2026',
-      description: 'Our paper "StepMIND: A Visual Framework for Stepwise, Multimodal, and Bidirectional Explanations of AI-Generated Data Analysis Pipeline" has been accepted to IUI 2026! Looking forward to seeing you in Cyprus!',
+      description: 'Our paper "StepMIND" has been accepted to IUI 2026! Looking forward to seeing you in Cyprus!',
       icon: <FileText size={20} />,
       type: 'publication',
       color: 'yellow',
@@ -21,7 +29,7 @@ const News = () => {
     {
       date: 'Jul 2025',
       title: 'Paper accepted at IEEE TSE',
-      description: 'Our paper on "Can Large Language Models Serve as Evaluators for Code Summarization?" has been accepted to IEEE Transactions on Software Engineering!',
+      description: 'Our paper on "CodeRPE" has been accepted to IEEE Transactions on Software Engineering!',
       icon: <FileText size={20} />,
       type: 'publication',
       color: 'yellow',
@@ -37,7 +45,7 @@ const News = () => {
     {
       date: 'May 2025',
       title: 'Paper accepted at ACL 2025',
-      description: 'Our paper on "Sign2Vis: Automated Data Visualization from Sign Language" has been accepted to ACL 2025!',
+      description: 'Our paper on "Sign2Vis" has been accepted to ACL 2025!',
       icon: <FileText size={20} />,
       type: 'publication',
       color: 'yellow',
@@ -45,7 +53,7 @@ const News = () => {
     {
       date: 'Jun 2024',
       title: 'Presented at SIGMOD 2024',
-      description: 'Presented our work on automated data visualization from natural language at SIGMOD 2024 in Santiago, Chile.',
+      description: 'Presented our work on NL2Vis at SIGMOD 2024 in Santiago, Chile.',
       icon: <Presentation size={20} />,
       type: 'talk',
       color: 'purple',

@@ -1,4 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Emoji -->
-  <text x="50" y="75" font-size="70" text-anchor="middle">🐏</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 32 32">
+  <g transform="translate(16,16)">
+    <ellipse cx="0" cy="-6" rx="4" ry="6.5" fill="#FFB3C6" transform="rotate(0)" opacity="0.9"/>
+    <ellipse cx="0" cy="-6" rx="4" ry="6.5" fill="#FFB3C6" transform="rotate(72)" opacity="0.9"/>
+    <ellipse cx="0" cy="-6" rx="4" ry="6.5" fill="#FFB3C6" transform="rotate(144)" opacity="0.9"/>
+    <ellipse cx="0" cy="-6" rx="4" ry="6.5" fill="#FFB3C6" transform="rotate(216)" opacity="0.9"/>
+    <ellipse cx="0" cy="-6" rx="4" ry="6.5" fill="#FFB3C6" transform="rotate(288)" opacity="0.9"/>
+    <circle cx="0" cy="0" r="2.5" fill="#FFD700"/>
+  </g>
 </svg>
