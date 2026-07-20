@@ -1,4 +1,4 @@
-import { ExternalLink } from 'lucide-react'
+import { Award, ExternalLink } from 'lucide-react'
 
 const Publications = () => {
   const publications = [
@@ -6,6 +6,7 @@ const Publications = () => {
       title: 'StepMIND: A Visual Framework for Stepwise, Multimodal, and Bidirectional Explanations of AI-Generated Data Analysis Pipeline',
       authors: ['Yang Wu', 'Yao Wan', 'Mennatallah El-Assady', 'April Yi Wang'],
       venue: 'IUI 2026',
+      award: 'Best Paper Award',
       venueLevel: 'CCF-A',
       year: '2026',
       tags: ['LLM', 'Visualization', 'Multimodal', 'Explanations', 'Data Analysis Pipeline'],
@@ -129,6 +130,12 @@ const Publications = () => {
                 {/* Venue and Links */}
                 <div className="flex flex-wrap items-center gap-3 text-sm">
                   <span className="font-semibold text-gray-900">{pub.venue}</span>
+                  {pub.award && (
+                    <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700">
+                      <Award size={12} />
+                      {pub.award}
+                    </span>
+                  )}
                   {pub.links.paper && (
                     <a
                       href={pub.links.paper}
