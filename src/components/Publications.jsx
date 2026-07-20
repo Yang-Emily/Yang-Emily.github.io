@@ -146,16 +146,6 @@ const Publications = () => {
                       Paper
                     </a>
                   )}
-                  {pub.links.doi && (
-                    <a
-                      href={pub.links.doi}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-200 hover:text-gray-800"
-                    >
-                      DOI
-                    </a>
-                  )}
                   {pub.links.system && (
                     <a
                       href={pub.links.system}
