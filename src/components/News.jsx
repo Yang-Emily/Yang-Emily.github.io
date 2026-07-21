@@ -11,7 +11,7 @@ const News = () => {
       color: 'purple',
     },
     {
-      date: 'Jan 2026',
+      date: 'Jul 2026',
       title: 'Paper accepted at IUI 2026',
       description: 'Our paper "StepMIND" was presented at IUI 2026 in Cyprus and received the Best Paper Award!',
       icon: <FileText size={20} />,
