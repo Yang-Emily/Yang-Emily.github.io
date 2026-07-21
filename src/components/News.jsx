@@ -3,20 +3,20 @@ import { Calendar, Award, Presentation, BookOpen, Star, FileText, GraduationCap 
 const News = () => {
   const newsItems = [
     {
-      date: 'Feb 2026',
-      title: 'Presented at SwissCHI',
-      description: 'February 10, 2026: SwissCHI presents our recent IUI paper, "StepMIND."',
-      icon: <Presentation size={20} />,
-      type: 'talk',
-      color: 'purple',
-    },
-    {
       date: 'Jul 2026',
       title: 'Paper accepted at IUI 2026',
       description: 'Our paper "StepMIND" was presented at IUI 2026 in Cyprus and received the Best Paper Award!',
       icon: <FileText size={20} />,
       type: 'publication',
       color: 'yellow',
+    },
+    {
+      date: 'Feb 2026',
+      title: 'Presented at SwissCHI',
+      description: 'February 10, 2026: SwissCHI presents our recent IUI paper, "StepMIND."',
+      icon: <Presentation size={20} />,
+      type: 'talk',
+      color: 'purple',
     },
     {
       date: 'Nov 2025',
