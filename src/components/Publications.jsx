@@ -4,7 +4,7 @@ const Publications = () => {
   const publications = [
     {
       title: 'SketchMind: Toward Executable Pen-Based Sketching for Constructing Sorting Algorithms',
-      authors: ['Yang Wu', 'Xintong Li', 'Mennatallah El-Assady', 'Minghui Zhou'],
+      authors: ['Yang Wu', 'Clément Pit-Claudel', 'April Yi Wang'],
       venue: 'UIST 2026',
       venueLevel: 'CCF-A',
       year: '2026',
