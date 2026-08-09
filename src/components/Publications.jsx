@@ -3,6 +3,19 @@ import { Award, ExternalLink } from 'lucide-react'
 const Publications = () => {
   const publications = [
     {
+      title: 'SketchMind: Toward Executable Pen-Based Sketching for Constructing Sorting Algorithms',
+      authors: ['Yang Wu', 'Xintong Li', 'Mennatallah El-Assady', 'Minghui Zhou'],
+      venue: 'UIST 2026',
+      venueLevel: 'CCF-A',
+      year: '2026',
+      tags: ['Pen-Based Interaction', 'Sketching', 'Executable Sketches', 'Education'],
+      thumbnail: 'uist26_sketchmind.png',
+      links: {
+        paper: `${import.meta.env.BASE_URL}uist26_sketchmind.pdf`,
+        doi: 'https://doi.org/10.1145/3830398.3830500',
+      },
+    },
+    {
       title: 'StepMIND: A Visual Framework for Stepwise, Multimodal, and Bidirectional Explanations of AI-Generated Data Analysis Pipeline',
       authors: ['Yang Wu', 'Yao Wan', 'Mennatallah El-Assady', 'April Yi Wang'],
       venue: 'IUI 2026',
@@ -144,6 +157,16 @@ const Publications = () => {
                       className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-200 hover:text-gray-800"
                     >
                       Paper
+                    </a>
+                  )}
+                  {pub.links.doi && pub.links.doi !== pub.links.paper && (
+                    <a
+                      href={pub.links.doi}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-200 hover:text-gray-800"
+                    >
+                      DOI
                     </a>
                   )}
                   {pub.links.system && (

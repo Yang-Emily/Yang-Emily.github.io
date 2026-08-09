@@ -3,6 +3,14 @@ import { Calendar, Award, Presentation, BookOpen, Star, FileText, GraduationCap 
 const News = () => {
   const newsItems = [
     {
+      date: 'Aug 2026',
+      title: 'Paper accepted at UIST 2026',
+      description: 'August 7, 2026: Our paper "SketchMind: Toward Executable Pen-Based Sketching for Constructing Sorting Algorithms" was accepted to UIST 2026.',
+      icon: <FileText size={20} />,
+      type: 'publication',
+      color: 'yellow',
+    },
+    {
       date: 'Jul 2026',
       title: 'Paper accepted at IUI 2026',
       description: 'Our paper "StepMIND" was presented at IUI 2026 in Cyprus and received the Best Paper Award!',
