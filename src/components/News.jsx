@@ -5,7 +5,7 @@ const News = () => {
     {
       date: 'Aug 2026',
       title: 'Paper accepted at UIST 2026',
-      description: 'August 7, 2026: Our paper "SketchMind: Toward Executable Pen-Based Sketching for Constructing Sorting Algorithms" was accepted to UIST 2026.',
+      description: 'Our paper "SketchMind: Toward Executable Pen-Based Sketching for Constructing Sorting Algorithms" was accepted to UIST 2026. See you in Detroit, Michigan!',
       icon: <FileText size={20} />,
       type: 'publication',
       color: 'yellow',
