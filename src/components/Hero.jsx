@@ -1,4 +1,4 @@
-import { Mail, Github, Linkedin, GraduationCap, Calendar } from 'lucide-react'
+import { Mail, Github, Linkedin, Calendar, FileText } from 'lucide-react'
 
 const Hero = () => {
   return (
@@ -27,6 +27,9 @@ const Hero = () => {
                 <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/>
                 </svg>
+              </a>
+              <a href={`${import.meta.env.BASE_URL}Yang_Wu_CV.pdf`} target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-700 transition-colors" title="Curriculum Vitae" aria-label="Curriculum Vitae">
+                <FileText size={18} />
               </a>
               {/* <a href="https://www.researchgate.net" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-blue-700 transition-colors" title="ResearchGate">
                 <svg className="w-[18px] h-[18px]" viewBox="0 0 24 24" fill="currentColor">
