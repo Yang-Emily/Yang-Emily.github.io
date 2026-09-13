@@ -87,6 +87,7 @@ const FireworksCursor = () => {
     }
 
     const handleClick = (e) => {
+      if (e.target.closest('.cat-garden')) return
       if (window.location.hash === '#/trial') {
         createMagicBurst(e.clientX, e.clientY)
       } else {

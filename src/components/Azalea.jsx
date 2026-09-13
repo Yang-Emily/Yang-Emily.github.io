@@ -27,8 +27,8 @@ const Azalea = ({ size = 100, color = '#FF6B9D', className = '', animate = true 
     >
       {/* 花瓣 - 手绘风格 */}
       {[0, 72, 144, 216, 288].map((rotation, index) => (
+        <g key={index} transform={`rotate(${rotation} 50 50)`}>
         <ellipse
-          key={index}
           className="petal"
           cx="50"
           cy="30"
@@ -36,10 +36,9 @@ const Azalea = ({ size = 100, color = '#FF6B9D', className = '', animate = true 
           ry="25"
           fill={color}
           opacity="0.85"
-          transform={`rotate(${rotation} 50 50)`}
           style={{
             opacity: animate ? '0' : '0.85',
-            transform: animate ? 'scale(0) rotate(-45deg)' : 'scale(1) rotate(0deg)',
+            transform: animate ? 'scale(0) rotate(-45deg)' : undefined,
             transformOrigin: '50px 50px',
             transition: 'all 0.5s ease-out',
             stroke: '#FF4081',
@@ -47,6 +46,7 @@ const Azalea = ({ size = 100, color = '#FF6B9D', className = '', animate = true 
             strokeDasharray: '2,2',
           }}
         />
+        </g>
       ))}
       
       {/* 花蕊 */}

@@ -1,0 +1,229 @@
+.cat-garden { --sky: #faf7ee; --ink: #686652; --grass-back: #e0e6cf; --grass: #d2ddbb; --water: #bed9d5; position: relative; min-height: 760px; height: 100svh; color: var(--ink); background: var(--sky); isolation: isolate; overflow: hidden; }
+.cat-garden.garden-night { --sky: #292e46; --ink: #e2dccc; --grass-back: #414c50; --grass: #4c5c55; --water: #667e8f; }
+.garden-heading { position: absolute; z-index: 2; top: 140px; left: 9%; pointer-events: none; max-width: 75%; }
+.garden-eyebrow { font-size: 10px; letter-spacing: .24em; opacity: .65; margin-bottom: 18px; }
+.garden-heading h1 { font-family: 'Caveat', cursive; font-size: clamp(38px, 5vw, 66px); line-height: 1.1; font-weight: 400; }
+.garden-note { font-family: 'Caveat', cursive; font-size: 22px; opacity: .7; margin-top: 14px; }
+.garden-scenes { position: absolute; z-index: 3; top: 92px; right: 6%; display: flex; gap: 4px; padding: 4px; border: 1px solid #a8a38d55; border-radius: 30px; background: #fff9; }
+.trial-page .garden-scenes button { border-radius: 24px; padding: 7px 15px; color: #736c60; font-size: 11px; cursor: pointer !important; transition: background .2s; }
+.garden-scenes button span { margin-right: 8px; font-size: 17px; }
+.garden-scenes button[aria-pressed='true'] { background: #e8e3d3; color: #514f45; }
+.garden-night .garden-scenes { background: #30354b; border-color: #777e8c; }
+.garden-night .garden-scenes button { color: #e2dccc; }
+.garden-night .garden-scenes button[aria-pressed='true'] { background: #54576e; }
+.garden-scenes button:focus-visible, .garden-envelope:focus-visible, .letter-close:focus-visible { outline: 3px solid #b39cc5; outline-offset: 4px; }
+.garden-stage { position: absolute; inset: 0; touch-action: pan-y; }
+.garden-stage:focus-visible { outline: 3px dashed #b39cc5; outline-offset: -6px; }
+.trial-page .garden-stage, .trial-page .garden-stage * { cursor: auto !important; }
+.garden-landscape { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.garden-terrain { position: absolute; width: 100%; height: 100%; }
+.distant-grass { fill: var(--grass-back); }
+.near-grass { fill: var(--grass); }
+.grass-contour { stroke: #879772; stroke-width: 1; opacity: .35; }
+.pond-bank { fill: #becba9; }
+.pond-water { fill: var(--water); stroke: #8aaea7; stroke-width: 1.5; }
+.water-lines { stroke: #f8faf0; opacity: .55; }
+.lily-pads { fill: #8faa89; stroke: #718d70; stroke-width: 1; }
+.grass-blades, .reeds { stroke: #7c946d; opacity: .5; }
+.garden-night .pond-bank { fill: #586653; }
+.garden-night .grass-blades, .garden-night .reeds { stroke: #99aa8a; opacity: .35; }
+.garden-celestial { position: absolute; width: clamp(70px, 9vw, 125px); top: 22%; right: 16%; }
+.garden-celestial svg { width: 100%; }
+.garden-night .garden-celestial { filter: drop-shadow(0 0 24px #f4e2b54a); }
+.moon-reflection { position: absolute; left: 72%; top: 69%; width: 9%; height: 15%; border-radius: 50%; background: repeating-linear-gradient(0deg, transparent 0 12px, #f2e1ae55 13px 15px, transparent 17px 24px); transform: skewX(-12deg); filter: blur(2px); }
+.garden-star { position: absolute; color: #e8ddb1; font-size: 15px; animation: garden-twinkle 4s ease-in-out infinite alternate; }
+.garden-butterfly { position: absolute; width: 35px; animation: garden-flutter 7s ease-in-out infinite; }
+.garden-butterfly svg { width: 100%; }
+.landscape-azalea { position: absolute; width: var(--flower-size); }
+.landscape-azalea > svg:not(.azalea-leaves) { position: relative; width: 100%; height: auto; opacity: .75; }
+.azalea-leaves { position: absolute; width: 150%; height: 150%; left: -25%; top: 5%; }
+.garden-night .landscape-azalea { filter: brightness(.7) saturate(.7); }
+.garden-stage canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.garden-cat, .garden-toy { position: absolute; top: 0; left: 0; pointer-events: none; will-change: transform; }
+.garden-toy { font-size: 28px; line-height: 34px; width: 34px; text-align: center; opacity: 0; color: #ffe3a0; }
+.garden-night .garden-land-toy { color: #ffe3a0; text-shadow: 0 0 8px #ffe3a0, 0 0 18px #efcb7980; }
+.garden-night .garden-cat { filter: brightness(.85); }
+.garden-cat[data-running='true'] .cat-tail { animation: garden-tail .3s ease-in-out infinite alternate; transform-origin: 37px 78px; }
+.garden-instructions { position: absolute; z-index: 2; bottom: 24px; left: 15%; right: 15%; text-align: center; display: flex; flex-direction: column; gap: 6px; font-size: 11px; opacity: .8; pointer-events: none; }
+.garden-instructions span:last-child { font-size: 10px; opacity: .7; }
+.garden-mail { position: absolute; z-index: 4; top: 36%; left: 10%; }
+.trial-page .garden-envelope { display: flex; align-items: center; flex-direction: column; font-family: 'Caveat', cursive; font-size: 18px; color: var(--ink); cursor: pointer !important; transition: filter .2s; }
+.garden-envelope svg { width: 132px; height: 190px; filter: drop-shadow(0 5px 5px #554a3f15); }
+.garden-envelope:hover { filter: brightness(1.04); }
+.mailbox-visible-letter { transform-origin: 60px 100px; transition: transform .25s ease; }
+.garden-envelope:is(:hover, :focus-visible, [aria-expanded='true']) .mailbox-visible-letter { transform: translateY(-5px) rotate(-3deg); }
+.garden-night .garden-mailbox { filter: brightness(.8); }
+.garden-envelope span { opacity: .7; }
+.garden-letter { position: absolute; z-index: 7; top: 88px; left: 27%; width: 360px; max-width: calc(100vw - 40px); max-height: 310px; overflow-y: auto; padding: 18px 24px; background: #fcf3df; color: #75634d; border: 1px solid #d5c6a6; border-radius: 3px 8px 4px 9px; box-shadow: 0 16px 45px #28222e22; font-family: 'Caveat', cursive; }
+.garden-letter h2 { font-size: 26px; margin: 8px 0 14px; }
+.garden-letter p { font-size: 20px; line-height: 1.3; }
+.garden-letter .letter-signature { margin-top: 16px; font-size: 20px; color: #9980a1; }
+.letter-mark { color: #a88aab; font-size: 26px; }
+.trial-page .letter-close { position: absolute; right: 10px; top: 6px; width: 36px; height: 36px; font-family: sans-serif; font-size: 24px; cursor: pointer !important; }
+@keyframes garden-tail { to { transform: rotate(18deg); } }
+@keyframes garden-flutter { 0%, 100% { transform: translate(0, 0) rotate(-12deg); } 35% { transform: translate(30px, -25px) rotate(10deg); } 70% { transform: translate(-20px, -8px) rotate(-6deg); } }
+@keyframes garden-twinkle { to { opacity: .25; } }
+@media (max-width: 600px) {
+  .cat-garden { min-height: 720px; }
+  .garden-heading { top: 164px; left: 7%; max-width: 87%; }
+  .garden-heading h1 { font-size: 39px; }
+  .garden-note { font-size: 19px; max-width: 250px; }
+  .garden-scenes { top: 95px; right: 6%; }
+  .garden-mail { top: 37%; left: 8%; }
+  .garden-envelope svg { width: 112px; height: 162px; }
+  .garden-letter { left: 20px; top: 150px; width: calc(100vw - 40px); max-height: 260px; }
+  .garden-celestial { top: 34%; right: 12%; width: 65px; }
+  .landscape-azalea { width: calc(var(--flower-size) * .6); }
+  .garden-instructions { left: 7%; right: 7%; bottom: 20px; font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .cat-garden *, .cat-garden *::before { animation: none !important; transition: none !important; } }
+
+.camellia-name { display: block; margin-top: -3px; text-align: center; font-family: 'Caveat', cursive; font-size: 16px; line-height: 20px; color: var(--ink); opacity: .8; }
+
+.camellia-facing { transform: scaleX(var(--cat-facing, 1)); }
+.camellia-action { transform-origin: 60px 82px; }
+.garden-cat[data-activity='walk'] .camellia-action { animation: camellia-walk .65s ease-in-out infinite; }
+.garden-cat[data-activity='run'] .camellia-action { animation: camellia-run .32s ease-in-out infinite; }
+.garden-cat[data-activity='play'] .camellia-action { animation: camellia-play .8s ease-in-out infinite; }
+.garden-cat[data-activity='roll'] .camellia-action { animation: camellia-roll 3.2s ease-in-out; }
+.garden-cat[data-activity='rest'] .camellia-action { transform: translateY(10px) scaleY(.85); }
+.garden-cat[data-activity='idle'] .camellia-action { animation: camellia-breathe 2s ease-in-out infinite; }
+.garden-cat[data-activity='walk'] .cat-tail, .garden-cat[data-activity='play'] .cat-tail, .garden-cat[data-activity='run'] .cat-tail { animation: garden-tail .4s ease-in-out infinite alternate; transform-origin: 37px 78px; }
+.garden-fish { display: none; width: 40px; height: 34px; filter: drop-shadow(0 2px 2px #496f7325); }
+.garden-toy[data-water='true'] .garden-fish { display: block; }
+.garden-toy[data-water='true'] .garden-land-toy { display: none; }
+.trial-page .garden-stage[data-water='true'], .trial-page .garden-stage[data-water='true'] * { cursor: none !important; }
+@keyframes camellia-walk { 0%, 100% { transform: rotate(-3deg); } 50% { transform: translateY(-3px) rotate(3deg); } }
+@keyframes camellia-run { 0%, 100% { transform: rotate(-7deg) scaleY(.94); } 50% { transform: translateY(-12px) rotate(5deg) scaleY(1.04); } }
+@keyframes camellia-play { 0%, 100% { transform: rotate(-10deg); } 45% { transform: translateY(-20px) rotate(12deg); } 75% { transform: rotate(5deg) scaleY(.9); } }
+@keyframes camellia-roll { 0%, 100% { transform: rotate(0); } 20% { transform: rotate(80deg); } 45% { transform: rotate(175deg) translateY(8px); } 65% { transform: rotate(210deg) translateY(8px); } 85% { transform: rotate(350deg); } }
+@keyframes camellia-breathe { 50% { transform: scale(1.02, .98); } }
+
+/* Four-legged movement and direct care. The front portrait is only a sitting pose. */
+.camellia-walking { display: block; }
+.garden-cat .camellia-sitting { display: none; }
+.garden-cat:is([data-activity='idle'], [data-activity='pet'], [data-activity='scratch']) .camellia-sitting { display: block; }
+.garden-cat:is([data-activity='idle'], [data-activity='pet'], [data-activity='scratch']) .camellia-walking { display: none; }
+.trial-page .garden-cat .camellia-touch, .trial-page .garden-cat .camellia-touch * { cursor: grab !important; }
+.camellia-touch { display: block; pointer-events: auto; border: 0; background: none; padding: 0; color: inherit; touch-action: manipulation; border-radius: 40%; }
+.camellia-touch:focus-visible { outline: 2px dashed #b39cc5; outline-offset: 4px; }
+.cat-happy-eye { display: none; }
+.garden-cat:is([data-activity='pet'], [data-activity='scratch'], [data-activity='rest'], [data-activity='feed']) .cat-open-eye { display: none; }
+.garden-cat:is([data-activity='pet'], [data-activity='scratch'], [data-activity='rest'], [data-activity='feed']) .cat-happy-eye { display: block; }
+.cat-leg { transform-box: fill-box; transform-origin: 50% 0; }
+.garden-cat:is([data-activity='walk'], [data-activity='run']) { --stride-time: .85s; }
+.garden-cat[data-activity='run'] { --stride-time: .38s; }
+.garden-cat:is([data-activity='walk'], [data-activity='run']) .cat-leg { animation: cat-stride var(--stride-time) ease-in-out infinite; }
+.garden-cat:is([data-activity='walk'], [data-activity='run']) :is(.leg-back-far, .leg-front-near) { animation-direction: reverse; }
+.garden-cat[data-activity='walk'] .camellia-action { animation: cat-walk-body .425s ease-in-out infinite; }
+.garden-cat[data-activity='run'] .camellia-action { animation: cat-run-body .38s ease-in-out infinite; }
+.walking-tail { transform-origin: 32px 60px; animation: cat-tail-sway 2s ease-in-out infinite; }
+.garden-cat[data-activity='pet'] .camellia-action { animation: cat-lean 1.8s ease-in-out infinite; }
+.garden-cat[data-activity='scratch'] .camellia-action { animation: cat-scratch .25s ease-in-out infinite alternate; }
+.garden-cat[data-activity='feed'] .walking-head { transform-origin: 80px 55px; animation: cat-nibble .8s ease-in-out infinite; }
+.garden-cat[data-activity='rest'] .camellia-action { transform: translateY(20px) scaleY(.68); }
+.garden-cat[data-activity='rest'] .cat-leg { transform: rotate(70deg); }
+.cat-affection { display: none; position: absolute; top: -14px; left: 40px; color: #c984a0; font-size: 24px; pointer-events: none; }
+.garden-cat:is([data-activity='pet'], [data-activity='scratch']) .cat-affection { display: block; animation: cat-love 1.7s ease-out infinite; }
+.cat-food-bowl { display: none; position: absolute; width: 45px; height: 26px; top: 85px; left: 87px; pointer-events: none; }
+.garden-cat[data-activity='feed'] .cat-food-bowl { display: block; }
+.garden-cat[data-activity='feed'] .camellia-facing { transform: none; }
+.pet-care { position: absolute; z-index: 4; bottom: 74px; left: 50%; transform: translateX(-50%); width: max-content; max-width: 94%; text-align: center; }
+.pet-feedback { font-family: 'Caveat', cursive; font-size: 19px; margin-bottom: 8px; }
+.pet-care-buttons { display: flex; padding: 5px; gap: 3px; border: 1px solid #aea99155; border-radius: 26px; background: #fff9edeb; box-shadow: 0 4px 18px #52644512; }
+.trial-page .pet-care-buttons button { padding: 9px 14px; border-radius: 22px; color: #736653; font-size: 16px; cursor: pointer !important; }
+.pet-care-buttons button span { font-size: 12px; margin-left: 4px; }
+.pet-care-buttons button:hover { background: #eadfcf; }
+.pet-care-buttons button:focus-visible { outline: 2px solid #a68bb6; }
+.garden-night .pet-care-buttons { background: #343d48ed; }
+.garden-night .pet-care-buttons button { color: #ece0cd; }
+.garden-night .pet-care-buttons button:hover { background: #545966; }
+.camellia-card { position: absolute; z-index: 8; padding: 0; width: min(280px, calc(100vw - 32px)); max-height: min(390px, calc(100svh - 24px)); overflow-y: auto; border: 1px solid #d6ccbb; border-radius: 16px; background: #fbf5e9; color: #6c6255; box-shadow: 0 12px 32px #1f243826; }
+.trial-page .pet-card-close { position: absolute; z-index: 1; top: 12px; right: 12px; border-radius: 50%; width: 34px; height: 34px; background: #fff9; color: #51483e; font: 24px sans-serif; cursor: pointer !important; }
+.camellia-photo { height: 160px; background: #e7e7d7; }
+.camellia-photo > img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; }
+.camellia-portrait { display: flex; height: 100%; flex-direction: column; justify-content: center; align-items: center; gap: 8px; font-family: 'Caveat', cursive; font-size: 18px; }
+.camellia-portrait svg { width: 175px; height: 160px; }
+.camellia-card-copy { padding: 16px 18px; }
+.camellia-card-copy h2 { font: 44px 'Caveat', cursive; line-height: 1; }
+.camellia-card-copy .cat-breed { font-size: 12px; margin: 10px 0 18px; color: #9b8371; }
+.camellia-card-copy > p:not([class]) { font-size: 13px; line-height: 1.8; margin-top: 12px; }
+.cat-photo-choices { display: flex; gap: 8px; padding: 12px 20px 0; }
+.cat-photo-choices button { padding: 3px; border: 1px solid transparent; border-radius: 6px; }
+.cat-photo-choices button[aria-pressed='true'] { border-color: #a88caf; }
+.cat-photo-choices img { width: 45px; height: 45px; object-fit: cover; border-radius: 4px; }
+@keyframes cat-stride { 0%, 100% { transform: rotate(-22deg); } 50% { transform: rotate(22deg); } }
+@keyframes cat-walk-body { 50% { transform: translateY(-2px); } }
+@keyframes cat-run-body { 30% { transform: translateY(-9px) rotate(-3deg); } 70% { transform: translateY(-3px) rotate(3deg); } }
+@keyframes cat-tail-sway { 50% { transform: rotate(13deg); } }
+@keyframes cat-lean { 50% { transform: rotate(-9deg) translateY(2px); } }
+@keyframes cat-scratch { to { transform: rotate(3deg) translateY(-2px); } }
+@keyframes cat-nibble { 0%, 100% { transform: rotate(28deg) translate(3px, 9px); } 50% { transform: rotate(34deg) translate(4px, 12px); } }
+@keyframes cat-love { from { opacity: 0; transform: translateY(0) scale(.8); } 30% { opacity: 1; } to { opacity: 0; transform: translateY(-23px); } }
+@media (max-width: 600px) { .pet-care { bottom: 73px; } .trial-page .pet-care-buttons button { padding: 8px 10px; } .pet-care-buttons button span { font-size: 11px; margin-left: 2px; } .pet-feedback { font-size: 17px; } }
+
+/* Keep a steady hit area while the cat illustration animates. */
+.garden-cat { width: 120px; height: 130px; pointer-events: auto; z-index: 6; }
+.camellia-touch { width: 120px; height: 130px; }
+.camellia-touch * { pointer-events: none; }
+.garden-cat .pet-care { bottom: auto; transform: none; max-width: none; overflow-y: auto; text-align: left; padding: 14px; border: 1px solid #cfc4b0; border-radius: 18px; color: #6b6054; background: #fffaf0; box-shadow: 0 10px 30px #34413624; pointer-events: auto; }
+.camellia-care-sidebar { position: absolute; z-index: 8; display: grid; gap: 12px; align-items: start; overflow-y: auto; pointer-events: auto; }
+.camellia-care-sidebar.is-expanded { grid-template-columns: minmax(0, 320fr) minmax(0, 280fr); }
+.camellia-care-sidebar.is-expanded[data-stacked='true'] { grid-template-columns: minmax(0, 1fr); }
+.garden-cat .camellia-care-sidebar > .pet-care,
+.garden-cat .camellia-care-sidebar > .camellia-card { position: relative; inset: auto; width: 100%; max-height: none; overflow: visible; }
+.garden-cat .camellia-card { text-align: left; }
+.garden-cat .camellia-care-sidebar[data-compact='true'] .pet-care { padding: 10px; }
+.garden-cat .camellia-care-sidebar[data-compact='true'] .pet-care .pet-care-buttons { grid-template-columns: minmax(0, 1fr); }
+.garden-cat .camellia-care-sidebar[data-compact='true'] .pet-care .pet-panel-heading { font-size: 19px; gap: 2px; }
+.garden-cat .camellia-care-sidebar[data-compact='true'] .pet-care .pet-panel-heading > span { min-width: 0; overflow-wrap: anywhere; }
+.garden-cat .camellia-care-sidebar[data-compact='true'] .pet-care .pet-panel-heading button { flex: 0 0 22px; width: 22px; }
+.garden-cat .camellia-care-sidebar[data-compact='true'] .pet-care progress { min-width: 0; }
+.garden-cat .camellia-care-sidebar[data-compact='true'] .pet-care .pet-need label { flex-wrap: wrap; gap: 2px; }
+.camellia-care-sidebar[data-compact='true'] .camellia-card .camellia-card-copy { padding: 12px 10px; overflow-wrap: anywhere; }
+.camellia-care-sidebar[data-compact='true'] .camellia-card .camellia-card-copy h2 { font-size: 26px; }
+.camellia-care-sidebar[data-compact='true'] .camellia-card .camellia-photo { height: 130px; }
+.pet-panel-heading { display: flex; align-items: center; justify-content: space-between; font: 27px 'Caveat', cursive; margin-bottom: 8px; }
+.trial-page .pet-panel-heading button { font: 22px sans-serif; width: 32px; height: 32px; border-radius: 50%; cursor: pointer !important; }
+.pet-panel-heading button:hover { background: #e8decd; }
+.pet-needs { display: grid; gap: 8px; }
+.pet-need label { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 3px; }
+.pet-need label span { font-variant-numeric: tabular-nums; opacity: .7; }
+.pet-need progress { display: block; width: 100%; height: 7px; border: 0; border-radius: 8px; overflow: hidden; background: #ece6d9; appearance: none; }
+.pet-need progress::-webkit-progress-bar { background: #ece6d9; border-radius: 8px; }
+.pet-need progress::-webkit-progress-value { background: var(--meter); border-radius: 8px; transition: width .3s; }
+.pet-need progress::-moz-progress-bar { background: var(--meter); border-radius: 8px; }
+.pet-need-mood { --meter: #cb99ae; }.pet-need-food { --meter: #d5b373; }.pet-need-energy { --meter: #98ad89; }
+.garden-cat .pet-feedback { font-size: 17px; line-height: 1.2; min-height: 40px; margin: 12px 0 4px; }
+.garden-cat .pet-care-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding: 0; border: 0; box-shadow: none; background: transparent; }
+.trial-page .garden-cat .pet-care-buttons button { padding: 8px; min-height: 38px; border: 1px solid #e3d9c9; text-align: center; background: #f6efdf; cursor: pointer !important; }
+.garden-night .garden-cat .pet-care { color: #eee3d2; background: #353e48; border-color: #606973; }
+.garden-night .garden-cat .pet-care-buttons button { background: #454e57; border-color: #657078; color: #eee3d2; }
+.garden-cat .pet-care-buttons button:hover { filter: brightness(.96); }
+
+.camellia-body-3d { position: absolute; width: 180px; height: 160px; top: -40px; left: -30px; pointer-events: none; }
+.garden-stage .camellia-body-3d canvas { position: absolute; inset: 0; width: 180px; height: 160px; pointer-events: none; }
+.camellia-body-fallback { position: absolute; left: 30px; top: 30px; }
+.garden-cat .camellia-body-fallback .camellia-sitting { display: block; }
+.camellia-touch > .camellia-name { position: absolute; top: 108px; left: 0; width: 120px; }
+.cat-model-credit { font-size: 10px !important; opacity: .65; margin-top: 20px !important; }
+.cat-model-credit a { text-decoration: underline; }
+
+/* Actual Camellia footage, with one stable hover/touch area. */
+.garden-cat.garden-cat-real, .garden-cat-real .camellia-touch { width: 200px; height: 150px; }
+.camellia-footage { position: absolute; top: -16px; left: 17px; width: 166px; height: 166px; pointer-events: none; }
+.garden-stage .camellia-footage canvas, .camellia-footage img { position: absolute; inset: 0; width: 166px; height: 166px; object-fit: contain; pointer-events: none; }
+.camellia-footage [hidden] { display: none !important; }
+.garden-cat-real .camellia-touch > .camellia-name { top: 151px; width: 200px; }
+.garden-night .camellia-footage { filter: brightness(.8); }
+.garden-cat-real .cat-food-bowl { top: 111px; left: 6px; }
+
+.camellia-generated-pet { position: absolute; inset: 0; width: 200px; height: 166px; pointer-events: none; }
+.camellia-generated-pet img { position: absolute; inset: 0; width: 200px; height: 166px; }
+.garden-stage .camellia-generated-pet canvas { position: absolute; inset: 0; width: 200px; height: 166px; opacity: 0; }
+.camellia-generated-pet:not([data-activity='idle']) img { opacity: 0; }
+.garden-stage .camellia-generated-pet:not([data-activity='idle']) canvas { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .garden-stage .camellia-generated-pet canvas, .camellia-generated-pet img { transition: none; }
+}
+.garden-night .camellia-generated-pet { filter: brightness(.8); }
