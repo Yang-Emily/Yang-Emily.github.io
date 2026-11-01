@@ -72,7 +72,8 @@ export default function SketchMindPost() {
         <p className="sk-byline">
           <a href="#/">Yang Wu</a>,{' '}
           <a href="https://pit-claudel.fr/clement/" target="_blank" rel="noopener noreferrer">Clément Pit-Claudel</a>,{' '}
-          <a href="https://aprilwang.me/" target="_blank" rel="noopener noreferrer">April Yi Wang</a> · UIST 2026
+          <a href="https://aprilwang.me/" target="_blank" rel="noopener noreferrer">April Yi Wang</a> ·{' '}
+          <a href="https://uist.acm.org/2026/" target="_blank" rel="noopener noreferrer">UIST 2026</a>
         </p>
         <nav className="sk-links" aria-label="Paper links">
           <a href={PAPER} target="_blank" rel="noopener noreferrer">
