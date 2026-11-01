@@ -93,13 +93,14 @@ export default function SketchMindPost() {
 
       <section className="sk-challenges-intro" aria-label="Challenges of tracing on paper">
         <p>
-          Write down 5, 2, 3, 4, 1 and work through bubble sort with a pen.
-          Compare 5 with 2, exchange them, and write out the new row. Now compare 5 with 3.
-          Before long, most of the marks on the page are copies of marks you have already made.
+          When learning algorithms, we often start by sketching examples on paper.
+          Imagine learning bubble sort this way: you write down an array and trace each
+          comparison and swap with a pen.
         </p>
         <p>
-          The drawing below shows where this gets awkward. Select a label to look at the
-          repeated copying, the repeated operations, or what happens when the input changes.
+          As the sketch grows, it becomes harder to track the steps, recognize repeating
+          patterns, and test your reasoning. How do you turn those repeated steps into
+          a loop? And does a procedure that sorts this array also work on other inputs?
         </p>
         <PaperChallenges />
       </section>
@@ -107,10 +108,14 @@ export default function SketchMindPost() {
       <div className="sk-essay-section sk-system-intro">
         <div className="sk-main">
           <p>
-            SketchMind lets you carry out those operations on the drawing itself.
-            You write an array, choose a pen, and draw across the elements you want to use.
-            The system executes the operation and records a step. You can then combine those
-            steps into a procedure and try it on another input.
+            SketchMind is a pen-based system that helps students construct sorting algorithms
+            through executable sketches before writing code.
+          </p>
+          <p>
+            With SketchMind, students can draw strokes to perform algorithmic operations,
+            combine actions into reusable pens, and move from concrete examples toward
+            general algorithms. They can also test their logic on new inputs and explore
+            tailored counterexamples to identify flaws and refine their solutions.
           </p>
         </div>
         <aside className="sk-margin">
