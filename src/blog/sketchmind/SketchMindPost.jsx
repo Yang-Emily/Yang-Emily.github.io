@@ -69,7 +69,11 @@ export default function SketchMindPost() {
           <h1>SketchMind</h1>
           <p className="sk-deck">Toward executable pen-based sketching for constructing sorting algorithms</p>
         </div>
-        <p className="sk-byline">Yang Wu, Clément Pit-Claudel, April Yi Wang · UIST 2026</p>
+        <p className="sk-byline">
+          <a href="#/">Yang Wu</a>,{' '}
+          <a href="https://pit-claudel.fr/clement/" target="_blank" rel="noopener noreferrer">Clément Pit-Claudel</a>,{' '}
+          <a href="https://aprilwang.me/" target="_blank" rel="noopener noreferrer">April Yi Wang</a> · UIST 2026
+        </p>
         <nav className="sk-links" aria-label="Paper links">
           <a href={PAPER} target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 3 10 .5 4 4-.5 13-14 .5L5 3Zm10 .5-.5 5L19 8M8 11l7 .3M8 15l7-.2" /></svg>
