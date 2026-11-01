@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="challenge-drawing" viewBox="123 7 432 526" role="img" aria-label="Handwritten trace with animated orange annotations">
+<rect width="640" height="540" fill="white"/>
+<svg x="100" y="15" width="350" height="510" viewBox="210 80 220 340"><image href="__FRAGMENT__" width="640" height="540"/></svg>
+<g class="challenge-ink" fill="none" stroke="#c66a38" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M197 41 C237 13 342 20 367 58 C399 99 348 137 279 131 C205 132 167 91 197 41 C203 30 217 26 231 25"/>
+<path d="M201 233 C235 209 341 214 367 252 C393 292 348 329 278 321 C213 325 173 282 201 233"/>
+<path d="M185 392 C222 359 337 363 366 402 C397 446 344 475 272 472 C207 474 165 435 185 392"/>
+
+<path d="M473 206 C476 172 523 168 539 193 C558 224 515 237 507 254 C503 264 505 277 505 285" stroke-width="5"/>
+<path d="M505 310 L506 313" stroke-width="7"/>
+</g></svg>

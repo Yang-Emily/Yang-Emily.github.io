@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" class="challenge-drawing" viewBox="21 12 555 506" role="img" aria-label="Handwritten trace with animated orange annotations">
+<rect width="640" height="540" fill="white"/>
+<svg x="10" y="20" width="300" height="490" viewBox="210 80 220 340"><image href="__FRAGMENT__" width="640" height="540"/></svg>
+<g class="challenge-ink" fill="none" stroke="#c66a38" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+<!-- A new input in red pen, alongside the existing black trace. -->
+<path d="M350 124 Q338 122 331 126 L333 197 Q344 200 352 197"/>
+<path d="M371 128 L369 146 Q377 150 381 157 Q386 166 378 173 Q372 178 365 176 M370 143 L386 140"/>
+<path d="M405 129 Q399 140 399 151 Q405 156 419 151 M413 134 L412 177"/>
+<path d="M436 130 Q450 126 455 135 Q459 144 445 151 Q459 151 460 160 Q461 173 446 178"/>
+<path d="M479 139 Q482 128 491 132 Q505 136 497 148 L482 171 L503 174"/>
+<path d="M524 130 Q523 149 525 178"/>
+<path d="M549 127 Q557 124 566 126 L565 198 Q555 201 547 198"/>
+<!-- Two fresh steps for the new input, followed by more unwritten work. -->
+<path d="M8 3 Q2 14 2 25 Q8 30 22 25 M16 8 L15 51" transform="translate(367 228)"/>
+<path d="M4 2 L2 20 Q10 24 14 31 Q19 40 11 47 Q5 52 -2 50 M3 17 L19 14" transform="translate(400 228)"/>
+<path d="M2 4 Q16 0 21 9 Q25 18 11 25 Q25 25 26 34 Q27 47 12 52" transform="translate(435 228)"/>
+<path d="M0 13 Q3 2 12 6 Q26 10 18 22 L3 45 L24 48" transform="translate(479 228)"/>
+<path d="M6 4 Q5 23 7 52" transform="translate(518 228)"/>
+<path d="M8 3 Q2 14 2 25 Q8 30 22 25 M16 8 L15 51" transform="translate(367 326)"/>
+<path d="M2 4 Q16 0 21 9 Q25 18 11 25 Q25 25 26 34 Q27 47 12 52" transform="translate(400 326)"/>
+<path d="M4 2 L2 20 Q10 24 14 31 Q19 40 11 47 Q5 52 -2 50 M3 17 L19 14" transform="translate(435 326)"/>
+<path d="M0 13 Q3 2 12 6 Q26 10 18 22 L3 45 L24 48" transform="translate(479 326)"/>
+<path d="M6 4 Q5 23 7 52" transform="translate(518 326)"/>
+<g fill="#c66a38" stroke="none"><circle cx="450" cy="419" r="3"/><circle cx="450" cy="441" r="3"/><circle cx="450" cy="463" r="3"/></g>
+</g></svg>

@@ -5,18 +5,27 @@ import News from './components/News'
 import Publications from './components/Publications'
 import FireworksCursor from './components/FireworksCursor'
 import TrialPage from './components/TrialPage'
+import SketchMindPost from './blog/sketchmind/SketchMindPost'
+
+const PAGES = { '#/trial': 'trial', '#/sketchmind': 'sketchmind' }
 
 function App() {
-  const getCurrentPage = () => (window.location.hash === '#/trial' ? 'trial' : 'home')
+  const getCurrentPage = () => PAGES[window.location.hash] ?? 'home'
   const [currentPage, setCurrentPage] = useState(getCurrentPage)
-  const [activeSection, setActiveSection] = useState(getCurrentPage() === 'trial' ? 'trial' : 'home')
+  const [activeSection, setActiveSection] = useState(getCurrentPage() === 'home' ? 'home' : getCurrentPage())
 
   useEffect(() => {
     const handleHashChange = () => {
       const page = getCurrentPage()
       setCurrentPage(page)
-      setActiveSection(page === 'trial' ? 'trial' : 'home')
-      window.scrollTo({ top: 0, behavior: 'auto' })
+      setActiveSection(page)
+      const target = page === 'home' && sessionStorage.getItem('scrollTo')
+      if (target) {
+        sessionStorage.removeItem('scrollTo')
+        requestAnimationFrame(() => document.getElementById(target)?.scrollIntoView())
+      } else {
+        window.scrollTo({ top: 0, behavior: 'auto' })
+      }
     }
 
     window.addEventListener('hashchange', handleHashChange)
@@ -24,7 +33,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (currentPage === 'trial') return
+    if (currentPage !== 'home') return
 
     const handleScroll = () => {
       const sections = ['home', 'news', 'publications']
@@ -48,8 +57,8 @@ function App() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* 烟花特效 */}
-      <FireworksCursor />
+      {/* 烟花特效 (博客页需要在画布上绘制，所以关闭) */}
+      {currentPage !== 'sketchmind' && <FireworksCursor />}
       
       {/* 导航栏 */}
       <Navigation 
@@ -60,6 +69,8 @@ function App() {
       {/* 主要内容 - 单页布局 */}
       {currentPage === 'trial' ? (
         <TrialPage />
+      ) : currentPage === 'sketchmind' ? (
+        <SketchMindPost />
       ) : (
         <main>
           <div id="home">
@@ -87,7 +98,7 @@ function App() {
       
       {/* 页脚 - 紧凑 */}
       <footer className="py-6 text-center text-sm text-gray-600 border-t border-gray-200">
-        <p>© 2025 Yang Wu · Last updated: October 2024</p>
+        <p>© 2026 Yang Wu · Last updated: November 2026</p>
       </footer>
     </div>
   )

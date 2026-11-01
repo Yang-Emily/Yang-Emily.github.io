@@ -13,6 +13,7 @@ const Publications = () => {
       links: {
         paper: `${import.meta.env.BASE_URL}uist26_sketchmind.pdf`,
         doi: 'https://doi.org/10.1145/3830398.3830500',
+        blog: '#/sketchmind',
       },
     },
     {
@@ -115,7 +116,10 @@ const Publications = () => {
             >
               {/* Thumbnail */}
               <div className="flex-shrink-0 w-full md:w-64 h-48 md:h-32">
-                <div className="w-full h-full bg-gray-100 rounded border border-gray-200 overflow-hidden">
+                <a
+                  href={pub.links.blog}
+                  className={`block w-full h-full bg-gray-100 rounded border border-gray-200 overflow-hidden ${pub.links.blog ? 'transition-shadow hover:shadow-md' : 'pointer-events-none'}`}
+                >
                   <img 
                     src={`${import.meta.env.BASE_URL}${pub.thumbnail}`}
                     alt={pub.title}
@@ -125,14 +129,16 @@ const Publications = () => {
                       e.target.parentElement.innerHTML = '<div class="w-full h-full flex items-center justify-center text-gray-400 text-xs">No preview</div>'
                     }}
                   />
-                </div>
+                </a>
               </div>
 
               {/* Content */}
               <div className="flex-1 min-w-0">
                 {/* Title */}
                 <h3 className="text-lg font-semibold text-gray-900 mb-2 leading-tight">
-                  {pub.title}
+                  {pub.links.blog ? (
+                    <a href={pub.links.blog} className="hover:text-blue-700 transition-colors">{pub.title}</a>
+                  ) : pub.title}
                 </h3>
 
                 {/* Authors */}
@@ -148,6 +154,20 @@ const Publications = () => {
                       <Award size={12} />
                       {pub.award}
                     </span>
+                  )}
+                  {pub.links.blog && (
+                    <a
+                      href={pub.links.blog}
+                      className="inline-flex items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-200 hover:text-gray-800"
+                    >
+                      {/* a little pen doodle drawing a squiggle */}
+                      <svg width="16" height="14" viewBox="0 0 20 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M2 13.5c2.2-1.6 3.6-.2 5.2-1.4s1.9-2.6 3.9-2.2" />
+                        <path d="M11.4 9.6l5.2-6.4 1.9 1.6-5.2 6.4-2.6.9z" />
+                        <path d="M15.5 4.5l1.9 1.6" />
+                      </svg>
+                      Blog
+                    </a>
                   )}
                   {pub.links.paper && (
                     <a
