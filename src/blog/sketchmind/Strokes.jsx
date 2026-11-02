@@ -5,6 +5,7 @@ import { TOOL, Window, Toolbar, PenGroup, PenPill, ExampleLabel, StepThumb, Bloc
 import { strokeOperands, executeStroke } from './strokeOperations'
 
 const EXAMPLE = [3, 1, 7, 4]
+const HINT = { target: '.smw-canvas svg', at: [0.44, 0.84], text: 'Draw across two numbers', draw: 'M 86 138 Q 150 166 214 136', color: TOOL.compare }
 export default function Strokes() {
   const svg = useRef(null)
   const points = useRef(null)
@@ -16,7 +17,6 @@ export default function Strokes() {
   const [lastInk, setLastInk] = useState(null)
   const [preview, setPreview] = useState(null)
   const [playing, setPlaying] = useState(false)
-  const [message, setMessage] = useState(null)
   const current = steps.length ? steps[steps.length - 1].values : input
   const values = preview === null ? current : preview < 0 ? input : steps[preview].values
   const slots = input.map((_, i) => 500 * (i + 1) / (input.length + 1))
@@ -24,11 +24,11 @@ export default function Strokes() {
   const stop = () => { playback.current++; setPlaying(false) }
   const reset = () => {
     stop(); setPen('compare')
-    setSteps([]); setLastInk(null); setPreview(null); setMessage(null); points.current = null; setLive(null)
+    setSteps([]); setLastInk(null); setPreview(null); points.current = null; setLive(null)
   }
   const down = e => {
     if (e.button !== 0 || !e.isPrimary) return
-    stop(); setPreview(null); setMessage(null)
+    stop(); setPreview(null)
     e.currentTarget.setPointerCapture(e.pointerId)
     points.current = [toSvgPoint(svg.current, e)]
     setLive(points.current)
@@ -43,10 +43,10 @@ export default function Strokes() {
     const stroke = [...points.current, toSvgPoint(svg.current, e)]
     points.current = null; setLive(null)
     const pair = strokeOperands(stroke, slots)
-    if (!pair) { setMessage('Draw across two numbers.'); return }
+    if (!pair) return
     const result = executeStroke(current, pen, pair)
     setSteps(history => [...history, { ...result, pen, pair, args: pair.map(i => current[i]) }])
-    setLastInk({ path: smooth(stroke), color: TOOL[pen] }); setMessage(null)
+    setLastInk({ path: smooth(stroke), color: TOOL[pen] })
   }
   const replay = async () => {
     if (playing) { stop(); setPreview(null); return }
@@ -62,7 +62,7 @@ export default function Strokes() {
   }
 
   return (
-    <Window className="smw-strokes">
+    <Window className="smw-strokes" hint={HINT}>
       <Toolbar right={<ExampleLabel values={input} />}>
         <PenGroup label="Primitives">
           <PenPill color={TOOL.data} disabled>Data</PenPill>
@@ -82,7 +82,6 @@ export default function Strokes() {
             {lastInk && preview === null && <path d={lastInk.path} fill="none" stroke={lastInk.color} strokeWidth="3" opacity=".6" strokeLinecap="round" />}
             {live && <path d={smooth(live)} fill="none" stroke={TOOL[pen]} strokeWidth="3.5" strokeLinecap="round" />}
           </svg>
-          <span className="smw-tip" role="status">{message || (preview !== null ? preview < 0 ? 'initial input' : steps[preview].label : steps.length ? steps[steps.length - 1].label : 'draw across two numbers')}</span>
           {steps.length > 0 && <div className="smw-tools"><button type="button" className="smw-icon" onClick={reset} title="Reset" aria-label="Reset"><RotateCcw size={14} /></button></div>}
         </div>
         <div className="smw-panel">

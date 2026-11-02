@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react'
-import { Undo2, RotateCcw } from 'lucide-react'
+import { useLayoutEffect, useRef, useState } from 'react'
+import { Undo2, RotateCcw, GripVertical, Hand } from 'lucide-react'
 import { smooth, toSvgPoint } from './ink'
 import { strokeOperands, executeStroke } from './strokeOperations'
 import { TOOL, Window, PenGroup, PenPill, ExampleLabel, Block, Chips, ArrayCard, StepThumb, Toolbar } from './ui'
@@ -82,12 +82,25 @@ export default function Merge() {
   const [message, setMessage] = useState(null)
   const [preview, setPreview] = useState(null)
   const [pen, setPen] = useState('compare')
+  // Until the reader first grabs a swap card, a ghost hand shows the gesture on a loop.
+  const [touched, setTouched] = useState(false)
+  const swapRefs = useRef({})
+  const [ghostDy, setGhostDy] = useState(null)
   const list = cards(steps)
   const merged = steps.some(s => s.merge)
   const userPen = [...steps].reverse().find(s => s.merge)?.merge
   const values = steps.length ? steps[steps.length - 1].after : EXAMPLE
   const shown = preview === null ? values : list[preview]?.last.after ?? values
   const slots = [100, 200, 300, 400]
+  const mergeableAt = k => steps[k]?.type === 'swap' && !steps[k].merge && steps[k - 1]?.type === 'compare' && !steps[k - 1].merge && samePair(steps[k - 1], steps[k])
+  const demoAt = touched || drag ? null : steps.findIndex((_, k) => mergeableAt(k))
+  const showGhost = demoAt !== null && demoAt >= 0
+  useLayoutEffect(() => {
+    if (!showGhost) return
+    const swap = swapRefs.current[demoAt]?.getBoundingClientRect()
+    const compare = compareRefs.current[demoAt - 1]?.getBoundingClientRect()
+    setGhostDy(swap && compare ? compare.top - swap.top : null)
+  }, [showGhost, demoAt, steps])
 
   const drawStart = e => {
     if (e.button !== 0 || !e.isPrimary) return
@@ -130,6 +143,7 @@ export default function Merge() {
   }
   const down = (e, at) => {
     e.currentTarget.setPointerCapture(e.pointerId)
+    setTouched(true)
     from.current = { x: e.clientX, y: e.clientY, at }
     setDrag({ at, dx: 0, dy: 0 })
   }
@@ -167,12 +181,12 @@ export default function Merge() {
     setMessage(null)
   }
   const reset = () => {
-    setSteps(initialSteps()); setPreview(null); setMessage(null); setPen('compare')
+    setSteps(initialSteps()); setPreview(null); setMessage(null); setPen('compare'); setTouched(false)
   }
 
   const status = preview !== null
     ? `Step ${preview + 1} of ${list.length}`
-    : message || (merged ? 'Draw across two numbers with your new pen.' : 'Drag the swap card onto the compare card above it.')
+    : message || (merged ? 'Draw across two numbers with your new pen.' : null)
 
   return (
     <Window className="smw-merge">
@@ -215,32 +229,43 @@ export default function Merge() {
           if (s.type === 'compare') {
             return (
               <div key={s.id} ref={el => { if (el) compareRefs.current[card.at] = el; else delete compareRefs.current[card.at] }}>
-                <Block kind="cmp" className={hover === card.at ? 'hot' : ''} right={<Chips value={bigger(s)} />}>is_bigger({a},{b})</Block>
+                <Block
+                  kind="cmp"
+                  className={hover === card.at ? 'hot' : drag && drag.at === card.at + 1 && mergeableAt(drag.at) ? 'drop' : showGhost && demoAt === card.at + 1 && ghostDy !== null ? 'demo-target' : ''}
+                  right={<Chips value={bigger(s)} />}
+                >is_bigger({a},{b})</Block>
               </div>
             )
           }
           const dragging = drag?.at === card.at
-          const mergeable = steps[card.at - 1]?.type === 'compare' && !steps[card.at - 1].merge && samePair(steps[card.at - 1], s)
+          const mergeable = mergeableAt(card.at)
           return (
-            <Block
-              key={s.id}
-              kind="swp"
-              className={`grab ${dragging ? 'dragging' : ''}`}
-              style={dragging ? { transform: `translate(${drag.dx}px, ${drag.dy}px) rotate(-1.5deg)` } : undefined}
-              onPointerDown={e => down(e, card.at)}
-              onPointerMove={move}
-              onPointerUp={up}
-              onPointerCancel={up}
-              right={mergeable && !merged ? <span className="smw-hint">drag onto the compare ↑</span> : null}
-            >
-              swap({a},{b})
-            </Block>
+            <div key={s.id} className="smw-swapwrap" ref={el => { if (el) swapRefs.current[card.at] = el; else delete swapRefs.current[card.at] }}>
+              <Block
+                kind="swp"
+                className={`grab ${dragging ? 'dragging' : ''} ${mergeable && !touched ? 'beckon' : ''}`}
+                style={dragging ? { transform: `translate(${drag.dx}px, ${drag.dy}px) rotate(-1.5deg)` } : undefined}
+                onPointerDown={e => down(e, card.at)}
+                onPointerMove={move}
+                onPointerUp={up}
+                onPointerCancel={up}
+                right={mergeable && !dragging && !touched ? <span className="smw-hint-label smw-hint-inline">Drag onto compare ↑</span> : null}
+              >
+                <GripVertical className="smw-grip" size={14} aria-hidden="true" />swap({a},{b})
+              </Block>
+              {showGhost && demoAt === card.at && ghostDy !== null && (
+                <div className="smw-ghost" style={{ '--dy': `${ghostDy}px` }} aria-hidden="true">
+                  <div className="smw-block swp smw-ghost-card"><code><GripVertical className="smw-grip" size={14} />swap({a},{b})</code></div>
+                  <div className="smw-ghost-hand"><span className="ring" /><Hand size={22} strokeWidth={1.8} /></div>
+                </div>
+              )}
+            </div>
           )
         })}
         <ArrayCard values={shown} labels kind="result" />
       </div>
       </div>
-      <div className="smw-foot"><span className="smw-status" role="status">{status}</span></div>
+      {status && <div className="smw-foot"><span className="smw-status" role="status">{status}</span></div>}
     </Window>
   )
 }

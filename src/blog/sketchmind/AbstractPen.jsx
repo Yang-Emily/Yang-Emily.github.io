@@ -2,12 +2,17 @@ import { useEffect, useRef, useState } from 'react'
 import { RotateCcw } from 'lucide-react'
 import { smooth, toSvgPoint } from './ink'
 import { TOOL, Window, Toolbar, PenGroup, PenPill, ExampleLabel, StepThumb } from './ui'
+import { GhostStroke } from './guide'
 import { shapeFromStrokes, addConnectedStroke, parseShapeValue } from './abstractShapes'
 
 const ABSTRACT = '#a66bb4'
 const W = 520
 const MID = 104
 const sleep = ms => new Promise(r => setTimeout(r, ms))
+const HINT = {
+  target: '.smw-canvas svg', at: [0.47, 0.5], text: 'Draw a few shapes here', color: ABSTRACT,
+  draw: 'M 176 62 C 205 58 222 80 220 100 C 218 124 196 136 172 132 C 148 128 136 108 140 88 C 144 70 160 62 182 64',
+}
 
 function bubbles() {
   // Independently drawn contours, with uneven proportions and short overlaps
@@ -43,6 +48,8 @@ export default function AbstractPen() {
   const [busy, setBusy] = useState(false)
   const [passes, setPasses] = useState([])
   const [ink, setInk] = useState(null)
+  // After Make array, a ghost hand shows the Bubble up stroke until the reader draws one.
+  const [triedBubble, setTriedBubble] = useState(false)
 
   useEffect(() => {
     alive.current = true
@@ -57,11 +64,13 @@ export default function AbstractPen() {
   const n = order.length
   const slotX = i => (W / (n + 1)) * (i + 1)
   const scale = shapes.length ? Math.min(1, 74 / Math.max(...shapes.map(s => s.size))) : 1
+  const showBubbleGhost = phase === 'array' && !triedBubble && !busy && n > 1
   const sorted = n > 1 && values.every((v, i) => !i || values[i - 1] <= v)
 
   const down = e => {
     if (busy || editing || e.button !== 0 || !e.isPrimary) return
     e.currentTarget.setPointerCapture(e.pointerId)
+    if (phase === 'array') setTriedBubble(true)
     stroke.current = [toSvgPoint(svg.current, e)]
     setLive(stroke.current)
   }
@@ -143,7 +152,7 @@ export default function AbstractPen() {
     if (!cancel && value !== null) changeValue(editing.id, value)
     setEditing(null)
   }
-  const reset = () => { if (!busy) { editSession.current = null; setEditing(null); stroke.current = null; nextId.current = 0; setLive(null); setPhase('draw'); setShapes([]); setOrder([]); setPasses([]); setInk(null) } }
+  const reset = () => { if (!busy) { editSession.current = null; setEditing(null); stroke.current = null; nextId.current = 0; setLive(null); setPhase('draw'); setTriedBubble(false); setShapes([]); setOrder([]); setPasses([]); setInk(null) } }
 
   const place = s => {
     if (phase === 'draw') return { transform: 'translate(0px, 0px)' }
@@ -156,7 +165,7 @@ export default function AbstractPen() {
   }
 
   return (
-    <Window>
+    <Window hint={HINT}>
       <Toolbar right={phase === 'array'
         ? <ExampleLabel values={passes[0] ?? []} />
         : <button type="button" className="smw-example-button" title="Load the default bubble example" aria-label="Load the default bubble example" onClick={() => makeArray(bubbles())}>
@@ -220,6 +229,9 @@ export default function AbstractPen() {
                 </g>
               )
             })}
+            {showBubbleGhost && (
+              <GhostStroke color={TOOL.bubble} d={`M ${slotX(0) - 34} ${MID + 6} C ${slotX(0) + 20} ${MID - 8}, ${slotX(n - 1) - 20} ${MID + 18}, ${slotX(n - 1) + 34} ${MID + 2}`} />
+            )}
             {ink && <path d={ink} fill="none" stroke={TOOL.bubble} strokeWidth="4" strokeLinecap="round" opacity=".6" />}
             {live && <path d={smooth(live)} fill="none" stroke={phase === 'draw' ? ABSTRACT : TOOL.bubble} strokeWidth="3.5" strokeLinecap="round" />}
           </svg>
@@ -233,7 +245,9 @@ export default function AbstractPen() {
             </div>
           )}
           {phase === 'array' && (
-            <span className="smw-tip top">{busy ? 'bubbling up…' : sorted ? 'sorted ✓' : 'draw one Bubble up stroke across the shapes'}</span>
+            showBubbleGhost
+              ? <span className="smw-hint-label smw-hint-top">Draw across all the shapes</span>
+              : <span className="smw-tip top">{busy ? 'bubbling up…' : sorted ? 'sorted ✓' : 'draw one Bubble up stroke across the shapes'}</span>
           )}
           {shapes.length > 0 && (
             <div className="smw-tools">

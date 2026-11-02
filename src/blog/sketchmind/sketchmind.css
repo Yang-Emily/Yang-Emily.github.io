@@ -158,7 +158,7 @@ text.sk-hint,.sk-hint text{fill:var(--faint)}
 
 .smw-pill.pop,.pop{animation:sk-pop .45s cubic-bezier(.2,1.5,.4,1)}
 
-.smw-right{flex-shrink:0}
+.smw-right{flex-shrink:0;display:flex;align-items:center;gap:8px}
 
 .smw-example{font-size:15px;font-weight:700;color:#1f2937;white-space:nowrap}
 
@@ -727,16 +727,39 @@ text.sk-hint,.sk-hint text{fill:var(--faint)}
   .sk-challenge-notebook .sk-paper-view > svg { height: 310px; }
 }
 
-/* The nib is the click/drawing hotspot. Touch devices keep their native input. */
+/* Match each desktop cursor to the action; SVG children inherit the hit target. */
 @media (hover: hover) and (pointer: fine) {
+  body:has(.sk-post) {
+    cursor: url('/blog/sketchmind/browse-cursor.svg') 5 3, default;
+  }
   .sk-post {
     --pen-cursor: url('/blog/sketchmind/pen-hand-cursor.svg') 4 35;
+    cursor: url('/blog/sketchmind/browse-cursor.svg') 5 3, default;
   }
-  body:has(.sk-post), body:has(.sk-post) *, .sk-post * {
-    cursor: var(--pen-cursor, url('/blog/sketchmind/pen-hand-cursor.svg') 4 35), auto;
+  body:has(.sk-post) :is(a, button, summary, [role='button']),
+  .sk-post :is(.sk-link, .sk-paper, .sk-nib, .smw-fix) {
+    cursor: url('/blog/sketchmind/point-cursor.svg') 15 4, pointer;
   }
-  .sk-post :is(input, textarea, pre) { cursor: text; }
-  .sk-post :is(button:disabled, [aria-disabled='true']) { cursor: not-allowed; }
+  .sk-post :is(.sk-draw, .smw-canvas) {
+    cursor: var(--pen-cursor), crosshair;
+  }
+  .sk-post :is(.sk-grab, .smw-block.grab) {
+    cursor: url('/blog/sketchmind/grab-cursor.svg') 20 19, grab;
+  }
+  .sk-post :is(.sk-grab:active, .smw-block.dragging) {
+    cursor: url('/blog/sketchmind/grabbing-cursor.svg') 20 19, grabbing;
+  }
+  .sk-post :is(.sk-num, .smw-drag) {
+    cursor: url('/blog/sketchmind/resize-cursor.svg') 18 18, ns-resize;
+  }
+  .sk-post :is(svg, button, a, [role='button']) :is(path, rect, circle, line, text, span, g) {
+    cursor: inherit;
+  }
+  body:has(.sk-post) :is(input, textarea, [contenteditable='true']),
+  .sk-post :is(pre, code) { cursor: text; }
+  body:has(.sk-post) :is(button:disabled, [aria-disabled='true']) {
+    cursor: not-allowed;
+  }
 }
 
 /* Challenge commentary sits below the labels; the paper uses the reading width. */
@@ -844,3 +867,74 @@ text.sk-hint,.sk-hint text{fill:var(--faint)}
 
 .sk-post .smw-value-input { box-sizing: border-box; width: 100%; height: 26px; padding: 2px 4px; border: 1.5px solid #a66bb4; border-radius: 6px; background: #fff; color: #76519c; font: 600 15px/1.2 var(--mono); text-align: center; outline: none; cursor: text; }
 .smw-value-input[aria-invalid='true'] { border-color: #bc665e; }
+
+/* One-line demo hint: a pulsing dot and a label; gone after the first touch */
+.smw.hinted{position:relative}
+.smw-hint-layer{position:absolute;inset:0;pointer-events:none;z-index:20}
+.smw-hint-dot{position:absolute;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#7b4f8a;box-shadow:0 0 0 3px #fff}
+.smw-hint-dot::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:2px solid #7b4f8a;animation:smw-hint-pulse 1.6s ease-out infinite}
+@keyframes smw-hint-pulse{from{transform:scale(1);opacity:.8}to{transform:scale(2.6);opacity:0}}
+.smw-hint-label{position:absolute;transform:translate(16px,-50%);white-space:nowrap;background:#2e2440;color:#fff;border-radius:8px;padding:2px 9px 3px;font:17px/1.3 'Patrick Hand',cursive;box-shadow:0 4px 12px #0002;animation:smw-hint-in .3s ease-out}
+.smw-hint-label.left{transform:translate(calc(-100% - 16px),-50%)}
+.smw-hint-label.above{transform:translate(-50%,calc(-100% - 14px))}
+@keyframes smw-hint-in{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion: reduce){.smw-hint-dot::after{animation:none}}
+
+/* Merge demo: drag affordance and a looping ghost of the gesture */
+.smw-swapwrap{position:relative}
+.smw-grip{display:inline-block;vertical-align:-2px;margin:0 6px 0 -4px;color:#b79ae6}
+.smw-block.swp.beckon{animation:smw-beckon 3.6s ease-in-out infinite}
+@keyframes smw-beckon{0%,8%,40%,100%{border-color:#e3d2fa}12%,30%{border-color:#a777ec}}
+.smw-block.cmp.drop{border-style:dashed;border-color:#818cf8;box-shadow:0 0 0 4px #eef2ff}
+.smw-block.cmp.drop::after,.smw-block.cmp.demo-target::after{content:'drop here';position:absolute;right:12px;top:-11px;padding:0 6px;border-radius:6px;background:#6366f1;color:#fff;font:600 10px/18px Inter,sans-serif;letter-spacing:.03em;opacity:0}
+.smw-block.cmp.drop::after{opacity:1}
+.smw-block.cmp.demo-target{animation:smw-target 3.6s ease-in-out infinite}
+.smw-block.cmp.demo-target::after{animation:smw-target-tag 3.6s ease-in-out infinite}
+@keyframes smw-target{0%,30%,82%,100%{border-color:#e8cfae;box-shadow:0 2px #00000008}38%,74%{border-color:#818cf8;border-style:dashed;box-shadow:0 0 0 4px #eef2ff}}
+@keyframes smw-target-tag{0%,30%,82%,100%{opacity:0}38%,74%{opacity:1}}
+.smw-ghost{position:absolute;inset:0;pointer-events:none;z-index:3}
+.smw-ghost-card{position:absolute;inset:0;opacity:0;animation:smw-ghost-card 3.6s ease-in-out infinite}
+.smw-ghost-hand{position:absolute;left:34%;top:55%;color:#4c1d95;opacity:0;animation:smw-ghost-hand 3.6s ease-in-out infinite}
+.smw-ghost-hand svg{fill:#fff;filter:drop-shadow(0 2px 3px #0003)}
+.smw-ghost-hand .ring{position:absolute;left:-9px;top:-9px;width:22px;height:22px;border-radius:50%;border:2px solid #8a2be2;opacity:0;animation:smw-ghost-ring 3.6s ease-out infinite}
+@keyframes smw-ghost-card{
+  0%,10%{opacity:0;transform:none;box-shadow:none}
+  14%{opacity:.92;transform:none}
+  24%{opacity:.92;transform:scale(.97)}
+  32%{opacity:.95;transform:translateY(-6px) scale(1.04) rotate(-1.5deg);box-shadow:0 14px 30px #50288c33}
+  64%{opacity:.8;transform:translateY(var(--dy)) scale(1.04) rotate(-1.5deg);box-shadow:0 14px 30px #50288c33}
+  72%{opacity:.75;transform:translateY(var(--dy)) scale(1)}
+  82%,100%{opacity:0;transform:translateY(var(--dy)) scale(1)}
+}
+@keyframes smw-ghost-hand{
+  0%{opacity:0;transform:translate(26px,18px)}
+  10%{opacity:1;transform:translate(0,0)}
+  24%{opacity:1;transform:translate(0,0) scale(.9)}
+  32%{opacity:1;transform:translateY(-6px) scale(.9)}
+  64%{opacity:1;transform:translateY(var(--dy)) scale(.9)}
+  72%{opacity:1;transform:translateY(var(--dy)) scale(1)}
+  84%,100%{opacity:0;transform:translate(26px,calc(var(--dy) + 14px))}
+}
+@keyframes smw-ghost-ring{0%,12%{opacity:0;transform:scale(.4)}16%{opacity:.9;transform:scale(.4)}28%{opacity:0;transform:scale(1.8)}100%{opacity:0}}
+@media (prefers-reduced-motion: reduce){.smw-ghost{display:none}.smw-block.swp.beckon,.smw-block.cmp.demo-target,.smw-block.cmp.demo-target::after{animation:none}}
+.smw-hint-draw{position:absolute;overflow:visible}
+.smw-ghost-stroke .ink{fill:none;stroke-width:3.5;stroke-linecap:round;stroke-dasharray:1 1;opacity:.55;animation:smw-hint-ink 3.6s linear infinite}
+@keyframes smw-hint-ink{0%,15%{stroke-dashoffset:1;opacity:.55}60%,80%{stroke-dashoffset:0;opacity:.55}92%,100%{stroke-dashoffset:0;opacity:0}}
+.smw-ghost-stroke .hand{animation:smw-hint-hand 3.6s linear infinite}
+@keyframes smw-hint-hand{0%{opacity:0}10%,72%{opacity:1}84%,100%{opacity:0}}
+.smw-ghost-stroke .touch{fill:#7b4f8a22;stroke:#7b4f8a;stroke-width:1.5}
+.smw-ghost-stroke .palm{fill:#fff;stroke:#4c1d95;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+@media (prefers-reduced-motion: reduce){.smw-ghost-stroke .ink{animation:none;stroke-dashoffset:0}.smw-ghost-stroke .hand{display:none}}
+/* Views demo: a ghost hand taps through the three views until the reader touches it */
+.smw-views{position:relative}
+.smw-tap-hand{position:absolute;z-index:5;pointer-events:none;color:#4c1d95;transition:left .55s cubic-bezier(.4,0,.2,1),top .55s cubic-bezier(.4,0,.2,1);animation:smw-hint-in .3s ease-out}
+.smw-tap-hand svg{display:block;fill:#fff;filter:drop-shadow(0 2px 3px #0003);transform:translate(-30%,0);transition:transform .15s}
+.smw-tap-hand.tap svg{transform:translate(-30%,0) scale(.85)}
+.smw-tap-hand .ring{position:absolute;left:-11px;top:-11px;width:22px;height:22px;border-radius:50%;border:2px solid #8a2be2;opacity:0}
+.smw-tap-hand.tap .ring{animation:smw-ghost-ring-tap .5s ease-out}
+@keyframes smw-ghost-ring-tap{from{opacity:.9;transform:scale(.4)}to{opacity:0;transform:scale(1.8)}}
+.smw-ghost-stroke{pointer-events:none}
+.smw-hint-label.smw-hint-top{left:50%;top:10px;transform:translateX(-50%);z-index:4;pointer-events:none;white-space:normal;width:max-content;max-width:calc(100% - 24px);text-align:center}
+@media (max-width: 560px){.smw-hint-label.smw-hint-top{top:4px;font-size:15px;padding:1px 8px 2px}}
+.smw-hint-label.smw-hint-inline{position:static;transform:none;font-size:15px;padding:1px 8px 2px;box-shadow:none;flex-shrink:0}
+@media (max-width: 560px){.smw-merge .smw-block.swp{flex-wrap:wrap;row-gap:6px}.smw-hint-label.smw-hint-inline{white-space:normal;font-size:14px;max-width:100%}}

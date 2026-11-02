@@ -4,6 +4,7 @@ import { PLANS, run, isSorted, firstDisorder, findCounterexamples } from './bubb
 import { TOOL, Window, Toolbar, PenGroup, PenPill, StepThumb, ArrayCard, ExpandBlock, CasInner } from './ui'
 
 const VERSIONS = ['one', 'two', 'full']
+const HINT = { target: '.smw-done', at: [-0.1, 0.5], side: 'left', text: 'Tap Done to test the plan' }
 
 function nudge(values, i, dir) {
   let v = values[i]
@@ -70,7 +71,7 @@ export default function DoneCheck() {
 
   const passes = version + 1
   return (
-    <Window>
+    <Window hint={HINT}>
       <Toolbar right={<EditableExample values={input} shown={shown} changed={changed} onNudge={nudgeAt} />}>
         <PenGroup label="User created">
           <PenPill color={TOOL.cas}>Compare &amp; Swap</PenPill>

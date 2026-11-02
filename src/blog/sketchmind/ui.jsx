@@ -1,5 +1,6 @@
 // Small replicas of the SketchMind interface, styled after the real tool.
 import { PenLine } from 'lucide-react'
+import { useHint } from './guide'
 
 export const TOOL = {
   data: '#3e445b',
@@ -11,8 +12,11 @@ export const TOOL = {
   bad: '#e03131',
 }
 
-export function Window({ children, className = '' }) {
-  return <div className={`smw ${className}`}>{children}</div>
+// `hint` is { target, text, at }: a selector inside the window, a short label, and
+// where on the target the dot sits (fractions of its width and height).
+export function Window({ children, className = '', hint }) {
+  const { ref, overlay } = useHint(hint)
+  return <div ref={ref} className={`smw ${hint ? 'hinted' : ''} ${className}`}>{children}{overlay}</div>
 }
 
 export function Toolbar({ children, right }) {
