@@ -955,3 +955,11 @@ text.sk-hint,.sk-hint text{fill:var(--faint)}
 .smw-views-switch{position:relative}
 .smw-views-switch>.smw-hint-label{position:absolute;left:calc(100% + 10px);top:50%;transform:translateY(-50%);white-space:nowrap}
 @media (max-width: 560px){.smw-views-switch:has(>.smw-hint-label){margin-bottom:34px}.smw-views-switch>.smw-hint-label{left:50%;top:calc(100% + 30px);transform:translate(-50%,-50%)}}
+
+/* Align the instructor's explanation with the illustration below the intro. */
+.sk-instructor-carousel { row-gap: 0; }
+.sk-instructor-demo { grid-column: 1; grid-row: 2; }
+.sk-instructor-note { grid-column: 2; grid-row: 2; }
+@media (max-width: 760px) {
+  .sk-instructor-note { grid-column: 1; grid-row: 3; margin-top: 18px; }
+}

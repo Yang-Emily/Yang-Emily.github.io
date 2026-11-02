@@ -165,7 +165,9 @@ export function InstructorScenes({ intro }) {
   return (
     <section className="sk-essay-section sk-learner-carousel sk-instructor-carousel" aria-label="Instructor perspectives" id="study-instructors">
       <div className="sk-main">
-      {intro}
+        {intro}
+      </div>
+      <div className="sk-main sk-instructor-demo">
       <div className="sk-notebook sk-challenge-notebook sk-learner-notebook">
         <div className="tabs">
           {SCENES.map((item, index) => (
@@ -181,7 +183,7 @@ export function InstructorScenes({ intro }) {
         </div>
       </div>
       </div>
-      <aside className="sk-margin" aria-live="polite">
+      <aside className="sk-margin sk-instructor-note" aria-live="polite">
         <p>{scene.text}</p>
         <p className="sk-theory-label">{scene.tag}</p>
         <div className="sk-theory-references">
