@@ -5,7 +5,7 @@ import { TOOL, Window, Toolbar, PenGroup, PenPill, ExampleLabel, StepThumb, Bloc
 import { strokeOperands, executeStroke } from './strokeOperations'
 
 const EXAMPLE = [3, 1, 7, 4]
-const HINT = { target: '.smw-canvas svg', at: [0.44, 0.84], text: 'Draw across two numbers', draw: 'M 86 138 Q 150 166 214 136', color: TOOL.compare }
+const HINT = { target: '.smw-canvas svg', at: [0.44, 0.84], text: 'draw across two numbers', draw: 'M 86 138 Q 150 166 214 136', color: TOOL.compare }
 export default function Strokes() {
   const svg = useRef(null)
   const points = useRef(null)

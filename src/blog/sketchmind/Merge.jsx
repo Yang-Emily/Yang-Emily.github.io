@@ -249,7 +249,7 @@ export default function Merge() {
                 onPointerMove={move}
                 onPointerUp={up}
                 onPointerCancel={up}
-                right={mergeable && !dragging && !touched ? <span className="smw-hint-label smw-hint-inline">Drag onto compare ↑</span> : null}
+                right={mergeable && !dragging && !touched ? <span className="smw-hint-label smw-hint-inline"><b>Try:</b> drag onto compare ↑</span> : null}
               >
                 <GripVertical className="smw-grip" size={14} aria-hidden="true" />swap({a},{b})
               </Block>

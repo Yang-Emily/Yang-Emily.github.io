@@ -22,6 +22,7 @@ export function useHint(hint) {
   const [root, setRoot] = useState(null)
   const [shown, setShown] = useState(Boolean(hint))
   const [spot, setSpot] = useState(null)
+  const [labelWidth, setLabelWidth] = useState(0)
 
   useEffect(() => {
     if (!root || !shown) return
@@ -50,6 +51,19 @@ export function useHint(hint) {
     return () => observer.disconnect()
   }, [root, shown, hint])
 
+  // Put the label on the preferred side of the dot, flip it if it would leave the
+  // demo, and sit above the dot when neither side has room (narrow screens).
+  let place = 'above', labelStyle = null
+  if (spot) {
+    const fitsRight = spot.x + 16 + labelWidth <= spot.width - 6
+    const fitsLeft = spot.x - 16 - labelWidth >= 6
+    // side: 'left' means the label must not cross the target, so it never flips right.
+    const order = hint.side === 'left' ? ['left'] : spot.x > spot.width * 0.6 ? ['left', 'right'] : ['right', 'left']
+    place = order.find(side => (side === 'right' ? fitsRight : fitsLeft)) ?? 'above'
+    labelStyle = place === 'above'
+      ? { left: Math.min(Math.max(spot.x, labelWidth / 2 + 6), spot.width - labelWidth / 2 - 6), top: spot.y - (hint.draw ? 0 : 10) }
+      : { left: spot.x, top: spot.y }
+  }
   const overlay = shown && spot ? (
     <div className="smw-hint-layer" aria-hidden="true">
       {hint.draw ? (
@@ -57,11 +71,7 @@ export function useHint(hint) {
           <GhostStroke d={hint.draw} color={hint.color} />
         </svg>
       ) : <span className="smw-hint-dot" style={{ left: spot.x, top: spot.y }} />}
-      {hint.side === 'left' && spot.x > 200
-        ? <span className="smw-hint-label left" style={{ left: spot.x, top: spot.y }}>{hint.text}</span>
-        : hint.side // no room on the left (narrow screens): sit above instead
-        ? <span className="smw-hint-label above" style={{ left: Math.min(Math.max(spot.x, 100), spot.width - 100), top: hint.side === 'left' ? spot.y - 14 : spot.y }}>{hint.text}</span>
-        : <span className={`smw-hint-label ${spot.x > spot.width * 0.6 ? 'left' : ''}`} style={{ left: spot.x, top: spot.y }}>{hint.text}</span>}
+      <span ref={el => { if (el && el.offsetWidth !== labelWidth) setLabelWidth(el.offsetWidth) }} className={`smw-hint-label ${place}`} style={labelStyle}><b>Try:</b> {hint.text}</span>
     </div>
   ) : null
   return { ref: setRoot, overlay }

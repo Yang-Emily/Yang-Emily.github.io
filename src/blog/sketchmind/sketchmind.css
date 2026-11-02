@@ -938,3 +938,4 @@ text.sk-hint,.sk-hint text{fill:var(--faint)}
 @media (max-width: 560px){.smw-hint-label.smw-hint-top{top:4px;font-size:15px;padding:1px 8px 2px}}
 .smw-hint-label.smw-hint-inline{position:static;transform:none;font-size:15px;padding:1px 8px 2px;box-shadow:none;flex-shrink:0}
 @media (max-width: 560px){.smw-merge .smw-block.swp{flex-wrap:wrap;row-gap:6px}.smw-hint-label.smw-hint-inline{white-space:normal;font-size:14px;max-width:100%}}
+.smw-hint-label b{color:#fcd34d;font-weight:400}
