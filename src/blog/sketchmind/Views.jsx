@@ -42,9 +42,11 @@ export default function Views({ onViewChange }) {
   return (
     <Window>
       <div ref={root} className="smw-panel smw-views" onPointerDownCapture={() => { setDemo(false); setHand(null) }}>
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap', gap: 8, marginBottom: 4 }}>
-          <div ref={seg}><Segmented options={OPTIONS} value={view} onChange={select} /></div>
-          {demo && <span className="smw-hint-label smw-hint-inline"><b>Try:</b> switch the view</span>}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 4 }}>
+          <div ref={seg} className="smw-views-switch">
+            <Segmented options={OPTIONS} value={view} onChange={select} />
+            {demo && <span className="smw-hint-label smw-hint-inline"><b>Try:</b> switch the view</span>}
+          </div>
         </div>
         {demo && hand && (
           <span className={`smw-tap-hand ${hand.tap ? 'tap' : ''}`} style={{ left: hand.x, top: hand.y }} aria-hidden="true">

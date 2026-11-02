@@ -146,8 +146,8 @@ export default function SketchMindPost() {
         <div className="sk-main sk-strokes-demo"><div className="sk-demo"><Strokes /></div></div>
         <aside className="sk-margin sk-strokes-note">
           <p>
-            Strokes are shape-independent: you can draw any shape, as long as the stroke
-            crosses the numbers you want to operate on. The selected pen determines the operation.
+            The shape of a stroke doesn’t matter. A line, a curve, or a loop all work, as long
+            as it crosses the numbers you want. The pen you pick decides what happens to them.
           </p>
         </aside>
       </section>
@@ -271,19 +271,14 @@ export default function SketchMindPost() {
 
       <LearnerThemes />
 
-      <section className="sk-instructors" aria-label="Instructor perspectives" id="study-instructors">
-        <div className="sk-main">
-        <div className="sk-copy">
-          <p>
-            <strong className="sk-run-in">Where instructors would use it.</strong>{' '}
-            Drawing on their own teaching contexts, instructors suggested several ways to
-            use SketchMind: for shared demonstrations in class, practice after a lecture,
-            and independent homework.
-          </p>
-        </div>
-        <div className="sk-demo"><InstructorScenes /></div>
-        </div>
-      </section>
+      <InstructorScenes intro={
+        <p>
+          <strong className="sk-run-in">Where instructors would use it.</strong>{' '}
+          Drawing on their own teaching contexts, instructors suggested several ways to
+          use SketchMind: for shared demonstrations in class, practice after a lecture,
+          and independent homework.
+        </p>
+      } />
 
       <section className="sk-essay-section" aria-label="Open questions" id="next">
         <div className="sk-main">

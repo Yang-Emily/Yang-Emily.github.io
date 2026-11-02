@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from 'react'
+import { Fragment, useLayoutEffect, useRef, useState } from 'react'
 import { Undo2, RotateCcw, GripVertical, Hand } from 'lucide-react'
 import { smooth, toSvgPoint } from './ink'
 import { strokeOperands, executeStroke } from './strokeOperations'
@@ -240,7 +240,8 @@ export default function Merge() {
           const dragging = drag?.at === card.at
           const mergeable = mergeableAt(card.at)
           return (
-            <div key={s.id} className="smw-swapwrap" ref={el => { if (el) swapRefs.current[card.at] = el; else delete swapRefs.current[card.at] }}>
+            <Fragment key={s.id}>
+            <div className="smw-swapwrap" ref={el => { if (el) swapRefs.current[card.at] = el; else delete swapRefs.current[card.at] }}>
               <Block
                 kind="swp"
                 className={`grab ${dragging ? 'dragging' : ''} ${mergeable && !touched ? 'beckon' : ''}`}
@@ -249,7 +250,6 @@ export default function Merge() {
                 onPointerMove={move}
                 onPointerUp={up}
                 onPointerCancel={up}
-                right={mergeable && !dragging && !touched ? <span className="smw-hint-label smw-hint-inline"><b>Try:</b> drag onto compare ↑</span> : null}
               >
                 <GripVertical className="smw-grip" size={14} aria-hidden="true" />swap({a},{b})
               </Block>
@@ -260,6 +260,8 @@ export default function Merge() {
                 </div>
               )}
             </div>
+            {mergeable && !dragging && !touched && <div className="smw-hint-under"><span className="smw-hint-label smw-hint-inline"><b>Try:</b> drag onto compare ↑</span></div>}
+            </Fragment>
           )
         })}
         <ArrayCard values={shown} labels kind="result" />

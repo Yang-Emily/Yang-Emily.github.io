@@ -39,8 +39,21 @@ export function useHint(hint) {
       const r = el?.getBoundingClientRect()
       if (!r) return setSpot(null)
       const [fx, fy] = hint.at ?? [0.5, 0.5]
+      // The label goes under what the reader should touch: under the ghost stroke and
+      // the hand that draws it, or under the target element.
+      let under = { x: r.left + r.width / 2, y: r.bottom }
+      if (hint.draw) {
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+        path.setAttribute('d', hint.draw)
+        el.appendChild(path)
+        const p = path.getBoundingClientRect()
+        path.remove()
+        const scale = r.width / Number(el.getAttribute('viewBox').split(' ')[2])
+        under = { x: p.left + p.width / 2, y: p.bottom + 30 * scale }
+      }
       setSpot({
         x: r.left - box.left + r.width * fx, y: r.top - box.top + r.height * fy, width: box.width,
+        under: { x: under.x - box.left, y: under.y - box.top },
         frame: { left: r.left - box.left, top: r.top - box.top, width: r.width, height: r.height },
         viewBox: el.getAttribute('viewBox'),
       })
@@ -51,27 +64,22 @@ export function useHint(hint) {
     return () => observer.disconnect()
   }, [root, shown, hint])
 
-  // Put the label on the preferred side of the dot, flip it if it would leave the
-  // demo, and sit above the dot when neither side has room (narrow screens).
-  let place = 'above', labelStyle = null
-  if (spot) {
-    const fitsRight = spot.x + 16 + labelWidth <= spot.width - 6
-    const fitsLeft = spot.x - 16 - labelWidth >= 6
-    // side: 'left' means the label must not cross the target, so it never flips right.
-    const order = hint.side === 'left' ? ['left'] : spot.x > spot.width * 0.6 ? ['left', 'right'] : ['right', 'left']
-    place = order.find(side => (side === 'right' ? fitsRight : fitsLeft)) ?? 'above'
-    labelStyle = place === 'above'
-      ? { left: Math.min(Math.max(spot.x, labelWidth / 2 + 6), spot.width - labelWidth / 2 - 6), top: spot.y - (hint.draw ? 0 : 10) }
-      : { left: spot.x, top: spot.y }
-  }
-  const overlay = shown && spot ? (
+  const label = <><b>Try:</b> {hint?.text}</>
+  const visible = shown && spot
+  const overlay = visible ? (
     <div className="smw-hint-layer" aria-hidden="true">
       {hint.draw ? (
         <svg className="smw-hint-draw" style={spot.frame} viewBox={spot.viewBox}>
           <GhostStroke d={hint.draw} color={hint.color} />
         </svg>
       ) : <span className="smw-hint-dot" style={{ left: spot.x, top: spot.y }} />}
-      <span ref={el => { if (el && el.offsetWidth !== labelWidth) setLabelWidth(el.offsetWidth) }} className={`smw-hint-label ${place}`} style={labelStyle}><b>Try:</b> {hint.text}</span>
+      {hint.text && (
+        <span
+          ref={el => { if (el && el.offsetWidth !== labelWidth) setLabelWidth(el.offsetWidth) }}
+          className="smw-hint-label below"
+          style={{ left: Math.min(Math.max(spot.under.x, labelWidth / 2 + 6), spot.width - labelWidth / 2 - 6), top: spot.under.y + 6 }}
+        >{label}</span>
+      )}
     </div>
   ) : null
   return { ref: setRoot, overlay }

@@ -4,7 +4,7 @@ import { PLANS, run, isSorted, firstDisorder, findCounterexamples } from './bubb
 import { TOOL, Window, Toolbar, PenGroup, PenPill, StepThumb, ArrayCard, ExpandBlock, CasInner } from './ui'
 
 const VERSIONS = ['one', 'two', 'full']
-const HINT = { target: '.smw-done', at: [-0.1, 0.5], side: 'left', text: 'tap Done to test the plan' }
+const HINT = { target: '.smw-done', at: [-0.15, 0.5] }
 
 function nudge(values, i, dir) {
   let v = values[i]
@@ -121,8 +121,8 @@ export default function DoneCheck() {
         </div>
       </div>
       <div className="smw-foot">
-        <span className="smw-status">
-          {!done && !notSorted && 'What happens when you click Done?'}
+        <span className={`smw-status ${!done && !notSorted ? 'try' : ''}`}>
+          {!done && !notSorted && <span className="smw-hint-label smw-hint-inline"><b>Try:</b> tap Done to test the plan</span>}
           {notSorted && <span style={{ color: TOOL.bad }}>This plan does not sort the example yet.</span>}
           {cx === 'none' && <span style={{ color: TOOL.ok }}>No failing input among distinct digits 1 to 9.</span>}
           {found && view === 1 && <span style={{ color: TOOL.bad }}>The same plan leaves this input unsorted.</span>}

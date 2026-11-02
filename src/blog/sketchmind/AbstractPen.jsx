@@ -10,7 +10,7 @@ const W = 520
 const MID = 104
 const sleep = ms => new Promise(r => setTimeout(r, ms))
 const HINT = {
-  target: '.smw-canvas svg', at: [0.47, 0.5], text: 'draw a few shapes here', color: ABSTRACT,
+  target: '.smw-canvas svg', at: [0.47, 0.5], color: ABSTRACT,
   draw: 'M 176 62 C 205 58 222 80 220 100 C 218 124 196 136 172 132 C 148 128 136 108 140 88 C 144 70 160 62 182 64',
 }
 
@@ -237,7 +237,7 @@ export default function AbstractPen() {
           </svg>
           {phase === 'draw' && (
             <div className="smw-canvasfoot">
-              {!shapes.length && <span className="smw-tip">Draw shapes: bubbles, stars, or any shape.</span>}
+              {!shapes.length && <span className="smw-tip try"><span className="smw-hint-label smw-hint-inline"><b>Try:</b> draw a few bubbles, stars, or any shape</span></span>}
               {shapes.length > 0 && <span className="smw-tip">tap a number to change its value</span>}
               <span>
                 <button type="button" className="smw-scan" disabled={shapes.length < 2} onClick={() => makeArray(shapes)}>Make array</button>
@@ -246,7 +246,7 @@ export default function AbstractPen() {
           )}
           {phase === 'array' && (
             showBubbleGhost
-              ? <span className="smw-hint-label smw-hint-top"><b>Try:</b> draw across all the shapes</span>
+              ? <span className="smw-hint-label smw-hint-bottom"><b>Try:</b> draw across all the shapes</span>
               : <span className="smw-tip top">{busy ? 'bubbling up…' : sorted ? 'sorted ✓' : 'draw one Bubble up stroke across the shapes'}</span>
           )}
           {shapes.length > 0 && (

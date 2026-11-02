@@ -152,22 +152,46 @@ const SCENES = [
   ] },
 ]
 
-export function InstructorScenes() {
+// Same layout as LearnerThemes: labels on the left rotate by themselves until a reader picks one.
+export function InstructorScenes({ intro }) {
+  const [active, setActive] = useState(0)
+  const [held, setHeld] = useState(false)
+  useEffect(() => {
+    if (held || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const timer = setInterval(() => setActive(index => (index + 1) % SCENES.length), 5000)
+    return () => clearInterval(timer)
+  }, [held])
+  const scene = SCENES[active]
   return (
-    <div className="sk-instructor-settings">
-      {SCENES.map((scene, index) => (
-        <div className="sk-instructor-setting" key={scene.title}>
-          <h3>{scene.title}</h3>
-          <svg viewBox="0 0 200 165" className="sk-doodle" role="img" aria-label={scene.title} dangerouslySetInnerHTML={{ __html: DOODLES[index] }} />
-          <p>{scene.text}</p>
-          <p className="sk-theory-label">{scene.tag}</p>
+    <section className="sk-essay-section sk-learner-carousel sk-instructor-carousel" aria-label="Instructor perspectives" id="study-instructors">
+      <div className="sk-main">
+      {intro}
+      <div className="sk-notebook sk-challenge-notebook sk-learner-notebook">
+        <div className="tabs">
+          {SCENES.map((item, index) => (
+            <div key={item.title} className="sk-challenge-tab">
+              <button type="button" className={active === index ? 'on' : ''} aria-pressed={active === index} onClick={() => { setActive(index); setHeld(true) }}>
+                <b>({String.fromCharCode(97 + index)})</b> {item.title}
+              </button>
+            </div>
+          ))}
+        </div>
+        <div className="page" key={active}>
+          <svg viewBox="0 0 200 165" className="sk-doodle" role="img" aria-label={scene.title} dangerouslySetInnerHTML={{ __html: DOODLES[active] }} />
+        </div>
+      </div>
+      </div>
+      <aside className="sk-margin" aria-live="polite">
+        <p>{scene.text}</p>
+        <p className="sk-theory-label">{scene.tag}</p>
+        <div className="sk-theory-references">
           {scene.references.map(reference => (
             <cite key={reference.url} className="sk-theory-reference">
               <a href={reference.url} target="_blank" rel="noopener noreferrer" title={reference.title}>{reference.label}</a>
             </cite>
           ))}
         </div>
-      ))}
-    </div>
+      </aside>
+    </section>
   )
 }
