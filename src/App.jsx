@@ -6,6 +6,7 @@ import Publications from './components/Publications'
 import FireworksCursor from './components/FireworksCursor'
 import TrialPage from './components/TrialPage'
 import SketchMindPost from './blog/sketchmind/SketchMindPost'
+import { initAnalytics, trackPage } from './analytics'
 
 const PAGES = { '#/trial': 'trial', '#/sketchmind': 'sketchmind' }
 
@@ -31,6 +32,8 @@ function App() {
     window.addEventListener('hashchange', handleHashChange)
     return () => window.removeEventListener('hashchange', handleHashChange)
   }, [])
+
+  useEffect(() => { initAnalytics(); trackPage(currentPage) }, [currentPage])
 
   useEffect(() => {
     if (currentPage !== 'home') return

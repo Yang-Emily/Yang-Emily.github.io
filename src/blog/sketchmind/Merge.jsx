@@ -1,4 +1,5 @@
-import { Fragment, useLayoutEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { trackComplete } from '../../analytics'
 import { Undo2, RotateCcw, GripVertical, Hand } from 'lucide-react'
 import { smooth, toSvgPoint } from './ink'
 import { strokeOperands, executeStroke } from './strokeOperations'
@@ -88,6 +89,7 @@ export default function Merge() {
   const [ghostDy, setGhostDy] = useState(null)
   const list = cards(steps)
   const merged = steps.some(s => s.merge)
+  useEffect(() => { if (merged) trackComplete('merge') }, [merged])
   const userPen = [...steps].reverse().find(s => s.merge)?.merge
   const values = steps.length ? steps[steps.length - 1].after : EXAMPLE
   const shown = preview === null ? values : list[preview]?.last.after ?? values

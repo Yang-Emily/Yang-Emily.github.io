@@ -1,4 +1,5 @@
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { trackComplete } from '../../analytics'
 import { CheckCircle2 } from 'lucide-react'
 import { PLANS, run, isSorted, firstDisorder, findCounterexamples } from './bubble'
 import { TOOL, Window, Toolbar, PenGroup, PenPill, StepThumb, ArrayCard, ExpandBlock, CasInner } from './ui'
@@ -62,6 +63,7 @@ export default function DoneCheck() {
   const nudgeAt = (i, dir) => { setInput(vals => vals.map((v, j) => (j === i ? nudge(vals, i, dir) : v))); reset() }
 
   const found = cx && cx !== 'none'
+  useEffect(() => { if (found) trackComplete('done_check') }, [found])
   const shown = view === 1 && found ? cx.input : input
   const changed = view === 1 && found ? cx.input.map((v, i) => (v !== input[i] ? i : -1)).filter(i => i >= 0) : []
   const trace = run(shown, steps)

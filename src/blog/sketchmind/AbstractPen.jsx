@@ -3,6 +3,7 @@ import { RotateCcw } from 'lucide-react'
 import { smooth, toSvgPoint } from './ink'
 import { TOOL, Window, Toolbar, PenGroup, PenPill, ExampleLabel, StepThumb } from './ui'
 import { GhostStroke } from './guide'
+import { trackComplete } from '../../analytics'
 import { shapeFromStrokes, addConnectedStroke, parseShapeValue } from './abstractShapes'
 
 const ABSTRACT = '#a66bb4'
@@ -66,6 +67,8 @@ export default function AbstractPen() {
   const scale = shapes.length ? Math.min(1, 74 / Math.max(...shapes.map(s => s.size))) : 1
   const showBubbleGhost = phase === 'array' && !triedBubble && !busy && n > 1
   const sorted = n > 1 && values.every((v, i) => !i || values[i - 1] <= v)
+  // Sorted by the reader's own Bubble up strokes, not an array that started sorted.
+  useEffect(() => { if (sorted && passes.length > 1) trackComplete('abstract_pen') }, [sorted, passes.length])
 
   const down = e => {
     if (busy || editing || e.button !== 0 || !e.isPrimary) return

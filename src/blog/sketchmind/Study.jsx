@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { DOODLES } from './doodles'
 import { TOOL } from './ui'
+import { tracked } from '../../analytics'
 
 const asset = name => `${import.meta.env.BASE_URL}blog/sketchmind/${name}`
 
@@ -116,7 +117,7 @@ export function LearnerThemes({ summary }) {
     <section className="sk-essay-section sk-learner-carousel" aria-label="Learner feedback" id="study-learners">
       <div className="sk-main">
       <p><strong className="sk-run-in">Learning with SketchMind.</strong> Participants used the animations to follow operations, the pens to reuse steps, and counterexamples to revisit a plan. Their reactions to the abstraction views were less consistent.</p>
-      <div className="sk-notebook sk-challenge-notebook sk-learner-notebook">
+      <div className="sk-notebook sk-challenge-notebook sk-learner-notebook" {...tracked('learner_themes')}>
         <div className="tabs">
           {THEMES.map((item, index) => (
             <div key={item.title} className="sk-challenge-tab">
@@ -168,7 +169,7 @@ export function InstructorScenes({ intro }) {
         {intro}
       </div>
       <div className="sk-main sk-instructor-demo">
-      <div className="sk-notebook sk-challenge-notebook sk-learner-notebook">
+      <div className="sk-notebook sk-challenge-notebook sk-learner-notebook" {...tracked('instructor_scenes')}>
         <div className="tabs">
           {SCENES.map((item, index) => (
             <div key={item.title} className="sk-challenge-tab">

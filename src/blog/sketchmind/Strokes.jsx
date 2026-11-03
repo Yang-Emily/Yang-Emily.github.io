@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { trackComplete } from '../../analytics'
 import { Play, Pause, RotateCcw } from 'lucide-react'
 import { smooth, toSvgPoint } from './ink'
 import { TOOL, Window, Toolbar, PenGroup, PenPill, ExampleLabel, StepThumb, Block, Chips, ArrayCard } from './ui'
@@ -17,6 +18,9 @@ export default function Strokes() {
   const [lastInk, setLastInk] = useState(null)
   const [preview, setPreview] = useState(null)
   const [playing, setPlaying] = useState(false)
+  // Done once the reader has run both a comparison and a swap.
+  const triedBoth = ['compare', 'swap'].every(type => steps.some(s => s.pen === type))
+  useEffect(() => { if (triedBoth) trackComplete('strokes') }, [triedBoth])
   const current = steps.length ? steps[steps.length - 1].values : input
   const values = preview === null ? current : preview < 0 ? input : steps[preview].values
   const slots = input.map((_, i) => 500 * (i + 1) / (input.length + 1))

@@ -10,6 +10,7 @@ import AbstractPen from './AbstractPen'
 import { PaperNotebook, LearnerThemes, InstructorScenes } from './Study'
 import ThreeWays from './ThreeWays'
 import { TOOL } from './ui'
+import { tracked, trackWidget } from '../../analytics'
 import './sketchmind.css'
 
 const PAPER = `${import.meta.env.BASE_URL}uist26_sketchmind.pdf`
@@ -102,7 +103,7 @@ export default function SketchMindPost() {
           patterns, and test your reasoning. How do you turn those repeated steps into
           a loop? And does a procedure that sorts this array also work on other inputs?
         </p>
-        <PaperChallenges />
+        <div {...tracked('paper_challenges')}><PaperChallenges /></div>
       </section>
 
       <div className="sk-essay-section sk-system-intro">
@@ -119,9 +120,9 @@ export default function SketchMindPost() {
           </p>
         </div>
         <aside className="sk-margin">
-          <button type="button" className="sk-inline-link" aria-expanded={systemOpen} aria-controls="sk-real-system" onClick={() => setSystemOpen(open => !open)}><AppWindow size={15} aria-hidden="true" /> Try the full system here.</button>
+          <button type="button" className="sk-inline-link" aria-expanded={systemOpen} aria-controls="sk-real-system" onClick={() => { if (!systemOpen) trackWidget('full_system'); setSystemOpen(open => !open) }}><AppWindow size={15} aria-hidden="true" /> Try the full system here.</button>
         </aside>
-        {systemOpen && <div id="sk-real-system" className="sk-system-entry sk-system-wide"><RealSystem /></div>}
+        {systemOpen && <div id="sk-real-system" className="sk-system-entry sk-system-wide" {...tracked('full_system')}><RealSystem /></div>}
       </div>
 
       <section className="sk-essay-section" aria-label="Strokes that run" id="strokes">
@@ -143,7 +144,7 @@ export default function SketchMindPost() {
             or use the play button to run through the sequence again.
           </p>
         </div>
-        <div className="sk-main sk-strokes-demo"><div className="sk-demo"><Strokes /></div></div>
+        <div className="sk-main sk-strokes-demo"><div className="sk-demo" {...tracked('strokes')}><Strokes /></div></div>
         <aside className="sk-margin sk-strokes-note">
           <p>
             The shape of a stroke doesn’t matter. A line, a curve, or a loop all work, as long
@@ -161,7 +162,7 @@ export default function SketchMindPost() {
             Drag the swap card onto the comparison below. The swap becomes the True branch;
             the False branch does nothing. Then draw across two numbers on the left to try your new pen.
           </p>
-          <div className="sk-demo"><Merge /></div>
+          <div className="sk-demo" {...tracked('merge')}><Merge /></div>
           <p>
             The result is <code>compare_and_swap</code>, with its own pen in the palette.
             A stroke with this pen applies the conditional to another pair. The expanded
@@ -187,7 +188,7 @@ export default function SketchMindPost() {
             identify recurring patterns and generalize them into reusable algorithmic structures.
           </p>
         </div>
-        <div className="sk-main sk-views-demo"><div className="sk-demo"><Views onViewChange={setReadingView} /></div></div>
+        <div className="sk-main sk-views-demo"><div className="sk-demo" {...tracked('views')}><Views onViewChange={setReadingView} /></div></div>
         <aside className="sk-margin sk-views-note" aria-live="polite">
           {readingView === 'value' && <p>
             <strong>Value view.</strong> The calls use the values at each step:
@@ -227,7 +228,7 @@ export default function SketchMindPost() {
             Select Done below to try it. You can also drag the input digits up or down
             before checking the plan.
           </p>
-          <div className="sk-demo"><DoneCheck /></div>
+          <div className="sk-demo" {...tracked('done_check')}><DoneCheck /></div>
         </div>
         <aside className="sk-margin">
           <p>
@@ -257,7 +258,7 @@ export default function SketchMindPost() {
             marked 8 &lt; 5. Others omitted later iterations, invented marks for a flip,
             or wrote rows of values without specifying the loop.
           </p>
-          <div className="sk-demo"><PaperNotebook onNoteChange={setPaperNote} /></div>
+          <div className="sk-demo" {...tracked('paper_notebook')}><PaperNotebook onNoteChange={setPaperNote} /></div>
         </div>
         <aside className="sk-margin">
           {paperNote && <div aria-live="polite"><p>{paperNote.text}</p><cite>{paperNote.who}</cite></div>}
@@ -291,7 +292,7 @@ export default function SketchMindPost() {
             the learner to notice different changes.
           </p>
         </div>
-        <div className="sk-main sk-counterexample-demo"><div className="sk-demo"><ThreeWays onNoteChange={setCounterexampleNote} /></div></div>
+        <div className="sk-main sk-counterexample-demo"><div className="sk-demo" {...tracked('three_ways')}><ThreeWays onNoteChange={setCounterexampleNote} /></div></div>
         <aside className="sk-margin sk-counterexample-note" aria-live="polite">
           {counterexampleNote && <p>{counterexampleNote}</p>}
         </aside>
@@ -345,7 +346,7 @@ export default function SketchMindPost() {
             then draw a Bubble up stroke across a range. One stroke runs a pass;
             repeat it if the shapes are not yet sorted.
           </p>
-          <div className="sk-demo"><AbstractPen /></div>
+          <div className="sk-demo" {...tracked('abstract_pen')}><AbstractPen /></div>
         </div>
         <aside className="sk-margin">
           <p>
