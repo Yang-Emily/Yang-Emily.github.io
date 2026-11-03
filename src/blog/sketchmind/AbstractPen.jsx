@@ -70,6 +70,8 @@ export default function AbstractPen() {
   const [passes, setPasses] = useState([])
   const [preview, setPreview] = useState(null)
   const [ink, setInk] = useState(null)
+  // The Bubble up stroke that made each page (none for the initial array).
+  const [passInk, setPassInk] = useState([])
   // After Make array, a ghost hand shows the Bubble up stroke until the reader draws one.
   const [triedBubble, setTriedBubble] = useState(false)
 
@@ -84,6 +86,9 @@ export default function AbstractPen() {
   const byId = id => shapes.find(s => s.id === id)
   const values = order.map(id => byId(id).v)
   const shownOrder = preview === null ? order : passes[preview]
+  // As in SketchMind, the selected page (the latest by default) shows the stroke that made it.
+  const page = preview ?? passes.length - 1
+  const shownInk = busy ? ink : passInk[page]
   const n = order.length
   const slotX = i => (W / (n + 1)) * (i + 1)
   const scale = shapes.length ? Math.min(1, 74 / Math.max(...shapes.map(s => s.size))) : 1
@@ -121,11 +126,12 @@ export default function AbstractPen() {
     const hi = Math.max(...xs)
     const hit = order.map((_, i) => i).filter(i => slotX(i) >= lo - 18 && slotX(i) <= hi + 18)
     if (hit.length < 2) return
-    setInk(smooth(pts))
-    bubbleUp(hit[0], hit[hit.length - 1])
+    const path = smooth(pts)
+    setInk(path)
+    bubbleUp(hit[0], hit[hit.length - 1], path)
   }
 
-  async function bubbleUp(from, to) {
+  async function bubbleUp(from, to, path) {
     setBusy(true)
     let cur = [...order]
     for (let k = from; k < to; k++) {
@@ -144,6 +150,7 @@ export default function AbstractPen() {
     setFocus(null)
     setInk(null)
     setPasses(p => [...p, [...cur]])
+    setPassInk(p => [...p, path])
     setBusy(false)
   }
 
@@ -152,7 +159,7 @@ export default function AbstractPen() {
     setShapes(list)
     setOrder(ordered.map(s => s.id))
     setPhase('array')
-    setPasses([ordered.map(s => s.id)]); setPreview(null)
+    setPasses([ordered.map(s => s.id)]); setPassInk([null]); setPreview(null)
   }
   const changeValue = (id, value) => {
     if (busy) return
@@ -161,7 +168,7 @@ export default function AbstractPen() {
     const updated = shapes.map(shape => shape.id === id ? { ...shape, v, manualValue: true, valueSource: 'manual' } : shape)
     setShapes(updated)
     if (phase === 'array') {
-      setPasses([[...order]]); setPreview(null)
+      setPasses([[...order]]); setPassInk([null]); setPreview(null)
       setInk(null)
     }
   }
@@ -178,7 +185,7 @@ export default function AbstractPen() {
     if (!cancel && value !== null) changeValue(editing.id, value)
     setEditing(null)
   }
-  const reset = () => { if (!busy) { editSession.current = null; setEditing(null); stroke.current = null; nextId.current = 0; setLive(null); setPhase('draw'); setTriedBubble(false); setShapes([]); setOrder([]); setPasses([]); setPreview(null); setInk(null) } }
+  const reset = () => { if (!busy) { editSession.current = null; setEditing(null); stroke.current = null; nextId.current = 0; setLive(null); setPhase('draw'); setTriedBubble(false); setShapes([]); setOrder([]); setPasses([]); setPassInk([]); setPreview(null); setInk(null) } }
 
   const place = s => {
     if (phase === 'draw') return { transform: 'translate(0px, 0px)' }
@@ -193,7 +200,7 @@ export default function AbstractPen() {
   return (
     <Window hint={HINT}>
       <Toolbar right={phase === 'array'
-        ? <ExampleLabel values={passes[0] ?? []} />
+        ? <ExampleLabel values={(passes[0] ?? []).map(id => byId(id).v)} />
         : <button type="button" className="smw-example-button" title="Load the default bubble example" aria-label="Load the default bubble example" onClick={() => makeArray(bubbles())}>
             <svg width="25" height="20" viewBox="0 0 30 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
               <circle cx="6" cy="15" r="3.5" />
@@ -258,7 +265,7 @@ export default function AbstractPen() {
             {showBubbleGhost && (
               <GhostStroke color={TOOL.bubble} d={`M ${slotX(0) - 34} ${MID + 6} C ${slotX(0) + 20} ${MID - 8}, ${slotX(n - 1) - 20} ${MID + 18}, ${slotX(n - 1) + 34} ${MID + 2}`} />
             )}
-            {ink && <path d={ink} fill="none" stroke={TOOL.bubble} strokeWidth="4" strokeLinecap="round" opacity=".6" />}
+            {shownInk && <path key={`ink-${page}`} d={shownInk} fill="none" stroke={TOOL.bubble} strokeWidth="4" strokeLinecap="round" className="smw-step-ink" />}
             {live && <path d={smooth(live)} fill="none" stroke={phase === 'draw' ? ABSTRACT : TOOL.bubble} strokeWidth="3.5" strokeLinecap="round" />}
           </svg>
           {phase === 'draw' && (
