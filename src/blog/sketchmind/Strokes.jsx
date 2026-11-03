@@ -15,20 +15,26 @@ export default function Strokes() {
   const [pen, setPen] = useState('compare')
   const [steps, setSteps] = useState([])
   const [live, setLive] = useState(null)
-  const [lastInk, setLastInk] = useState(null)
   const [preview, setPreview] = useState(null)
   const [playing, setPlaying] = useState(false)
+  // Bumped whenever a step is shown, so its ink and swap animation play again.
+  const [shown, setShown] = useState(0)
   // Done once the reader has run both a comparison and a swap.
   const triedBoth = ['compare', 'swap'].every(type => steps.some(s => s.pen === type))
   useEffect(() => { if (triedBoth) trackComplete('strokes') }, [triedBoth])
   const current = steps.length ? steps[steps.length - 1].values : input
   const values = preview === null ? current : preview < 0 ? input : steps[preview].values
+  // As in SketchMind, the selected step (the latest one by default) shows the stroke
+  // that made it, and a swap slides its two numbers into each other's place.
+  const focus = preview === null ? steps[steps.length - 1] : preview < 0 ? null : steps[preview]
+  const digits = focus?.pen === 'swap' ? focus.before : values
   const slots = input.map((_, i) => 500 * (i + 1) / (input.length + 1))
 
   const stop = () => { playback.current++; setPlaying(false) }
+  const show = index => { stop(); setPreview(index); setShown(k => k + 1) }
   const reset = () => {
     stop(); setPen('compare')
-    setSteps([]); setLastInk(null); setPreview(null); points.current = null; setLive(null)
+    setSteps([]); setPreview(null); points.current = null; setLive(null)
   }
   const down = e => {
     if (e.button !== 0 || !e.isPrimary) return
@@ -49,8 +55,8 @@ export default function Strokes() {
     const pair = strokeOperands(stroke, slots)
     if (!pair) return
     const result = executeStroke(current, pen, pair)
-    setSteps(history => [...history, { ...result, pen, pair, args: pair.map(i => current[i]) }])
-    setLastInk({ path: smooth(stroke), color: TOOL[pen] })
+    setSteps(history => [...history, { ...result, pen, pair, before: current, args: pair.map(i => current[i]), ink: smooth(stroke) }])
+    setShown(k => k + 1)
   }
   const replay = async () => {
     if (playing) { stop(); setPreview(null); return }
@@ -59,10 +65,10 @@ export default function Strokes() {
     setPlaying(true)
     for (let i = -1; i < steps.length; i++) {
       if (playback.current !== version || !svg.current) return
-      setPreview(i)
-      await new Promise(resolve => setTimeout(resolve, 550))
+      setPreview(i); setShown(k => k + 1)
+      await new Promise(resolve => setTimeout(resolve, 1000))
     }
-    if (playback.current === version && svg.current) { setPlaying(false); setPreview(null) }
+    if (playback.current === version && svg.current) setPlaying(false)
   }
 
   return (
@@ -77,24 +83,39 @@ export default function Strokes() {
       <div className="smw-body">
         <div className="smw-instances">
             <button type="button" className="smw-play" title="Replay steps" disabled={!steps.length} onClick={replay}>{playing ? <Pause size={13} /> : <Play size={13} />}</button>
-            <button type="button" title="Initial input" onClick={() => { stop(); setPreview(-1) }}><StepThumb values={input} active={preview === -1} /></button>
-            {steps.map((step, index) => <button key={index} type="button" title={step.label} onClick={() => { stop(); setPreview(index) }}><StepThumb values={step.values} pair={step.pair} color={TOOL[step.pen]} active={preview === index || preview === null && index === steps.length - 1} /></button>)}
+            <button type="button" title="Initial input" onClick={() => show(-1)}><StepThumb values={input} active={preview === -1 || preview === null && !steps.length} /></button>
+            {steps.map((step, index) => <button key={index} type="button" title={step.label} onClick={() => show(index)}><StepThumb values={step.values} pair={step.pair} color={TOOL[step.pen]} active={preview === index || preview === null && index === steps.length - 1} /></button>)}
         </div>
         <div className="smw-canvas">
           <svg ref={svg} viewBox="0 0 500 210" onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={() => { points.current = null; setLive(null) }} aria-label="Draw across two array elements to compare or swap them">
-            {values.map((value, index) => <text key={index} x={slots[index]} y="118" textAnchor="middle" className="smw-digit">{value}</text>)}
-            {lastInk && preview === null && <path d={lastInk.path} fill="none" stroke={lastInk.color} strokeWidth="3" opacity=".6" strokeLinecap="round" />}
+            {digits.map((value, index) => {
+              const moving = focus?.pen === 'swap' && focus.pair.includes(index)
+              const to = moving ? focus.pair.find(j => j !== index) : index
+              return (
+                <text key={`${shown}-${index}`} x={slots[index]} y="118" textAnchor="middle" className={`smw-digit ${moving ? 'swapping' : ''}`} style={moving ? { '--dx': `${slots[to] - slots[index]}px` } : undefined}>{value}</text>
+              )
+            })}
+            {focus && <path key={`ink-${shown}`} d={focus.ink} fill="none" stroke={TOOL[focus.pen]} strokeWidth="3.5" strokeLinecap="round" className="smw-step-ink" />}
             {live && <path d={smooth(live)} fill="none" stroke={TOOL[pen]} strokeWidth="3.5" strokeLinecap="round" />}
           </svg>
           {steps.length > 0 && <div className="smw-tools"><button type="button" className="smw-icon" onClick={reset} title="Reset" aria-label="Reset"><RotateCcw size={14} /></button></div>}
         </div>
         <div className="smw-panel">
-          {steps.map((step, index) => <div key={index} className={preview === index ? 'smw-operation-selected' : ''}>
-            <Block kind={step.pen === 'compare' ? 'cmp' : 'swp'} right={step.pen === 'compare' ? <Chips value={step.comparison} /> : null}>
-              {step.pen === 'compare' ? 'is_bigger' : 'swap'}({step.args.join(',')})
-            </Block>
-          </div>)}
-          <ArrayCard values={values} labels kind="result" />
+          {/* As in SketchMind: the grey data card is the initial array, then one card per
+              stroke. The selected card darkens its own border. */}
+          {[-1, ...steps.keys()].map(index => {
+            const step = steps[index]
+            const active = preview === index || preview === null && index === steps.length - 1
+            return (
+              <div key={index} role="button" tabIndex={0} title={step ? 'Show this step' : 'Show the initial array'} className="smw-step-card" onClick={() => show(index)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(index) } }}>
+                {step
+                  ? <Block kind={`${step.pen === 'compare' ? 'cmp' : 'swp'} ${active ? 'active' : ''}`} right={step.pen === 'compare' ? <Chips value={step.comparison} /> : null}>
+                      {step.pen === 'compare' ? 'is_bigger' : 'swap'}({step.args.join(',')})
+                    </Block>
+                  : <ArrayCard values={input} labels kind={`data ${active ? 'active' : ''}`} />}
+              </div>
+            )
+          })}
         </div>
       </div>
 

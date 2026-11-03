@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { RotateCcw } from 'lucide-react'
 import { smooth, toSvgPoint } from './ink'
-import { TOOL, Window, Toolbar, PenGroup, PenPill, ExampleLabel, StepThumb } from './ui'
+import { TOOL, Window, Toolbar, PenGroup, PenPill, ExampleLabel } from './ui'
 import { GhostStroke } from './guide'
 import { trackComplete } from '../../analytics'
 import { shapeFromStrokes, addConnectedStroke, parseShapeValue } from './abstractShapes'
@@ -32,6 +32,25 @@ function bubbles() {
   })
 }
 
+// A page thumbnail that redraws the reader's own shapes in that page's order, the way
+// SketchMind's page strip shows the handwritten elements.
+function SketchThumb({ shapes, scale, color, active }) {
+  const cell = 40
+  const k = scale * 0.5
+  return (
+    <div className={`smw-thumb smw-sketch-thumb ${active ? 'on' : ''}`} style={{ '--c': color ?? '#d6d3dc' }}>
+      <svg viewBox={`0 0 ${shapes.length * cell} ${cell}`} aria-hidden="true">
+        {shapes.map((s, i) => (
+          <g key={s.id} transform={`translate(${cell * i + cell / 2} ${cell / 2}) scale(${k}) translate(${-s.cx} ${-s.cy})`}>
+            {s.strokes.map((points, j) => <path key={j} d={smooth(points)} fill="none" stroke={ABSTRACT} strokeWidth={2.2 / k} strokeLinecap="round" strokeLinejoin="round" />)}
+          </g>
+        ))}
+      </svg>
+      {color && <i className="dot" />}
+    </div>
+  )
+}
+
 export default function AbstractPen() {
   const svg = useRef(null)
   const alive = useRef(true)
@@ -47,7 +66,9 @@ export default function AbstractPen() {
   const [focus, setFocus] = useState(null)
   const [lift, setLift] = useState(null)
   const [busy, setBusy] = useState(false)
+  // Each pass is the shape order after it ran, so a thumbnail can redraw that page.
   const [passes, setPasses] = useState([])
+  const [preview, setPreview] = useState(null)
   const [ink, setInk] = useState(null)
   // After Make array, a ghost hand shows the Bubble up stroke until the reader draws one.
   const [triedBubble, setTriedBubble] = useState(false)
@@ -62,6 +83,7 @@ export default function AbstractPen() {
 
   const byId = id => shapes.find(s => s.id === id)
   const values = order.map(id => byId(id).v)
+  const shownOrder = preview === null ? order : passes[preview]
   const n = order.length
   const slotX = i => (W / (n + 1)) * (i + 1)
   const scale = shapes.length ? Math.min(1, 74 / Math.max(...shapes.map(s => s.size))) : 1
@@ -73,6 +95,7 @@ export default function AbstractPen() {
   const down = e => {
     if (busy || editing || e.button !== 0 || !e.isPrimary) return
     e.currentTarget.setPointerCapture(e.pointerId)
+    setPreview(null)
     if (phase === 'array') setTriedBubble(true)
     stroke.current = [toSvgPoint(svg.current, e)]
     setLive(stroke.current)
@@ -120,7 +143,7 @@ export default function AbstractPen() {
     }
     setFocus(null)
     setInk(null)
-    setPasses(p => [...p, cur.map(id => byId(id).v)])
+    setPasses(p => [...p, [...cur]])
     setBusy(false)
   }
 
@@ -129,7 +152,7 @@ export default function AbstractPen() {
     setShapes(list)
     setOrder(ordered.map(s => s.id))
     setPhase('array')
-    setPasses([ordered.map(s => s.v)])
+    setPasses([ordered.map(s => s.id)]); setPreview(null)
   }
   const changeValue = (id, value) => {
     if (busy) return
@@ -138,7 +161,7 @@ export default function AbstractPen() {
     const updated = shapes.map(shape => shape.id === id ? { ...shape, v, manualValue: true, valueSource: 'manual' } : shape)
     setShapes(updated)
     if (phase === 'array') {
-      setPasses([order.map(key => updated.find(shape => shape.id === key).v)])
+      setPasses([[...order]]); setPreview(null)
       setInk(null)
     }
   }
@@ -155,11 +178,11 @@ export default function AbstractPen() {
     if (!cancel && value !== null) changeValue(editing.id, value)
     setEditing(null)
   }
-  const reset = () => { if (!busy) { editSession.current = null; setEditing(null); stroke.current = null; nextId.current = 0; setLive(null); setPhase('draw'); setTriedBubble(false); setShapes([]); setOrder([]); setPasses([]); setInk(null) } }
+  const reset = () => { if (!busy) { editSession.current = null; setEditing(null); stroke.current = null; nextId.current = 0; setLive(null); setPhase('draw'); setTriedBubble(false); setShapes([]); setOrder([]); setPasses([]); setPreview(null); setInk(null) } }
 
   const place = s => {
     if (phase === 'draw') return { transform: 'translate(0px, 0px)' }
-    const i = order.indexOf(s.id)
+    const i = shownOrder.indexOf(s.id)
     const y = MID + (lift === s.id ? -34 : 0)
     return {
       transform: `translate(${slotX(i)}px, ${y}px) scale(${scale}) translate(${-s.cx}px, ${-s.cy}px)`,
@@ -200,7 +223,7 @@ export default function AbstractPen() {
               </g>
             ))}
             {shapes.map(s => {
-              const i = order.indexOf(s.id)
+              const i = shownOrder.indexOf(s.id)
               const x = phase === 'array' ? slotX(i) : s.cx
               const y = phase === 'array' ? MID + 58 : s.cy + s.size / 2 + 18
               if (editing?.id === s.id) return (
@@ -259,8 +282,10 @@ export default function AbstractPen() {
           )}
         </div>
         <div className="smw-strip">
-          {passes.length ? passes.map((p, k) => (
-            <StepThumb key={k} values={p} color={k ? TOOL.bubble : null} pair={k ? p.map((_, i) => i) : null} active={k === passes.length - 1} />
+          {passes.length ? passes.map((ids, k) => (
+            <button key={k} type="button" title={k ? `After pass ${k}` : 'Initial array'} disabled={busy} onClick={() => setPreview(k === passes.length - 1 ? null : k)}>
+              <SketchThumb shapes={ids.map(byId)} scale={scale} color={k ? TOOL.bubble : null} active={preview === null ? k === passes.length - 1 : preview === k} />
+            </button>
           )) : <div className="smw-empty">passes show up here</div>}
         </div>
       </div>

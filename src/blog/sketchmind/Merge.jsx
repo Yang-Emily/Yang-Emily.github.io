@@ -3,7 +3,7 @@ import { trackComplete } from '../../analytics'
 import { Undo2, RotateCcw, GripVertical, Hand } from 'lucide-react'
 import { smooth, toSvgPoint } from './ink'
 import { strokeOperands, executeStroke } from './strokeOperations'
-import { TOOL, Window, PenGroup, PenPill, ExampleLabel, Block, Chips, ArrayCard, StepThumb, Toolbar } from './ui'
+import { TOOL, Window, PenGroup, PenPill, ExampleLabel, Block, Chips, StepThumb, Toolbar } from './ui'
 
 // The plan is one card per stroke, in order, as in SketchMind's step list.
 // Merging follows the tool's rules (useDragHandlers / useAutoMerge): a swap merges
@@ -50,23 +50,30 @@ function autoMerge(steps) {
   return next
 }
 
-function CasCard({ card, onUnmerge }) {
+// As in SketchMind, a card made by dragging opens expanded; cards drawn with the new
+// pen (or merged automatically) start collapsed.
+function CasCard({ card, open, onToggle, onUnmerge }) {
   const [a, b] = args(card.compare)
   const result = bigger(card.compare)
   const invert = card.compare.merge.invert
   const swapBranch = <code style={{ color: TOOL.swap }}>swap({a},{b})</code>
   const nothing = <code>do nothing</code>
   return (
-    <div className={`smw-block cas expanded ${card.compare.merge.fresh ? 'pop' : ''}`}>
+    <div className={`smw-block cas ${open ? 'expanded' : ''} ${card.compare.merge.fresh ? 'pop' : ''}`}>
       <div className="head">
         <code>compare_and_swap({a},{b})</code>
-        <button type="button" className="smw-round" title="Unmerge" onClick={onUnmerge}><Undo2 size={13} /></button>
+        <span className="smw-cas-actions">
+          <button type="button" className="smw-round" title="Unmerge" onClick={onUnmerge}><Undo2 size={13} /></button>
+          <button type="button" className={`smw-round chev ${open ? 'open' : ''}`} onClick={onToggle} aria-expanded={open} title={open ? 'Collapse' : 'Expand'}>
+            <svg viewBox="0 0 16 16" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M4 6l4 4 4-4" /></svg>
+          </button>
+        </span>
       </div>
-      <div className="inner">
+      {open && <div className="inner">
         <code className="if">if <span style={{ color: TOOL.compare }}>is_bigger({a},{b})</span></code>
         <div className={`branch ${result ? 'yes' : 'idle'}`}>{result && <span className="tick">✓</span>}{invert ? nothing : swapBranch}</div>
         <div className={`branch ${result ? 'idle' : 'yes'}`}>{!result && <span className="tick">✓</span>}{invert ? swapBranch : nothing}</div>
-      </div>
+      </div>}
     </div>
   )
 }
@@ -82,6 +89,10 @@ export default function Merge() {
   const [steps, setSteps] = useState(initialSteps)
   const [message, setMessage] = useState(null)
   const [preview, setPreview] = useState(null)
+  // Bumped whenever a card is shown, so its ink and swap animation play again.
+  const [replayKey, setReplayKey] = useState(0)
+  const [openCards, setOpenCards] = useState({})
+  const [drewWithPen, setDrewWithPen] = useState(false)
   const [pen, setPen] = useState('compare')
   // Until the reader first grabs a swap card, a ghost hand shows the gesture on a loop.
   const [touched, setTouched] = useState(false)
@@ -93,6 +104,12 @@ export default function Merge() {
   const userPen = [...steps].reverse().find(s => s.merge)?.merge
   const values = steps.length ? steps[steps.length - 1].after : EXAMPLE
   const shown = preview === null ? values : list[preview]?.last.after ?? values
+  // The selected card (the latest one by default) shows the stroke that made it, and a
+  // card that swapped slides its two numbers into each other's place, as in SketchMind.
+  const focus = list[preview ?? list.length - 1]
+  const focusInk = focus && (focus.kind === 'cas' ? focus.compare : focus.step).ink
+  const focusSwap = focus?.last.type === 'swap' ? focus.last : null
+  const digits = focusSwap ? focusSwap.before : shown
   const slots = [100, 200, 300, 400]
   const mergeableAt = k => steps[k]?.type === 'swap' && !steps[k].merge && steps[k - 1]?.type === 'compare' && !steps[k - 1].merge && samePair(steps[k - 1], steps[k])
   const demoAt = touched || drag ? null : steps.findIndex((_, k) => mergeableAt(k))
@@ -121,19 +138,20 @@ export default function Merge() {
     const stroke = [...ink.current, toSvgPoint(canvas.current, e)]
     ink.current = null; setLive(null)
     const pair = strokeOperands(stroke, slots)
-    if (!pair) { setMessage('Draw across two numbers.'); return }
+    if (!pair) return
+    setMessage(null)
     if (pen === 'cas') {
       // A stroke with the user pen adds a merged block; its swap runs only on the branch that has it.
       const merge = { id: `pen-${nextId}`, invert: userPen?.invert ?? false }
-      const compare = step('compare', pair, values, merge)
+      const path = smooth(stroke)
+      const compare = { ...step('compare', pair, values, merge), ink: path }
       const swaps = bigger(compare) !== merge.invert
-      const [a, b] = args(compare)
-      setSteps(prev => swaps ? [...prev, compare, step('swap', pair, values, merge)] : [...prev, compare])
-      setMessage(`compare_and_swap(${a},${b}) → ${bigger(compare) ? 'True' : 'False'}: ${swaps ? 'swap' : 'do nothing'}`)
+      setSteps(prev => swaps ? [...prev, compare, { ...step('swap', pair, values, merge), ink: path }] : [...prev, compare])
+      setDrewWithPen(true)
     } else {
-      setSteps(prev => [...prev, step(pen, pair, values)])
-      setMessage(executeStroke(values, pen, pair).label)
+      setSteps(prev => [...prev, { ...step(pen, pair, values), ink: smooth(stroke) }])
     }
+    setReplayKey(k => k + 1)
   }
 
   const hitCompare = e => {
@@ -145,7 +163,7 @@ export default function Merge() {
   }
   const down = (e, at) => {
     e.currentTarget.setPointerCapture(e.pointerId)
-    setTouched(true)
+    setTouched(true); setMessage(null)
     from.current = { x: e.clientX, y: e.clientY, at }
     setDrag({ at, dx: 0, dy: 0 })
   }
@@ -167,28 +185,27 @@ export default function Merge() {
     if (!samePair(compare, swap)) { setMessage('Compare and Swap can only be merged when parameters match.'); return }
     // Dropped on the card itself: the swap goes to the branch the comparison actually took.
     const merge = { id: `merge-${compare.id}`, invert: !bigger(compare), fresh: true }
+    setOpenCards(o => ({ ...o, [merge.id]: true }))
     let next = steps.map((s, k) => (k === compareAt || k === swapAt ? { ...s, merge } : s))
     next = autoMerge(next)
     setSteps(next)
     setPen('cas')
     setPreview(null)
-    const [a, b] = args(compare)
-    setMessage(merge.invert ? `is_bigger(${a},${b}) was False, so the swap goes on the False branch.` : 'Merged. The swap is the True branch; draw with your new pen.')
+    setMessage(null)
   }
   const unmerge = id => {
     const next = steps.map(s => (s.merge?.id === id ? { ...s, merge: undefined } : s))
     setSteps(next)
-    if (!next.some(s => s.merge)) setPen('compare')
+    if (!next.some(s => s.merge)) { setPen('compare'); setDrewWithPen(false) }
     setPreview(null)
     setMessage(null)
   }
   const reset = () => {
-    setSteps(initialSteps()); setPreview(null); setMessage(null); setPen('compare'); setTouched(false)
+    setSteps(initialSteps()); setPreview(null); setMessage(null); setPen('compare'); setTouched(false); setOpenCards({}); setDrewWithPen(false)
   }
 
-  const status = preview !== null
-    ? `Step ${preview + 1} of ${list.length}`
-    : message || (merged ? 'Draw across two numbers with your new pen.' : null)
+  // After a merge, until the reader uses it, point at the new pen.
+  const penHint = merged && !drewWithPen && preview === null && pen === 'cas'
 
   return (
     <Window className="smw-merge">
@@ -207,24 +224,47 @@ export default function Merge() {
       <div className="smw-instances">
         {list.map((card, i) => {
           const s = card.kind === 'cas' ? card.compare : card.step
+          const active = preview === i || preview === null && i === list.length - 1
+          const select = () => { setPreview(i); setReplayKey(k => k + 1) }
+          // As in SketchMind's step strip: an expanded compare_and_swap card shows its
+          // compare and swap as two thumbnails wrapped together; a folded one shows one.
+          if (card.kind === 'cas' && (openCards[s.merge.id] ?? false)) {
+            return (
+              <button key={s.id} type="button" className={`smw-thumb-group ${active ? 'on' : ''}`} onClick={select}>
+                <span className="label"><i />Cmp &amp; Swp</span>
+                <StepThumb values={card.compare.after} pair={s.pair} color={TOOL.compare} active={active && !card.swap} />
+                {card.swap && <StepThumb values={card.swap.after} pair={s.pair} color={TOOL.swap} active={active} />}
+              </button>
+            )
+          }
           return (
-            <button key={s.id} type="button" onClick={() => setPreview(i)}>
-              <StepThumb values={card.last.after} pair={s.pair} color={TOOL[card.kind]} active={preview === i || preview === null && i === list.length - 1} />
+            <button key={s.id} type="button" onClick={select}>
+              <StepThumb values={card.last.after} pair={s.pair} color={TOOL[card.kind]} active={active} />
             </button>
           )
         })}
       </div>
       <div className="smw-canvas">
         <svg ref={canvas} viewBox="0 0 500 210" aria-label="Draw across two numbers to add a step" onPointerDown={drawStart} onPointerMove={drawMove} onPointerUp={drawEnd} onPointerCancel={() => { ink.current = null; setLive(null) }}>
-          {shown.map((value, i) => <text key={i} x={slots[i]} y="118" textAnchor="middle" className="smw-digit">{value}</text>)}
+          {digits.map((value, i) => {
+            const moving = focusSwap?.pair.includes(i)
+            const to = moving ? focusSwap.pair.find(j => j !== i) : i
+            return <text key={`${replayKey}-${i}`} x={slots[i]} y="118" textAnchor="middle" className={`smw-digit ${moving ? 'swapping' : ''}`} style={moving ? { '--dx': `${slots[to] - slots[i]}px` } : undefined}>{value}</text>
+          })}
+          {focusInk && <path key={`ink-${replayKey}`} d={focusInk} fill="none" stroke={TOOL[focus.kind]} strokeWidth="3.5" strokeLinecap="round" className="smw-step-ink" />}
           {live && <path d={smooth(live)} fill="none" stroke={TOOL[pen]} strokeWidth="3.5" strokeLinecap="round" />}
         </svg>
+        {/* Under the array: the Try label after a merge, or why a drop did not merge. */}
+        {penHint
+          ? <span className="smw-hint-label smw-hint-inline smw-canvas-note"><b>Try:</b> draw with your new pen</span>
+          : message && <span className="smw-canvas-note smw-drop-note" role="status">{message}</span>}
         {(steps.length > 2 || merged) && <div className="smw-tools"><button type="button" className="smw-icon" onClick={reset} title="Reset" aria-label="Reset"><RotateCcw size={14} /></button></div>}
       </div>
       <div className="smw-panel">
         {list.map(card => {
           if (card.kind === 'cas') {
-            return <CasCard key={card.compare.id} card={card} onUnmerge={() => unmerge(card.compare.merge.id)} />
+            const id = card.compare.merge.id
+            return <CasCard key={card.compare.id} card={card} open={openCards[id] ?? false} onToggle={() => setOpenCards(o => ({ ...o, [id]: !(o[id] ?? false) }))} onUnmerge={() => unmerge(id)} />
           }
           const s = card.step
           const [a, b] = args(s)
@@ -266,10 +306,8 @@ export default function Merge() {
             </Fragment>
           )
         })}
-        <ArrayCard values={shown} labels kind="result" />
       </div>
       </div>
-      {status && <div className="smw-foot"><span className="smw-status" role="status">{status}</span></div>}
     </Window>
   )
 }

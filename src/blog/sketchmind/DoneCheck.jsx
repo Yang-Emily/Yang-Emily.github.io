@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { trackComplete } from '../../analytics'
 import { CheckCircle2 } from 'lucide-react'
-import { PLANS, run, isSorted, firstDisorder, findCounterexamples } from './bubble'
+import { PLANS, run, isSorted, findCounterexamples } from './bubble'
 import { TOOL, Window, Toolbar, PenGroup, PenPill, StepThumb, ArrayCard, ExpandBlock, CasInner } from './ui'
 
 const VERSIONS = ['one', 'two', 'full']
@@ -69,11 +69,14 @@ export default function DoneCheck() {
   const trace = run(shown, steps)
   const result = trace.result
   const toggle = k => setOpen(o => (o === k ? null : k))
-  const bad = firstDisorder(result)
+  // As in SketchMind, red marks the numbers the counterexample changed, wherever the
+  // plan moved them (values are distinct, so each can be found by value).
+  const changedValues = changed.map(i => shown[i])
+  const movedChanged = result.map((v, i) => (changedValues.includes(v) ? i : -1)).filter(i => i >= 0)
 
   const passes = version + 1
   return (
-    <Window hint={HINT}>
+    <Window className="smw-done-check" hint={HINT}>
       <Toolbar right={<EditableExample values={input} shown={shown} changed={changed} onNudge={nudgeAt} />}>
         <PenGroup label="User created">
           <PenPill color={TOOL.cas}>Compare &amp; Swap</PenPill>
@@ -81,7 +84,7 @@ export default function DoneCheck() {
         </PenGroup>
       </Toolbar>
       <div className="smw-body">
-        <div className="smw-instances">
+        <div className="smw-instances smw-pages" aria-label="Inputs">
           <button type="button" onClick={() => setView(0)}>
             <StepThumb values={input} active={view === 0} badge={cx === 'none' ? <CheckCircle2 className="smw-flag ok" size={16} /> : null} />
           </button>
@@ -90,6 +93,24 @@ export default function DoneCheck() {
               <StepThumb values={cx.input} pair={changed.length ? changed : cx.input.map((v, i) => (v !== input[i] ? i : -1))} color={TOOL.bad} active={view === 1} badge={<span className="smw-flag bad">!</span>} />
             </button>
           )}
+        </div>
+        {/* As in SketchMind's sidebar: the left strip holds the inputs (pages), and this
+            one holds the steps run on the selected input, one thumbnail per card. */}
+        <div className="smw-instances smw-steps" aria-label="Steps">
+          {version === 0
+            ? [0, 1, 2].map(i => (
+              <button key={i} type="button" title={`compare_and_swap, i = ${i}`} onClick={() => toggle(i)}>
+                <StepThumb values={trace.states[i + 1]} pair={[i, i + 1]} color={TOOL.cas} active={open === i} />
+              </button>
+            ))
+            : Array.from({ length: passes }, (_, k) => {
+              const first = [0, 3, 5][k], last = first + 3 - k
+              return (
+                <button key={k} type="button" title={`bubble_up, pass ${k + 1}`} onClick={() => toggle(k)}>
+                  <StepThumb values={trace.states[last]} pair={Array.from({ length: 4 - k }, (_, i) => i)} color={TOOL.bubble} active={open === k} />
+                </button>
+              )
+            })}
         </div>
         <div className="smw-panel" style={{ flex: 1 }}>
           {version === 0
@@ -119,7 +140,7 @@ export default function DoneCheck() {
                 </ExpandBlock>
               )
             })}
-          <ArrayCard values={result} labels kind={found && view === 1 ? 'result bad' : 'result'} mark={bad > 0 ? [bad - 1, bad] : []} />
+          <ArrayCard values={result} labels kind={found && view === 1 ? 'result bad' : 'result'} mark={movedChanged} />
         </div>
       </div>
       <div className="smw-foot">

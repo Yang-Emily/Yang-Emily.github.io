@@ -186,7 +186,7 @@ text.sk-hint,.sk-hint text{fill:var(--faint)}
 
 .smw-icon:hover{color:#374151}
 
-.smw-strip{width:118px;flex-shrink:0;border-left:1px solid #f1eef5;background:#fcfbfe;padding:10px 12px;display:flex;flex-direction:column;gap:8px;max-height:236px;overflow-y:auto;scrollbar-width:thin}
+.smw-strip{width:118px;flex-shrink:0;border-left:1px solid #f1eef5;background:#fcfbfe;padding:10px 12px;display:flex;flex-direction:column;gap:8px;max-height:236px;overflow-y:auto}
 
 .smw-thumb{--c: #d6d3dc;position:relative;display:flex;justify-content:space-evenly;align-items:center;height:58px;border:1.5px dashed color-mix(in srgb,var(--c) 35%,#fff);border-radius:10px;background:#fff;font-family:Schoolbell,cursive;font-size:21px;color:#111;flex-shrink:0;animation:sk-in .3s ease}
 
@@ -963,3 +963,46 @@ text.sk-hint,.sk-hint text{fill:var(--faint)}
 @media (max-width: 760px) {
   .sk-instructor-note { grid-column: 1; grid-row: 3; margin-top: 18px; }
 }
+/* Strokes demo: the selected step's ink fades in, then a swap moves its two numbers. */
+.smw-step-ink{opacity:.75;animation:smw-step-ink .3s ease-out}
+@keyframes smw-step-ink{from{opacity:0}to{opacity:.75}}
+.smw-digit.swapping{animation:smw-digit-swap .5s cubic-bezier(.4,0,.2,1) .25s both}
+@keyframes smw-digit-swap{from{transform:translateX(0)}to{transform:translateX(var(--dx))}}
+@media (prefers-reduced-motion: reduce){.smw-digit.swapping{animation-duration:.01s;animation-delay:0s}.smw-step-ink{animation:none}}
+.smw-cas-actions{display:flex;align-items:center;gap:6px}
+.smw-pen-hint{margin:0 auto}
+@media (max-width: 560px){.smw-pen-hint{white-space:normal;text-align:center}}
+.smw-step-card{cursor:pointer;border-radius:16px}
+.smw-step-card:focus-visible{outline:2px solid #8a2be2;outline-offset:3px}
+.smw-canvas>.smw-canvas-note{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:4;pointer-events:none;max-width:calc(100% - 24px);width:max-content;text-align:center;white-space:normal}
+.smw-drop-note{font:15px/1.3 'Patrick Hand',cursive;color:#bc665e}
+@media (max-width: 560px){.smw-canvas>.smw-canvas-note{bottom:8px;font-size:14px}}
+/* Step cards as in SketchMind: a grey data card first; the selected card darkens its border. */
+.smw-block.data{background:#f9fafb;border-color:#d1d5db}
+.smw-block.data code{color:#1f2937}
+.smw-step-card:hover .smw-block.data{border-color:#9ca3af}
+.smw-step-card:hover .smw-block.cmp{border-color:#c99b5a}
+.smw-step-card:hover .smw-block.swp{border-color:#d8b4fe}
+.smw-step-card .smw-block.data.active{border-color:#6b7280}
+.smw-step-card .smw-block.cmp.active{border-color:#bc7d35}
+.smw-step-card .smw-block.swp.active{border-color:#a855f7}
+/* Code inside demo cards is part of the card, so it keeps the card's cursor. */
+.sk-post .smw code{cursor:inherit}
+/* Merge: an expanded compare_and_swap wraps its two step thumbnails, as in SketchMind. */
+.smw-thumb-group{display:flex;flex-direction:column;align-items:center;gap:6px;width:100%;padding:6px 5px 7px;border-radius:12px;background:#eef2ff;transition:box-shadow .15s}
+.smw-thumb-group.on{box-shadow:0 1px 3px #0000001a}
+.smw-thumb-group .label{align-self:flex-start;display:flex;align-items:center;gap:4px;padding:0 2px;font:700 9px/1.2 Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#6366f1;white-space:nowrap}
+.smw-thumb-group .label i{width:5px;height:5px;border-radius:50%;background:#6366f1}
+/* Thumbnail columns scroll without a visible bar, like SketchMind's no-scrollbar strips. */
+.smw-instances,.smw-strip{scrollbar-width:none;-ms-overflow-style:none}
+.smw-instances::-webkit-scrollbar,.smw-strip::-webkit-scrollbar{display:none}
+/* DoneCheck has both SketchMind strips: inputs (grey, like InstanceStrip) and steps. */
+.smw-instances.smw-pages{width:96px;background:#f9f9fb}
+.smw-instances.smw-steps{width:104px}
+@media (max-width: 560px){
+  .smw-done-check>.smw-body{flex-wrap:wrap}
+  .smw-done-check .smw-instances.smw-pages,.smw-done-check .smw-instances.smw-steps{width:auto;flex:1 1 0;border-bottom:1px solid #f1eef5}
+  .smw-done-check>.smw-body>.smw-panel{flex:1 1 100%!important}
+}
+.smw-sketch-thumb{padding:4px 6px}
+.smw-sketch-thumb svg{display:block;width:100%;height:100%}
