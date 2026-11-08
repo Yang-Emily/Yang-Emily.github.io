@@ -264,13 +264,13 @@ export default function CatGarden({ onOpenKnit, onOpenCode }) {
         <img src={`${import.meta.env.BASE_URL}trial/pixel-cat-icon.png`} alt="" width="94" height="94"/>
         <span><b>Pixel knotting</b></span>
       </a>
-      {onOpenCode && <a className="garden-knit-card garden-code-card" href="#/trial/ProgrammingWithKnots" aria-label="Open Programming with knots">
+      {onOpenCode && <a className="garden-knit-card garden-code-card" href="#/trial/ProgrammingWithKnots" aria-label="Open Programming Threads">
         <span className="garden-photo-clip" aria-hidden="true"/>
         <svg className="garden-code-photo" viewBox="0 0 105 98" aria-hidden="true">
           <text x="8" y="17" fontFamily="ui-monospace, Menlo, monospace" fontSize="9.5" fill="#8a6d55">pixel(x, y)</text>
           {HEART.map((line, y) => line.map((on, x) => <circle key={`${x}-${y}`} cx={17 + x * 5} cy={30 + y * 5} r="2.1" fill={on ? '#c54e45' : '#e6d9c2'}/>))}
         </svg>
-        <span><b>Programming with knots</b></span>
+        <span><b>Programming Threads</b></span>
       </a>}
     </div>}
     <div className="garden-mail">

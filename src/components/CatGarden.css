@@ -281,11 +281,11 @@
 
 /* With two photos on the string, they share it. */
 .trial-page .garden-photo-line .garden-knit-card:has(~ .garden-code-card) { left: 30%; }
-.trial-page .garden-photo-line .garden-code-card { left: 56%; animation-delay: -3.2s; }
+.trial-page .garden-photo-line .garden-code-card { left: 51%; animation-delay: -3.2s; }
 .garden-code-photo { display: block; width: 105px; height: 98px; background: #f3e5cf; border: 1px solid #e9d9bf; }
 @media(max-width:600px) {
   .trial-page .garden-photo-line .garden-knit-card:has(~ .garden-code-card) { left: 12%; }
-  .trial-page .garden-photo-line .garden-code-card { left: 56%; }
+  .trial-page .garden-photo-line .garden-code-card { left: 51%; }
   .garden-code-photo { width: 84px; height: 80px; }
 }
 

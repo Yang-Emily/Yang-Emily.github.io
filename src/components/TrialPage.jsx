@@ -7,7 +7,7 @@ export default function TrialPage({ demo = null }) {
   if (demo) return <main className="trial-page trial-demo-page">
     <nav className="trial-demo-nav" aria-label="Trial navigation">
       <a className="trial-demo-back" href={TRIAL_ROUTES.garden}>← Back to the garden</a>
-      <a href={demo === 'code' ? TRIAL_ROUTES.weave : TRIAL_ROUTES.code}>{demo === 'code' ? 'Weave Camellia →' : 'Programming with knots →'}</a>
+      <a href={demo === 'code' ? TRIAL_ROUTES.weave : TRIAL_ROUTES.code}>{demo === 'code' ? 'Weave Camellia →' : 'Programming Threads →'}</a>
     </nav>
     {demo === 'code' ? <CodeWeaving/> : <CatWeaving/>}
   </main>

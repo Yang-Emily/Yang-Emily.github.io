@@ -148,7 +148,7 @@ export default function CodeWeaving() {
       <div className="cw-pattern-dialog-heading"><h2 id="cd-pattern-title">Design chart</h2><button type="button" onClick={() => patternDialog.current?.close()}>Close ×</button></div>
       {chart && state && <div className="cw-pattern-large"><Pattern chart={chart} names={chart.names} state={state} seek={t => inspectKnot(Math.floor((t - SETUP) / KNOT_TIME))} onInspect={inspectKnot}/></div>}
     </dialog>
-    <header className="pk-head"><p className="pk-kicker">write a move, watch a knot</p><h1 id="pixel-knot-title">Programming with knots</h1></header>
+    <header className="pk-head"><p className="pk-kicker">write a move, watch a knot</p><h1 id="pixel-knot-title">Programming Threads</h1></header>
     <div className="cd-layout">
       <section className="cd-code" aria-labelledby="cd-code-title">
         <div className="pk-label"><h2 id="cd-code-title">Your weaving program</h2></div>
