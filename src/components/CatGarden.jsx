@@ -12,7 +12,13 @@ const scenes = [
   { id: 'night', icon: '☾', name: 'Moonlight', colors: ['#efcb79', '#b4a2ed', '#e7c4e0'] },
 ]
 
-export default function CatGarden({ onOpenKnit }) {
+// The second photo on the string: a small heart chart under the line of code that drew it.
+const HEART = Array.from({ length: 13 }, (_, y) => Array.from({ length: 15 }, (_, x) => {
+  const u = (x - 7) / 6, v = 1.25 - y * 0.19
+  return (u * u + v * v - 1) ** 3 - u * u * v ** 3 < 0
+}))
+
+export default function CatGarden({ onOpenKnit, onOpenCode }) {
   const needs = useRef(null)
   if (!needs.current) needs.current = createCamelliaNeeds()
   const [stats, setStats] = useState(() => needs.current.snapshot())
@@ -210,7 +216,7 @@ export default function CatGarden({ onOpenKnit }) {
         <defs><radialGradient id="garden-lamp-warmth"><stop stopColor="#ffe5a3" stopOpacity=".65"/><stop offset="1" stopColor="#f6c677" stopOpacity="0"/></radialGradient></defs>
         <path d="M5 16 Q450 111 895 16" stroke="#a08a68" strokeWidth="1.8"/>
         <circle cx="5" cy="16" r="3" fill="#b6a58b"/><circle cx="895" cy="16" r="3" fill="#b6a58b"/>
-        {[.05,.14,.23,.32,.4,.59,.68,.77,.86,.95].map((u,i) => <g key={u} transform={`translate(${5 + 890*u} ${16 + 190*u*(1-u)})`}>
+        {(onOpenCode ? [.05,.13,.21,.28,.505,.74,.82,.9,.97] : [.05,.14,.23,.32,.4,.59,.68,.77,.86,.95]).map((u,i) => <g key={u} transform={`translate(${5 + 890*u} ${16 + 190*u*(1-u)})`}>
           <path d="M0 0 V9" stroke="#94856e" strokeWidth="1.3"/>
           <circle className="garden-lamp-halo" cy="13" r="24" fill="url(#garden-lamp-warmth)"/>
           <ellipse className="garden-fairy-light" cx="0" cy="13" rx="3.5" ry="5" fill={i % 3 ? '#f4d69a' : '#e7bd9d'} style={{ animationDelay: `${i*.6}s` }}/>
@@ -252,12 +258,20 @@ export default function CatGarden({ onOpenKnit }) {
           <rect x="-3" y="14" width="6" height="17" rx="1" fill="#b6a17e"/>
         </g>
       </svg>
-      <button type="button" className="garden-knit-card" onClick={onOpenKnit} aria-haspopup="dialog" aria-label="Open Camellia pixel knotting">
+      <a className="garden-knit-card" href="#/trial/WeaveCamellia" aria-label="Open Camellia pixel knotting">
         <span className="garden-photo-clip" aria-hidden="true"/>
         <svg className="garden-photo-bow" viewBox="0 0 48 27" fill="none" aria-hidden="true"><path d="M23 13C8-7 0 9 7 15c5 4 11 0 16-2Zm2 0C40-7 48 9 41 15c-5 4-11 0-16-2Z" fill="#c79b8a" stroke="#af806f"/><path d="m22 13-9 12 8-2 3-9 4 10 7 2-10-13" fill="#c79b8a"/><ellipse cx="24" cy="13" rx="4" ry="4" fill="#d8b09a"/></svg>
         <img src={`${import.meta.env.BASE_URL}trial/pixel-cat-icon.png`} alt="" width="94" height="94"/>
         <span><b>Pixel knotting</b></span>
-      </button>
+      </a>
+      {onOpenCode && <a className="garden-knit-card garden-code-card" href="#/trial/ProgrammingWithKnots" aria-label="Open Programming with knots">
+        <span className="garden-photo-clip" aria-hidden="true"/>
+        <svg className="garden-code-photo" viewBox="0 0 105 98" aria-hidden="true">
+          <text x="8" y="17" fontFamily="ui-monospace, Menlo, monospace" fontSize="9.5" fill="#8a6d55">pixel(x, y)</text>
+          {HEART.map((line, y) => line.map((on, x) => <circle key={`${x}-${y}`} cx={17 + x * 5} cy={30 + y * 5} r="2.1" fill={on ? '#c54e45' : '#e6d9c2'}/>))}
+        </svg>
+        <span><b>Programming with knots</b></span>
+      </a>}
     </div>}
     <div className="garden-mail">
       <button ref={envelopeRef} className="garden-envelope" type="button" aria-expanded={letterOpen} aria-controls="witch-letter" aria-label={letterOpen ? 'Close the witch’s letter' : 'Open the witch’s letter'} onClick={() => setLetterOpen(value => !value)}>

@@ -13,7 +13,7 @@ const posX = (c, chart) => 180 + c * 196 / Math.max(1, chart.W - 1)
 const posY = (r, chart) => 105 + r * Math.min(10, 150 / Math.max(1, chart.H - 1))
 function Yarn({ d, color, width = 3 }) { return <g fill="none" strokeLinecap="round"><path d={d} stroke="#51403444" strokeWidth={width + 1.3}/><path d={d} stroke={color} strokeWidth={width}/><path d={d} stroke="#fff8" strokeWidth=".65" strokeDasharray="2 3"/></g> }
 function Stitch({ r, c, color, chart, amount = 1 }) { return <g opacity={amount} transform={`translate(${posX(c, chart)} ${posY(r, chart)}) scale(${amount * Math.min(1, 15 / chart.W)} ${amount * Math.min(1, 16 / chart.H)})`}><rect x="-6.6" y="-4.6" width="13.2" height="9.2" rx="3.7" fill={color} stroke="#55443555" strokeWidth=".65"/><path d="M-4 -2 L3 1 M-3 1 L3 3" stroke="#fff6" strokeWidth="1.1"/></g> }
-function Pattern({ state, seek, small = false, chart: CAT, names, interactive = true, viewport, onInspect }) {
+export function Pattern({ state, seek, small = false, chart: CAT, names, interactive = true, viewport, onInspect }) {
   return <svg viewBox={viewport ?? `0 0 ${CAT.W * 10 + 20} ${CAT.H * 10 + 20}`} className={small ? 'cw-mini-chart' : 'cw-pattern'} role="img" aria-label="Knot chart. Select a circle to inspect its knot." onPointerMove={onInspect ? e => {
     if (e.pointerType === 'touch') return
     const svg = e.currentTarget, matrix = svg.getScreenCTM()
@@ -34,7 +34,7 @@ function Pattern({ state, seek, small = false, chart: CAT, names, interactive = 
     }))}
   </svg>
 }
-function PatternPreview({ chart, state, names, onOpen, custom, onInspect }) {
+export function PatternPreview({ chart, state, names, onOpen, custom, onInspect }) {
   const [lens, setLens] = useState(null)
   const inspect = e => {
     if (e.pointerType === 'touch') return
@@ -47,7 +47,7 @@ function PatternPreview({ chart, state, names, onOpen, custom, onInspect }) {
     setLens({ x, y, left: Math.max(8, Math.min(window.innerWidth - 140, e.clientX + 18)), top: Math.max(8, Math.min(window.innerHeight - 140, e.clientY + 18)) })
   }
   return <div className="cw-detail-pattern" aria-label="Pattern preview">
-    <span>{custom ? 'Photo pattern' : 'Camellia pattern'} · Row {state.row + 1} / Col {state.col + 1} {state.row % 2 ? '←' : '→'}</span>
+    <span>{custom ? 'Your pattern' : 'Camellia pattern'} · Row {state.row + 1} / Col {state.col + 1} {state.row % 2 ? '←' : '→'}</span>
     <button type="button" className="cw-pattern-preview" aria-label="Enlarge the full pattern" onPointerMove={inspect} onPointerLeave={() => setLens(null)} onBlur={() => setLens(null)} onClick={() => { setLens(null); onOpen() }}>
       <Pattern chart={chart} names={names} state={state} interactive={false}/>
     </button>
@@ -55,11 +55,54 @@ function PatternPreview({ chart, state, names, onOpen, custom, onInspect }) {
   </div>
 }
 
-function WeavingPlayer({ chart: CAT, custom, title, children }) {
+export function WholePiece({ chart: CAT, time, compact = false }) {
+  const TOTAL_KNOTS = CAT.W * CAT.H
+  const fringeY = compact ? posY(CAT.H - 1, CAT) + 24 : 282
+  const state = simulationAt(time, CAT)
+  const X = c => posX(c, CAT), Y = r => posY(r, CAT)
+  const dir = state.row % 2 ? -1 : 1
+  const x = X(state.col), y = Y(state.row)
+  const half = state.p < .55 ? (state.p - .15) / .4 : (state.p - .55) / .4
+  const tight = ease((half - .65) / .35)
+  const handX = x + dir * (48 + tight * 38), handY = y + 74 - tight * 80
+  const setup = ease(time / SETUP)
+  const finishing = state.phase === 'finish' || state.phase === 'done'
+  const finish = finishing ? ease((time - SETUP - TOTAL_KNOTS * KNOT_TIME) / 6) : 0
+  const color = CAT.palette[state.color]
+  return (
+
+<div className="cw-stage cw-overview-stage">
+          <svg viewBox={compact ? `145 40 270 ${Math.max(145, fringeY - 10)}` : '110 30 340 400'} role="img" aria-label={`${state.title}, ${state.count} knots completed`}>
+            <defs><HandsShadow/><linearGradient id="cw-mat" x2="1" y2="1"><stop stopColor="#e8d3cc"/><stop offset="1" stopColor="#ccb0a9"/></linearGradient><linearGradient id="cw-metal" x2="0" y2="1"><stop stopColor="#78837e"/><stop offset=".3" stopColor="#f8faf2"/><stop offset=".6" stopColor="#939f99"/><stop offset="1" stopColor="#d7ddd4"/></linearGradient></defs>
+            <rect width="560" height="480" rx="12" fill="url(#cw-mat)"/>
+            {Array.from({ length: 35 }, (_, i) => <path key={i} d={`M0 ${i * 15} H560`} stroke="#fff" strokeOpacity=".05"/>)}
+            <g opacity={setup}>
+              {Array.from({ length: CAT.W }, (_, c) => <Yarn key={c} color="#eee9db" d={`M${X(c)} 88 L${X(c)} ${finishing ? 275 : 300} Q${X(c)} 370 ${X(c) + (c - 7) * (2 + finish * 2)} ${470 - finish * 80}`}/>)}
+              {CAT.palette.map((co, i) => <Yarn key={co} color={co} d={`M180 ${100 + i * 3} C${70 + i * 8} 160 ${120 - i * 12} 210 ${30 + i * 13} 330`}/>)}
+              {CAT.grid.map((line, r) => line.map((c, col) => knotIndex(r, col, CAT) < state.count ? <Stitch chart={CAT} key={`${r}-${col}`} r={r} c={col} color={CAT.palette[c]}/> : null))}
+            </g>
+            {state.phase === 'knot' && <>
+              {state.change && <Yarn d={`M${x} ${y} Q${x + 55} ${y + 42} 507 320`} color={CAT.palette[state.oldColor]}/>}
+              <Yarn d={`M${x - dir * 14} ${y - 6} Q${x - dir * 30} ${y + 22} ${x} ${y + 30 * (1 - tight)} C${x + dir * 40 * (1 - tight)} ${y + 74 * (1 - tight)} ${x - dir * 44 * (1 - tight)} ${y + 62 * (1 - tight)} ${x} ${y + 30 * (1 - tight)} Q${handX} ${handY + 14} ${handX} ${handY}`} color={color}/>
+              {state.p > .45 && <Stitch chart={CAT} r={state.row} c={state.col} color={color} amount={state.p < .85 ? .55 : .55 + ease((state.p - .85) / .15) * .45}/>}
+
+            </>}
+            {state.phase === 'knot' && <rect x={x - 8} y={y - 6} width="16" height="12" rx="3" fill="none" stroke="#bf6d49" strokeWidth="1.5"/>}
+            {finishing && <>
+              {[0, 1, 2, 3, 4].map(i => <g key={i} opacity={finish} transform={`translate(${194 + i * 42} ${fringeY})`}><ellipse rx="13" ry="6" fill="#eae5d6" stroke="#b3a68f"/><path d="M-7 -2 L7 2" stroke="#fff"/></g>)}
+            </>}
+            <g transform={`translate(0 ${-finish * 110})`}><path d="M248 55 V33 C248 2 310 2 310 33 V55" fill="none" stroke="#a2aaa3" strokeWidth="6"/><rect x="157" y="54" width="246" height="37" rx="6" fill="url(#cw-metal)" stroke="#7b857e"/><path d="M164 80 H396" stroke="#6c766e" strokeWidth="4"/></g>
+            <text x="22" y="29" fill="#725e54" fontSize="11" letterSpacing="2">CAMELLIA / ALPHA WEAVING</text>
+          </svg>
+          <div className="cw-caption"><span>{state.phase === 'setup' ? 'Setup' : finishing ? 'Finishing' : `Row ${state.row + 1} · String ${state.col + 1}`}</span><strong>{state.title}</strong></div>
+        </div>
+  )
+}
+
+export function WeavingPlayer({ chart: CAT, custom, title, heading, names: givenNames, children }) {
   const TOTAL_KNOTS = CAT.W * CAT.H
   const DURATION = SETUP + TOTAL_KNOTS * KNOT_TIME + FINISH
-  const names = custom ? CAT.palette.map((_, i) => `Thread ${i + 1}`) : sampleNames
-  const X = c => posX(c, CAT), Y = r => posY(r, CAT)
+  const names = givenNames ?? (custom ? CAT.palette.map((_, i) => `Thread ${i + 1}`) : sampleNames)
   const [time, setTime] = useState(0)
   const [playing, setPlaying] = useState(false)
   const [speed, setSpeed] = useState(1)
@@ -100,49 +143,16 @@ function WeavingPlayer({ chart: CAT, custom, title, children }) {
   }, [playing, speed, DURATION, teaching, breakpoints])
   useEffect(() => { if (time >= DURATION) { setPlaying(false) } }, [time, DURATION])
   const seek = t => { setPlaying(false); setTime(Math.max(0, Math.min(DURATION, t))) }
-  const dir = state.row % 2 ? -1 : 1
-  const x = X(state.col), y = Y(state.row)
-  const half = state.p < .55 ? (state.p - .15) / .4 : (state.p - .55) / .4
-  const tight = ease((half - .65) / .35)
-  const handX = x + dir * (48 + tight * 38), handY = y + 74 - tight * 80
-  const setup = ease(time / SETUP)
-  const finishing = state.phase === 'finish' || state.phase === 'done'
-  const finish = finishing ? ease((time - SETUP - TOTAL_KNOTS * KNOT_TIME) / 6) : 0
   const color = CAT.palette[state.color]
-  const overview = (
-<div className="cw-stage cw-overview-stage">
-          <svg viewBox="110 30 340 400" role="img" aria-label={`${state.title}, ${state.count} knots completed`}>
-            <defs><HandsShadow/><linearGradient id="cw-mat" x2="1" y2="1"><stop stopColor="#e8d3cc"/><stop offset="1" stopColor="#ccb0a9"/></linearGradient><linearGradient id="cw-metal" x2="0" y2="1"><stop stopColor="#78837e"/><stop offset=".3" stopColor="#f8faf2"/><stop offset=".6" stopColor="#939f99"/><stop offset="1" stopColor="#d7ddd4"/></linearGradient></defs>
-            <rect width="560" height="480" rx="12" fill="url(#cw-mat)"/>
-            {Array.from({ length: 35 }, (_, i) => <path key={i} d={`M0 ${i * 15} H560`} stroke="#fff" strokeOpacity=".05"/>)}
-            <g opacity={setup}>
-              {Array.from({ length: CAT.W }, (_, c) => <Yarn key={c} color="#eee9db" d={`M${X(c)} 88 L${X(c)} ${finishing ? 275 : 300} Q${X(c)} 370 ${X(c) + (c - 7) * (2 + finish * 2)} ${470 - finish * 80}`}/>)}
-              {CAT.palette.map((co, i) => <Yarn key={co} color={co} d={`M180 ${100 + i * 3} C${70 + i * 8} 160 ${120 - i * 12} 210 ${30 + i * 13} 330`}/>)}
-              {CAT.grid.map((line, r) => line.map((c, col) => knotIndex(r, col, CAT) < state.count ? <Stitch chart={CAT} key={`${r}-${col}`} r={r} c={col} color={CAT.palette[c]}/> : null))}
-            </g>
-            {state.phase === 'knot' && <>
-              {state.change && <Yarn d={`M${x} ${y} Q${x + 55} ${y + 42} 507 320`} color={CAT.palette[state.oldColor]}/>}
-              <Yarn d={`M${x - dir * 14} ${y - 6} Q${x - dir * 30} ${y + 22} ${x} ${y + 30 * (1 - tight)} C${x + dir * 40 * (1 - tight)} ${y + 74 * (1 - tight)} ${x - dir * 44 * (1 - tight)} ${y + 62 * (1 - tight)} ${x} ${y + 30 * (1 - tight)} Q${handX} ${handY + 14} ${handX} ${handY}`} color={color}/>
-              {state.p > .45 && <Stitch chart={CAT} r={state.row} c={state.col} color={color} amount={state.p < .85 ? .55 : .55 + ease((state.p - .85) / .15) * .45}/>}
-              
-            </>}
-            {finishing && <>
-              {[0, 1, 2, 3, 4].map(i => <g key={i} opacity={finish} transform={`translate(${194 + i * 42} 282)`}><ellipse rx="13" ry="6" fill="#eae5d6" stroke="#b3a68f"/><path d="M-7 -2 L7 2" stroke="#fff"/></g>)}
-            </>}
-            <g transform={`translate(0 ${-finish * 110})`}><path d="M248 55 V33 C248 2 310 2 310 33 V55" fill="none" stroke="#a2aaa3" strokeWidth="6"/><rect x="157" y="54" width="246" height="37" rx="6" fill="url(#cw-metal)" stroke="#7b857e"/><path d="M164 80 H396" stroke="#6c766e" strokeWidth="4"/></g>
-            <text x="22" y="29" fill="#725e54" fontSize="11" letterSpacing="2">CAMELLIA / ALPHA WEAVING</text>
-          </svg>
-          <div className="cw-caption"><span>{state.phase === 'setup' ? 'Setup' : finishing ? 'Finishing' : `Row ${state.row + 1} · String ${state.col + 1}`}</span><strong>{state.title}</strong></div>
-        </div>
-  )
+  const overview = <WholePiece chart={CAT} time={time}/>
   const patternInset = <PatternPreview chart={CAT} state={state} names={names} custom={custom} onInspect={k => seek(SETUP + k * KNOT_TIME + .0001)} onOpen={() => { setPlaying(false); patternDialog.current?.showModal() }}/>
   return <div className="pixel-knot cw" lang="en">
     <dialog ref={patternDialog} className="cw-pattern-dialog" aria-labelledby="cw-pattern-title" onClick={e => { if (e.target === e.currentTarget) e.currentTarget.close() }}>
-      <div className="cw-pattern-dialog-heading"><h2 id="cw-pattern-title">{custom ? 'Photo knot chart' : 'Camellia knot chart'}</h2><button type="button" onClick={() => patternDialog.current?.close()}>Close ×</button></div>
+      <div className="cw-pattern-dialog-heading"><h2 id="cw-pattern-title">{custom ? 'Your knot chart' : 'Camellia knot chart'}</h2><button type="button" onClick={() => patternDialog.current?.close()}>Close ×</button></div>
       <p>Row {state.row + 1} · String {state.col + 1} · Select a circle to inspect its knot</p>
       <div className="cw-pattern-large"><Pattern chart={CAT} names={names} state={state} seek={seek} onInspect={k => { if (state.phase !== 'knot' || k !== state.index) seek(SETUP + k * KNOT_TIME + .0001) }}/></div>
     </dialog>
-    <header className="pk-head"><p className="pk-kicker">a little knot at a time</p><h1 id="pixel-knot-title">{custom ? 'Weave your photo in pixels' : 'Weave Camellia'}</h1><p className="pk-lead">{CAT.W} base strings · {CAT.palette.length} colors · {TOTAL_KNOTS} knots. {title}, from setup to finishing.</p></header>
+    <header className="pk-head"><p className="pk-kicker">a little knot at a time</p><h1 id="pixel-knot-title">{heading ?? (custom ? 'Weave your photo in pixels' : 'Weave Camellia')}</h1><p className="pk-lead">{CAT.W} base strings · {CAT.palette.length} colors · {TOTAL_KNOTS} knots. {title}, from setup to finishing.</p></header>
 <div className="cw-view-options"><span>Knot close-up</span><label><input type="checkbox" checked={hands} onChange={e => setHands(e.target.checked)}/>Show hands (translucent)</label></div>
     <div className="cw-layout">
       <div className="cw-main">

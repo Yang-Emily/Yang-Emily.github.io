@@ -15,20 +15,24 @@ export function moveText(move, backward) {
   const swap = text => backward ? text.replaceAll('left', '§').replaceAll('right', 'left').replaceAll('§', 'right').replaceAll('figure-4', 'mirrored figure-4') : text
   return { ...move, hold: swap(move.hold), work: swap(move.work), check: swap(move.check) }
 }
-export default function WeavingDetail({ state, color, oldColor, names, hands, onMove, patternInset }) {
+export default function WeavingDetail({ state, color, oldColor, names, hands, patternInset, wholeInset }) {
   const n = moveAt(state.p), move = moveText(MOVES[Math.max(0, n)], state.row % 2 === 1)
   const second = n >= 5, cross = n >= 1, behind = n === 2 || n === 3 || n === 6, through = n === 3 || n === 6
   const pull = n === 4 || n === 7
   const start = MOVES[n]?.at ?? 0, end = MOVES[n + 1]?.at ?? 1
   const f = Math.min(1, Math.max(0, (state.p - start) / (end - start)))
-  const y = pull ? 230 - f * 100 : 230
-  const tx = pull ? 364 + f * 25 : through ? 158 - f * 35 : behind ? 338 - f * 120 : 126 + f * 224
-  const ty = pull ? 252 - f * 132 : through ? 232 - f * 27 : behind ? 265 : 242
+  // Continuous fingertip positions across the whole double knot, including phase boundaries.
+  const smooth = f * f * (3 - 2 * f)
+  const interpolate = values => values[n] + (values[n + 1] - values[n]) * smooth
+  const tx = interpolate([126, 152, 350, 205, 165, 389, 350, 165, 389])
+  const ty = interpolate([242, 260, 243, 265, 205, 120, 243, 205, 120])
+  const y = interpolate([230, 230, 230, 230, 230, 130, 230, 230, 130])
   const yarn = (d, dashed = false, c = color) => <g fill="none" strokeLinecap="round"><path d={d} stroke="#463a2c66" strokeWidth="10" strokeDasharray={dashed ? '5 10' : undefined}/><path d={d} stroke={c} strokeWidth="7" strokeDasharray={dashed ? '5 10' : undefined}/><path d={d} stroke="#ffffff70" strokeWidth="1.5" strokeDasharray="2 5"/></g>
   return <div className="wd">
     <div className="wd-heading"><span>Close-up · Row {state.row + 1} / String {state.col + 1}</span><b>{state.row % 2 ? '← Backward knot' : 'Forward knot →'}</b></div>
     <div className="wd-canvas">
     {patternInset}
+    {wholeInset}
     <svg viewBox="0 0 560 420" role="img" aria-label={move.title}>
       <defs><marker id="wd-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10" fill="none" stroke="#446c75" strokeWidth="2"/></marker></defs>
       <rect width="560" height="420" fill="#ece2d5"/>
@@ -56,8 +60,8 @@ export default function WeavingDetail({ state, color, oldColor, names, hands, on
       <g fontSize="11" fontFamily="system-ui" fill="#5c5344"><rect x="20" y="20" width="174" height="53" rx="7" fill="#fffaf0"/><text x="32" y="41">Beige = base string</text><text x="32" y="60">Color = working thread</text><text x="22" y="392">↓ Keep the base string taut</text><text x="310" y="392">Dashes = behind the base string</text></g>
     </svg>
     </div>
-    <div className="wd-steps">{MOVES.map((m,i) => <button key={m.at} className={i === n ? 'on' : ''} onClick={() => onMove(m.at)} aria-label={m.title}>{i+1}</button>)}</div>
-    <h3>{move.title}</h3>
+
+    <h3>{move.title.replace(/^\d+\. /, '')}</h3>
     <dl><dt>{state.row % 2 ? 'Right hand · hold the base string' : 'Left hand · hold the base string'}</dt><dd>{move.hold}</dd><dt>{state.row % 2 ? 'Left hand · move the working thread' : 'Right hand · move the working thread'}</dt><dd>{move.work}</dd><dt>Check before moving on</dt><dd>{move.check}</dd></dl>
     {state.change && <p className="wd-change">Change color: {names[state.oldColor]} → {names[state.color]}. Place the old thread behind the work and hold the new thread tail. Tie two half-hitches with the new color. This shows a basic color change; the extra passes for a flat color change are not shown.</p>}
   </div>

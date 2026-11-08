@@ -278,3 +278,21 @@
 .trial-page .garden-photo-line .garden-knit-card,
 .trial-page .garden-photo-line .garden-knit-card * { cursor: pointer !important; }
 .trial-page .garden-photo-line .garden-knit-card:hover { animation-play-state: paused; }
+
+/* With two photos on the string, they share it. */
+.trial-page .garden-photo-line .garden-knit-card:has(~ .garden-code-card) { left: 30%; }
+.trial-page .garden-photo-line .garden-code-card { left: 56%; animation-delay: -3.2s; }
+.garden-code-photo { display: block; width: 105px; height: 98px; background: #f3e5cf; border: 1px solid #e9d9bf; }
+@media(max-width:600px) {
+  .trial-page .garden-photo-line .garden-knit-card:has(~ .garden-code-card) { left: 12%; }
+  .trial-page .garden-photo-line .garden-code-card { left: 56%; }
+  .garden-code-photo { width: 84px; height: 80px; }
+}
+
+.trial-demo-page { min-height: calc(100svh - 80px); padding-top: 88px; background: #fbf8f1; }
+.trial-demo-nav { max-width: 1012px; margin: 0 auto; padding: 0 0 8px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.trial-demo-nav a { color: #8b795f; font: 13px/1.6 system-ui, sans-serif; text-decoration: none; cursor: pointer; }
+.trial-demo-nav a:hover { color: #66563f; text-decoration: underline; }
+.garden-photo-line a.garden-knit-card { text-decoration: none; }
+@media(max-width:1100px) { .trial-demo-nav { padding: 0 24px 8px; } }
+@media(max-width:600px) { .trial-demo-nav { padding: 0 16px; }.trial-demo-nav a { font-size: 11px; } }

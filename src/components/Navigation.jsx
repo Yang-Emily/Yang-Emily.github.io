@@ -21,7 +21,9 @@ const Navigation = ({ activeSection, currentPage = 'home' }) => {
 
   const scrollToSection = (id) => {
     if (currentPage !== 'home') {
-      if (id !== 'trial') {
+      if (id === 'trial') {
+        window.location.hash = '#/trial'
+      } else {
         if (id !== 'home') sessionStorage.setItem('scrollTo', id)
         window.location.hash = '#/'
       }

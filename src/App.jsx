@@ -5,13 +5,13 @@ import News from './components/News'
 import Publications from './components/Publications'
 import FireworksCursor from './components/FireworksCursor'
 import TrialPage from './components/TrialPage'
+import { resolvePage } from './trialRoutes'
 import SketchMindPost from './blog/sketchmind/SketchMindPost'
 import { initAnalytics, trackPage } from './analytics'
 
-const PAGES = { '#/trial': 'trial', '#/sketchmind': 'sketchmind' }
 
 function App() {
-  const getCurrentPage = () => PAGES[window.location.hash] ?? 'home'
+  const getCurrentPage = () => resolvePage(window.location.hash)
   const [currentPage, setCurrentPage] = useState(getCurrentPage)
   const [activeSection, setActiveSection] = useState(getCurrentPage() === 'home' ? 'home' : getCurrentPage())
 
@@ -58,20 +58,22 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [currentPage])
 
+  const isTrial = ['trial', 'weave-camellia', 'programming-knots'].includes(currentPage)
+
   return (
     <div className="min-h-screen bg-white">
       {/* 烟花特效 (博客页需要在画布上绘制，所以关闭) */}
       {currentPage !== 'sketchmind' && <FireworksCursor />}
-      
+
       {/* 导航栏 */}
-      <Navigation 
-        activeSection={activeSection} 
-        currentPage={currentPage}
+      <Navigation
+        activeSection={isTrial ? 'trial' : activeSection}
+        currentPage={isTrial ? 'trial' : currentPage}
       />
-      
+
       {/* 主要内容 - 单页布局 */}
-      {currentPage === 'trial' ? (
-        <TrialPage />
+      {isTrial ? (
+        <TrialPage demo={currentPage === 'weave-camellia' ? 'weave' : currentPage === 'programming-knots' ? 'code' : null} />
       ) : currentPage === 'sketchmind' ? (
         <SketchMindPost />
       ) : (
@@ -88,7 +90,7 @@ function App() {
                 <div id="news">
                   <News />
                 </div>
-                
+
                 {/* 右侧：Publications */}
                 <div id="publications">
                   <Publications />
@@ -98,7 +100,7 @@ function App() {
           </section>
         </main>
       )}
-      
+
       {/* 页脚 - 紧凑 */}
       <footer className="py-6 text-center text-sm text-gray-600 border-t border-gray-200">
         <p>© 2026 Yang Wu · Last updated: November 2026</p>
