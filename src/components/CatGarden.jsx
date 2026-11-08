@@ -12,7 +12,7 @@ const scenes = [
   { id: 'night', icon: '☾', name: 'Moonlight', colors: ['#efcb79', '#b4a2ed', '#e7c4e0'] },
 ]
 
-export default function CatGarden() {
+export default function CatGarden({ onOpenKnit }) {
   const needs = useRef(null)
   if (!needs.current) needs.current = createCamelliaNeeds()
   const [stats, setStats] = useState(() => needs.current.snapshot())
@@ -205,6 +205,60 @@ export default function CatGarden() {
     <div className="garden-scenes" role="group" aria-label="Choose time of day">
       {scenes.map((item, index) => <button type="button" key={item.id} aria-pressed={sceneIndex === index} onClick={() => setSceneIndex(index)}><span aria-hidden="true">{item.icon}</span>{item.name}</button>)}
     </div>
+    {onOpenKnit && <div className="garden-photo-line">
+      <svg className="garden-holiday-string" viewBox="0 0 900 240" fill="none" aria-hidden="true">
+        <defs><radialGradient id="garden-lamp-warmth"><stop stopColor="#ffe5a3" stopOpacity=".65"/><stop offset="1" stopColor="#f6c677" stopOpacity="0"/></radialGradient></defs>
+        <path d="M5 16 Q450 111 895 16" stroke="#a08a68" strokeWidth="1.8"/>
+        <circle cx="5" cy="16" r="3" fill="#b6a58b"/><circle cx="895" cy="16" r="3" fill="#b6a58b"/>
+        {[.05,.14,.23,.32,.4,.59,.68,.77,.86,.95].map((u,i) => <g key={u} transform={`translate(${5 + 890*u} ${16 + 190*u*(1-u)})`}>
+          <path d="M0 0 V9" stroke="#94856e" strokeWidth="1.3"/>
+          <circle className="garden-lamp-halo" cy="13" r="24" fill="url(#garden-lamp-warmth)"/>
+          <ellipse className="garden-fairy-light" cx="0" cy="13" rx="3.5" ry="5" fill={i % 3 ? '#f4d69a' : '#e7bd9d'} style={{ animationDelay: `${i*.6}s` }}/>
+        </g>)}
+        {[{ x: 36, y: 22, flip: 1 }, { x: 864, y: 23, flip: -1 }].map(({ x, y, flip }) => <g key={x} transform={`translate(${x} ${y}) scale(${flip} 1)`}>
+          <path d="M0 0 Q35 15 82 16" stroke="#8b997b" strokeWidth="2"/>
+          {[10,25,40,55,70].map((v,i) => <g key={v} transform={`translate(${v} ${v*.2})`}><path d="M0 0q-6-17 7-15Q12-4 0 0" fill={i%2 ? '#a6b295' : '#bac4a6'}/><path d="M0 0q4 16 14 10Q14 1 0 0" fill="#a5b291"/></g>)}
+          <circle cx="27" cy="8" r="3.5" fill="#bf8b7e"/><circle cx="33" cy="12" r="3" fill="#ce9d8c"/>
+        </g>)}
+        <g transform="translate(818 32) rotate(-7)">
+          <path d="M0 0 V57" stroke="#b69a75" strokeWidth="1.2"/>
+          <path d="M0 91C-40 69-17 47 0 64C17 47 40 69 0 91Z" fill="#cca196" stroke="#b7847b" strokeWidth="1.5"/>
+          <path d="M0 84C-28 67-15 56 0 71C15 56 28 67 0 84Z" stroke="#f2d8cb" strokeWidth="1" strokeDasharray="2 3"/>
+        </g>
+        <g className="garden-hanging-star" transform="translate(133 40)">
+          <path d="M0 0 V42" stroke="#ae9874" strokeWidth="1.2"/>
+          <path d="m0 35 7 16 18 2-14 12 4 18-15-9-15 9 4-18-14-12 18-2Z" fill="#e7cc92" stroke="#b99d65" strokeWidth="1.4"/>
+          <path d="m0 43 4 13 13 1-10 7 3 12-10-7" stroke="#fff1cb" strokeWidth="1.2"/>
+        </g>
+        <g transform="translate(714 47) rotate(7)">
+          <path d="M0 -5 V46" stroke="#aa9779" strokeWidth="1.2"/>
+          <path d="m0 37-17 24h9l-18 25h15l-18 25h58l-18-25h15L8 61h9Z" fill="#9ca98b" stroke="#78876d" strokeWidth="1.4" strokeLinejoin="round"/>
+          <path d="M-4 112v12h8v-12" fill="#ae8d69"/>
+          <path d="M-13 74q15 11 28 0M-19 95q20 12 39 0" stroke="#e9d3a5" strokeWidth="1.7"/>
+          <circle cx="-8" cy="86" r="2.8" fill="#bd8378"/><circle cx="10" cy="104" r="2.8" fill="#bd8378"/>
+        </g>
+        <g transform="translate(278 57) rotate(-9)">
+          <path d="M0 -5 V26" stroke="#aa9779" strokeWidth="1.2"/>
+          <rect x="-7" y="22" width="14" height="8" rx="2" fill="#b59b72"/>
+          <circle cy="48" r="19" fill="#c89b94" stroke="#a67873" strokeWidth="1.2"/>
+          <path d="M-14 39q14 10 28 0M-17 51q17 10 34 0" stroke="#f8e9d3" strokeWidth="2"/>
+        </g>
+        <g transform="translate(594 61) rotate(8)">
+          <path d="M0 0 V21" stroke="#aa9779" strokeWidth="1.2"/>
+          <rect x="-30" y="21" width="60" height="73" rx="2" fill="#fff9ed" stroke="#d1c2a8"/>
+          <rect x="-24" y="27" width="48" height="48" fill="#e3e7d6"/>
+          <path d="M0 67V35m0 10-9-7m9 16 11-8m-11 15-10-8" stroke="#8c9c79" strokeWidth="2" strokeLinecap="round"/>
+          <circle cx="8" cy="39" r="3" fill="#c48c80"/><path d="M-11 84h22" stroke="#cbbba0"/>
+          <rect x="-3" y="14" width="6" height="17" rx="1" fill="#b6a17e"/>
+        </g>
+      </svg>
+      <button type="button" className="garden-knit-card" onClick={onOpenKnit} aria-haspopup="dialog" aria-label="Open Camellia pixel knotting">
+        <span className="garden-photo-clip" aria-hidden="true"/>
+        <svg className="garden-photo-bow" viewBox="0 0 48 27" fill="none" aria-hidden="true"><path d="M23 13C8-7 0 9 7 15c5 4 11 0 16-2Zm2 0C40-7 48 9 41 15c-5 4-11 0-16-2Z" fill="#c79b8a" stroke="#af806f"/><path d="m22 13-9 12 8-2 3-9 4 10 7 2-10-13" fill="#c79b8a"/><ellipse cx="24" cy="13" rx="4" ry="4" fill="#d8b09a"/></svg>
+        <img src={`${import.meta.env.BASE_URL}trial/pixel-cat-icon.png`} alt="" width="94" height="94"/>
+        <span><b>Pixel knotting</b></span>
+      </button>
+    </div>}
     <div className="garden-mail">
       <button ref={envelopeRef} className="garden-envelope" type="button" aria-expanded={letterOpen} aria-controls="witch-letter" aria-label={letterOpen ? 'Close the witch’s letter' : 'Open the witch’s letter'} onClick={() => setLetterOpen(value => !value)}>
         <svg className="garden-mailbox" viewBox="0 0 160 230" fill="none" aria-hidden="true">
@@ -230,14 +284,14 @@ export default function CatGarden() {
         </svg>
         <span className="sr-only">A note for you</span>
       </button>
-    </div>
       {letterOpen && <div id="witch-letter" className="garden-letter" role="region" aria-label="A letter from the witch" onKeyDown={event => { if (event.key === 'Escape') { setLetterOpen(false); envelopeRef.current?.focus() } }}>
         <button className="letter-close" type="button" aria-label="Close letter" onClick={() => { setLetterOpen(false); envelopeRef.current?.focus() }}>×</button>
         <span className="letter-mark" aria-hidden="true">✧</span>
         <h2>The witch is away for now.</h2>
-        <p>Hi dear friend,<br />I’ve stepped out for a little while.<br />Please feel free to wander around,<br />and keep Camellia company.<br />I’ll be back with more magic soon.</p>
+        <p>Hi dear friend,<br />I’ve stepped out for a little while. Please feel free to wander around and keep Camellia company. I’ll be back with more magic soon.</p>
         <p className="letter-signature">With a little magic ♡</p>
       </div>}
+    </div>
     <div ref={stageRef} className="garden-stage" role="application" tabIndex={0}
       aria-label={`${scene.name}. Camellia plays independently on the lawn. Move the pointer or use arrow keys to explore; the pond cursor becomes a fish. Click, press Enter or Space for a magic burst.`}
       aria-describedby="garden-instructions"

@@ -54,11 +54,11 @@
 .garden-envelope:is(:hover, :focus-visible, [aria-expanded='true']) .mailbox-visible-letter { transform: translateY(-5px) rotate(-3deg); }
 .garden-night .garden-mailbox { filter: brightness(.8); }
 .garden-envelope span { opacity: .7; }
-.garden-letter { position: absolute; z-index: 7; top: 88px; left: 27%; width: 360px; max-width: calc(100vw - 40px); max-height: 310px; overflow-y: auto; padding: 18px 24px; background: #fcf3df; color: #75634d; border: 1px solid #d5c6a6; border-radius: 3px 8px 4px 9px; box-shadow: 0 16px 45px #28222e22; font-family: 'Caveat', cursive; }
-.garden-letter h2 { font-size: 26px; margin: 8px 0 14px; }
-.garden-letter p { font-size: 20px; line-height: 1.3; }
-.garden-letter .letter-signature { margin-top: 16px; font-size: 20px; color: #9980a1; }
-.letter-mark { color: #a88aab; font-size: 26px; }
+.garden-letter { position: absolute; z-index: 7; top: auto; bottom: calc(100% - 16px); left: 50%; transform: translateX(-50%); width: 290px; max-width: calc(100vw - 40px); max-height: calc(100svh - 120px); overflow-y: auto; padding: 16px 18px; background: #fcf3df; color: #75634d; border: 1px solid #d5c6a6; border-radius: 3px 8px 4px 9px; box-shadow: 0 16px 45px #28222e22; font-family: 'Caveat', cursive; }
+.garden-letter h2 { font-size: 24px; line-height: 1.1; margin: 0 18px 9px 0; }
+.garden-letter p { font-size: 22px; line-height: 1.22; margin: 0; }
+.garden-letter .letter-signature { margin-top: 9px; font-size: 20px; color: #9980a1; }
+.letter-mark { display: none; }
 .trial-page .letter-close { position: absolute; right: 10px; top: 6px; width: 36px; height: 36px; font-family: sans-serif; font-size: 24px; cursor: pointer !important; }
 @keyframes garden-tail { to { transform: rotate(18deg); } }
 @keyframes garden-flutter { 0%, 100% { transform: translate(0, 0) rotate(-12deg); } 35% { transform: translate(30px, -25px) rotate(10deg); } 70% { transform: translate(-20px, -8px) rotate(-6deg); } }
@@ -71,7 +71,7 @@
   .garden-scenes { top: 95px; right: 6%; }
   .garden-mail { top: 37%; left: 8%; }
   .garden-envelope svg { width: 112px; height: 162px; }
-  .garden-letter { left: 20px; top: 150px; width: calc(100vw - 40px); max-height: 260px; }
+  .garden-letter { left: 0; top: auto; bottom: calc(100% - 18px); transform: none; width: min(290px, calc(100vw - 40px)); max-height: 250px; }
   .garden-celestial { top: 34%; right: 12%; width: 65px; }
   .landscape-azalea { width: calc(var(--flower-size) * .6); }
   .garden-instructions { left: 7%; right: 7%; bottom: 20px; font-size: 10px; }
@@ -227,3 +227,54 @@
   .garden-stage .camellia-generated-pet canvas, .camellia-generated-pet img { transition: none; }
 }
 .garden-night .camellia-generated-pet { filter: brightness(.8); }
+
+/* A small card floating in the sky that opens the knitting demo. */
+.trial-page .garden-knit-card { position: absolute; z-index: 4; top: 17%; left: 34%; display: flex; align-items: center; gap: 10px; padding: 9px 14px 9px 10px; border: 1px solid #d9cdb6; border-radius: 6px 10px 7px 11px; background: #fffaf0; box-shadow: 0 8px 22px #5a4b3218; color: #5c5244; text-align: left; cursor: pointer !important; transform: rotate(-3deg); animation: garden-knit-float 5s ease-in-out infinite; transition: box-shadow .2s, border-color .2s; }
+.trial-page .garden-knit-card * { cursor: pointer !important; }
+.garden-knit-card img { display: block; width: 52px; height: 52px; flex-shrink: 0; border-radius: 5px; box-shadow: 0 1px 3px #5a4b3226; }
+.garden-knit-card b { display: block; font: 400 22px/1 'Caveat', cursive; }
+.garden-knit-card small { display: block; margin-top: 2px; font: 11px/1.3 Inter, sans-serif; color: #8d8172; }
+.trial-page .garden-knit-card:hover { border-color: #c4705a; box-shadow: 0 10px 26px #5a4b3228; }
+.garden-knit-card:focus-visible { outline: 3px solid #b39cc5; outline-offset: 4px; }
+.garden-night .garden-knit-card { background: #3a3f57; border-color: #6c7189; color: #ece4d2; box-shadow: 0 8px 22px #0003; }
+.garden-night .garden-knit-card small { color: #b9b2a3; }
+@keyframes garden-knit-float { 0%, 100% { transform: rotate(-3deg) translateY(0); } 50% { transform: rotate(-1.5deg) translateY(-6px); } }
+@media (prefers-reduced-motion: reduce) { .garden-knit-card { animation: none; } }
+@media (max-width: 600px) { .trial-page .garden-knit-card { top: 166px; left: auto; right: 16px; padding: 7px 11px 7px 8px; } .garden-knit-card img { width: 42px; height: 42px; } .garden-knit-card b { font-size: 19px; } }
+
+/* A softly lit photo string above the garden. */
+.garden-photo-line { position: absolute; z-index: 4; top: 16%; left: 18%; width: 65%; max-width: 900px; height: 240px; pointer-events: none; }
+.garden-holiday-string { display: block; width: 100%; height: auto; overflow: visible; }
+.trial-page .garden-photo-line .garden-knit-card { top: 24%; left: 44%; right: auto; width: 125px; padding: 9px 9px 14px; display: flex; flex-direction: column; gap: 9px; border: 1px solid #d6c9b2; border-radius: 2px; background: #fffbf1; color: #655947; text-align: center; pointer-events: auto; transform-origin: 50% 0; animation: garden-photo-sway 7s ease-in-out infinite; box-shadow: 2px 5px 12px #55432615; }
+.garden-photo-line .garden-knit-card img { width: 105px; height: 98px; object-fit: contain; image-rendering: pixelated; background: #f7f0e2; border-radius: 0; box-shadow: none; }
+.garden-photo-line .garden-knit-card b { font-size: 21px; line-height: 1; }
+.garden-photo-clip { position: absolute; top: -13px; left: calc(50% - 5px); width: 10px; height: 24px; border: 1px solid #9f8966; border-radius: 2px; background: #c4ac84; box-shadow: 1px 1px 2px #4a362422; transform: rotate(5deg); }
+.garden-photo-clip::after { content: ''; position: absolute; inset: 3px 4px; border-left: 1px solid #a38a65; }
+.garden-fairy-light { animation: garden-fairy-glow 5s ease-in-out infinite; }
+.garden-night .garden-fairy-light { filter: drop-shadow(0 0 5px #f4d592); }
+.garden-night .garden-photo-line .garden-knit-card { background: #eee5d1; border-color: #b6a98c; color: #655947; }
+@keyframes garden-photo-sway { 0%,100% { transform: rotate(-4deg); } 50% { transform: rotate(-1deg); } }
+@keyframes garden-fairy-glow { 0%,100% { opacity: .65; } 50% { opacity: 1; } }
+@media(max-width:600px) {
+  .garden-photo-line { top: 185px; left: 4%; width: 92%; height: 195px; }
+  .trial-page .garden-photo-line .garden-knit-card { top: 12%; left: 39%; width: 100px; padding: 7px 7px 11px; gap: 7px; }
+  .garden-photo-line .garden-knit-card img { width: 84px; height: 80px; }
+  .garden-photo-line .garden-knit-card b { font-size: 18px; }
+  .garden-photo-clip { height: 20px; top: -11px; width: 8px; }
+}
+@media(prefers-reduced-motion:reduce) { .trial-page .garden-photo-line .garden-knit-card,.garden-fairy-light { animation: none; } }
+
+.garden-photo-line::before { content: ''; position: absolute; z-index: -1; inset: -65px -50px -35px; pointer-events: none; background: radial-gradient(ellipse at 50% 35%, #f7dca333 0%, #f2d2b014 45%, transparent 72%); }
+.garden-lamp-halo { opacity: .65; }
+.garden-fairy-light { filter: drop-shadow(0 0 4px #e4b86c88); }
+.garden-night .garden-lamp-halo { opacity: 1; }
+.garden-night .garden-photo-line::before { background: radial-gradient(ellipse at 50% 35%, #f1c87916 0%, transparent 72%); }
+.trial-page .garden-photo-line .garden-knit-card { background: linear-gradient(135deg, #fffdf5, #f7eddc); border-color: #dbc9ac; border-radius: 3px 4px 5px 3px; box-shadow: 2px 7px 17px #78552a17, 0 0 28px #f6d9a529; }
+.garden-photo-line .garden-knit-card img { background: #f3e5cf; border: 1px solid #e9d9bf; }
+.garden-photo-bow { position: absolute; top: -12px; left: calc(50% - 20px); width: 40px; height: 25px; z-index: 1; transform: rotate(-7deg); }
+.trial-page .garden-photo-line .garden-knit-card:hover { border-color: #c6a47e; box-shadow: 2px 9px 22px #78552a20, 0 0 32px #f8dca846; }
+.garden-night .garden-photo-line .garden-knit-card { background: linear-gradient(135deg, #fff2d8, #e8d8bb); box-shadow: 2px 7px 18px #0002, 0 0 35px #f1ce8d1f; }
+
+.trial-page .garden-photo-line .garden-knit-card,
+.trial-page .garden-photo-line .garden-knit-card * { cursor: pointer !important; }
+.trial-page .garden-photo-line .garden-knit-card:hover { animation-play-state: paused; }
