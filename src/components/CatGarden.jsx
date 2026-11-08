@@ -26,7 +26,10 @@ export default function CatGarden({ onOpenKnit, onOpenCode }) {
   const menuOpenRef = useRef(false)
   const menuPinned = useRef(false)
   const closeTimer = useRef(null)
-  const [sceneIndex, setSceneIndex] = useState(0)
+  const [sceneIndex, setSceneIndex] = useState(() => {
+    const hour = new Date().getHours()
+    return hour >= 7 && hour < 19 ? 0 : 1
+  })
   const [cardOpen, setCardOpen] = useState(false)
   const [petMessage, setPetMessage] = useState('Camellia is exploring the garden.')
   const [letterOpen, setLetterOpen] = useState(false)
