@@ -296,3 +296,8 @@
 .garden-photo-line a.garden-knit-card { text-decoration: none; }
 @media(max-width:1100px) { .trial-demo-nav { padding: 0 24px 8px; } }
 @media(max-width:600px) { .trial-demo-nav { padding: 0 16px; }.trial-demo-nav a { font-size: 11px; } }
+
+.trial-demo-nav .trial-demo-back { display: inline-flex; align-items: center; padding: 7px 13px; border: 1px solid #d8c9b1; border-radius: 18px; background: #fffaf0; color: #796348; font-size: 13px; }
+.trial-demo-nav .trial-demo-back:hover { background: #f0e6d4; text-decoration: none; }
+.trial-demo-nav .trial-demo-back:focus-visible { outline: 2px solid #8b9c75; outline-offset: 3px; }
+.trial-demo-nav { align-items: center; }
