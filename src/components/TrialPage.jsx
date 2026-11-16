@@ -1,4 +1,5 @@
-import BlockKnitting from './BlockKnitting'
+import { lazy, Suspense } from 'react'
+const BlockKnitting = lazy(() => import('./BlockKnitting'))
 import CatGarden from './CatGarden'
 import CatWeaving from './CatWeaving'
 import CodeWeaving from './CodeWeaving'
@@ -10,7 +11,7 @@ export default function TrialPage({ demo = null }) {
       <a className="trial-demo-back" href={TRIAL_ROUTES.garden}>← Back to the garden</a>
       <a href={demo === 'code' ? TRIAL_ROUTES.blocks : TRIAL_ROUTES.code}>{demo === 'code' ? 'Knitting Blocks →' : 'Programming Threads →'}</a>
     </nav>
-    {demo === 'blocks' ? <BlockKnitting/> : demo === 'code' ? <CodeWeaving/> : <CatWeaving/>}
+    {demo === 'blocks' ? <Suspense fallback={<p className="pk-lead">Loading knitting blocks…</p>}><BlockKnitting/></Suspense> : demo === 'code' ? <CodeWeaving/> : <CatWeaving/>}
   </main>
 
   return <main className="trial-page">

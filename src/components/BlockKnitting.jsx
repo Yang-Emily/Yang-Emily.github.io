@@ -1,24 +1,14 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
+import KnittingBlockEditor from './KnittingBlockEditor'
 import WeavingDetail, { MOVES, moveAt } from './WeavingDetail'
 import './CatWeaving.css'
 import './PixelKnot.css'
 import './BlockKnitting.css'
 
-let nextId = 0
-const block = (type, extra = {}) => ({ id: ++nextId, type, count: 4, color: '#ef4974', ...extra })
-const heart = () => {
-  const rows = ['000000000000','000110011000','001111111100','001111111100','000111111000','000011110000','000001100000','000000000000']
-  return rows.flatMap(row => {
-    const runs = row.match(/0+|1+/g)
-    return [...runs.map(run => block('knit', { count: run.length, color: run[0] === '1' ? '#ef4974' : '#fffaf2' })), block('row')]
-  })
-}
-const stripes = () => [block('repeat', { count: 4, children: [block('knit', { count: 12, color: '#9278cc' }), block('row'), block('knit', { count: 12, color: '#fffaf2' }), block('row')] })]
-const change = (list, id, fn) => list.flatMap(item => item.id === id ? fn(item) : [{ ...item, ...(item.children ? { children: change(item.children, id, fn) } : {}) }])
 const number = (value, max) => Math.max(1, Math.min(max, Number(value) || 1))
 
 export default function BlockKnitting() {
-  const [blocks, setBlocks] = useState(heart)
+  const [result, setResult] = useState({ cells: [], frames: [], overflow: false, error: null })
   const [cols, setCols] = useState(12)
   const [rows, setRows] = useState(8)
   const [active, setActive] = useState(null)
@@ -27,26 +17,7 @@ export default function BlockKnitting() {
   const [progress, setProgress] = useState(0)
   const [showAll, setShowAll] = useState(true)
   const [speed, setSpeed] = useState(1)
-  const result = useMemo(() => {
-    const cells = [], frames = []
-    let x = 0, y = 0, operations = 0, overflow = false
-    const run = list => {
-      for (const item of list) {
-        if (++operations >= 10000 || frames.length >= 4096) { overflow = true; return }
-        if (item.type === 'repeat') { for (let n = 0; n < item.count; n++) { run(item.children); if (overflow) return } }
-        else if (item.type === 'row') { if (x !== 0) { y++; x = 0 } }
-        else for (let n = 0; n < item.count; n++) {
-          if (y >= rows) { overflow = true; return }
-          cells.push({ x: y % 2 ? cols - 1 - x : x, y, color: item.color, id: item.id })
-          frames.push(item.id)
-          x++; if (x === cols) { x = 0; y++ }
-        }
-      }
-    }
-    run(blocks)
-    return { cells, frames, overflow }
-  }, [blocks, rows, cols])
-  useEffect(() => { setPlaying(false); setStep(0); setProgress(0); setShowAll(true); setActive(null) }, [blocks, rows, cols])
+  useEffect(() => { setPlaying(false); setStep(0); setProgress(0); setShowAll(true); setActive(null) }, [result])
   useEffect(() => {
     if (!playing || !result.cells.length) return
     let raf, start
@@ -68,23 +39,6 @@ export default function BlockKnitting() {
     if (!showAll && result.cells[step]) setActive(result.cells[step].id)
   }, [step, showAll, result])
   const inspect = index => { setStep(index); setProgress(0); setShowAll(false); setPlaying(false); setActive(result.cells[index]?.id ?? null) }
-  const update = (id, patch) => { setActive(id); setBlocks(list => change(list, id, item => [{ ...item, ...patch }])) }
-  const add = (type, parent = null, before = null) => {
-    const item = block(type, type === 'repeat' ? { children: [block('knit'), block('row')] } : {})
-    const insert = list => { const copy = [...list]; const index = before ? copy.findIndex(b => b.id === before) : copy.length; copy.splice(index < 0 ? copy.length : index, 0, item); return copy }
-    setBlocks(list => parent ? change(list, parent, p => [{ ...p, children: insert(p.children) }]) : insert(list)); setActive(item.id)
-  }
-  const drop = (event, parent, before) => { event.preventDefault(); event.stopPropagation(); const type = event.dataTransfer.getData('text/plain'); if (['knit','row','repeat'].includes(type)) add(type, parent, before) }
-  const render = (list, parent = null) => <div className="bk-stack" onDragOver={e => e.preventDefault()} onDrop={e => drop(e, parent)}>
-    {list.map((item, index) => <div key={item.id} className={`bk-block bk-${item.type} ${active === item.id ? 'bk-active' : ''}`} onDragOver={e => e.preventDefault()} onDrop={e => drop(e, parent, item.id)}>
-      <div className="bk-block-line"><span aria-hidden="true">{item.type === 'knit' ? '⋎' : item.type === 'row' ? '↵' : '↻'}</span>
-        {item.type === 'knit' ? <><b>Knit</b><input aria-label="Stitch count" type="number" min="1" max="48" value={item.count} onChange={e => update(item.id, { count: number(e.target.value, 48) })}/><span>in</span><input aria-label="Yarn color" type="color" value={item.color} onChange={e => update(item.id, { color: e.target.value })}/></> : item.type === 'row' ? <b>Next row</b> : <><b>Repeat</b><input aria-label="Repeat count" type="number" min="1" max="12" value={item.count} onChange={e => update(item.id, { count: number(e.target.value, 12) })}/><span>times</span></>}
-        <div className="bk-block-tools"><button disabled={index === 0} aria-label="Move block up" onClick={() => { const move = items => { const copy = [...items]; [copy[index - 1], copy[index]] = [copy[index], copy[index - 1]]; return copy }; setBlocks(items => parent ? change(items, parent, p => [{ ...p, children: move(p.children) }]) : move(items)) }}>↑</button><button aria-label="Delete block" onClick={() => setBlocks(items => change(items, item.id, () => []))}>×</button></div>
-      </div>
-      {item.children && <>{render(item.children, item.id)}<button className="bk-add-inside" onClick={() => add('knit', item.id)}>+ Knit inside repeat</button></>}
-    </div>)}
-    {!list.length && <p className="bk-drop-note">Drop a block here to begin.</p>}
-  </div>
   const visible = showAll ? result.cells : result.cells.slice(0, step + 1)
   const current = result.cells[step]
   const previous = result.cells[Math.max(0, step - 1)]
@@ -100,10 +54,8 @@ export default function BlockKnitting() {
     <header className="pk-head"><p className="pk-kicker">little blocks, stitch by stitch</p><h1>Knitting Blocks</h1><p className="pk-lead">Build a pattern with blocks. Watch your stitches come together.</p></header>
     <div className="bk-layout">
       <section className="bk-program" aria-label="Block program"><div className="pk-label"><h2>Your blocks</h2><span>top to bottom ↓</span></div>
-        <div className="bk-presets"><button onClick={() => { setCols(12); setRows(8); setBlocks(heart()) }}>♡ Heart</button><button onClick={() => { setCols(12); setRows(8); setBlocks(stripes()) }}>≋ Stripes</button><button onClick={() => setBlocks([])}>Clear</button></div>
-        <div className="bk-palette">{[['knit','⋎ Knit'],['row','↵ Next row'],['repeat','↻ Repeat']].map(([type, name]) => <button key={type} className={`bk-${type}`} draggable onDragStart={e => e.dataTransfer.setData('text/plain', type)} onClick={() => add(type)}>{name} +</button>)}</div>
-        <p className="bk-hint">Click to add, or drag a block into the stack. Changes appear instantly.</p>
-        <div className="bk-workspace"><div className="bk-start">⚑ When we begin</div>{render(blocks)}<div className="bk-end">■ Finish</div></div>
+        <KnittingBlockEditor cols={cols} rows={rows} active={active} onResult={setResult}/>
+        {result.error && <p className="bk-notice" role="alert">{result.error}</p>}
       </section>
       <section className="bk-simulator" aria-labelledby="bk-simulator-title"><div className="bk-simulator-head"><div><p className="pk-kicker">your knitted canvas</p><h2 id="bk-simulator-title">A little world of stitches</h2></div><span>{visible.length} stitches</span></div>
         <div className="bk-size"><label>Columns <input type="number" min="2" max="48" value={cols} onChange={e => setCols(Math.max(2, number(e.target.value, 48)))}/></label><label>Rows <input type="number" min="2" max="48" value={rows} onChange={e => setRows(Math.max(2, number(e.target.value, 48)))}/></label><span>1 square = 1 stitch</span></div>

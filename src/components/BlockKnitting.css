@@ -77,3 +77,27 @@
   .bk-hands { order: 1; width: 100%; }
   .bk-program { order: 2; }
 }
+
+.pixel-knot.bk { max-width: 1880px; padding-left: 28px; padding-right: 28px; }
+.bk-layout { grid-template-columns: minmax(440px, 1.25fr) minmax(0, 1.45fr) minmax(260px, .8fr); }
+.bk-blockly { position: relative; width: 100%; height: 650px; overflow: hidden; border: 1px solid #b8d8e9; border-radius: 12px; }
+.bk .blocklyText { fill: #717582; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.bk .blocklyToolboxCategoryLabel { font-size: 12px; font-family: Inter, system-ui, sans-serif; }
+.bk .blocklyMainBackground { stroke: none; }
+.bk .blocklyFlyoutBackground { fill-opacity: 1; }
+.bk .blocklySelected > .blocklyPath { stroke: #ebc641; stroke-width: 3px; }
+.bk .blocklyHighlightedConnectionPath { stroke: #ebc641; }
+.bk .blocklySvg { background: transparent; }
+@media (min-width: 651px) and (max-width: 1250px) {
+  .bk-layout { grid-template-columns: minmax(0, 1.6fr) minmax(260px, 1fr); }
+  .bk-program { grid-column: 1 / -1; grid-row: auto; }
+  .bk-blockly { height: 480px; }
+  .bk-hands { grid-column: 2; }
+}
+@media (max-width: 650px) {
+  .pixel-knot.bk { padding-left: 14px; padding-right: 14px; }
+  .bk-program { order: 0; }
+  .bk-simulator { order: 1; }
+  .bk-hands { order: 2; }
+  .bk-blockly { height: 460px; }
+}
