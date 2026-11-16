@@ -275,6 +275,14 @@ export default function CatGarden({ onOpenKnit, onOpenCode }) {
         </svg>
         <span><b>Programming Threads</b></span>
       </a>}
+      <a className="garden-knit-card garden-blocks-card" href="#/trial/KnittingBlocks" aria-label="Open Knitting Blocks">
+        <span className="garden-photo-clip" aria-hidden="true"/>
+        <svg className="garden-code-photo" viewBox="0 0 105 98" aria-hidden="true">
+          <rect width="105" height="98" fill="#f3e5cf"/>
+          {[0,1,2].map((n) => <g key={n} transform={`translate(${16+n*3} ${15+n*24})`}><path d="M0 0H15V-4H29V0H67V22H29V18H15V22H0Z" fill={['#d6b152','#678bd2','#9478c6'][n]}/><text x="9" y="14" fill="white" fontSize="10" fontFamily="monospace">{['⚑ start','knit 4','repeat 3'][n]}</text></g>)}
+        </svg>
+        <span><b>Knitting Blocks</b></span>
+      </a>
     </div>}
     <div className="garden-mail">
       <button ref={envelopeRef} className="garden-envelope" type="button" aria-expanded={letterOpen} aria-controls="witch-letter" aria-label={letterOpen ? 'Close the witch’s letter' : 'Open the witch’s letter'} onClick={() => setLetterOpen(value => !value)}>

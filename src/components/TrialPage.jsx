@@ -1,3 +1,4 @@
+import BlockKnitting from './BlockKnitting'
 import CatGarden from './CatGarden'
 import CatWeaving from './CatWeaving'
 import CodeWeaving from './CodeWeaving'
@@ -9,7 +10,7 @@ export default function TrialPage({ demo = null }) {
       <a className="trial-demo-back" href={TRIAL_ROUTES.garden}>← Back to the garden</a>
       <a href={demo === 'code' ? TRIAL_ROUTES.weave : TRIAL_ROUTES.code}>{demo === 'code' ? 'Weave Camellia →' : 'Programming Threads →'}</a>
     </nav>
-    {demo === 'code' ? <CodeWeaving/> : <CatWeaving/>}
+    {demo === 'blocks' ? <BlockKnitting/> : demo === 'code' ? <CodeWeaving/> : <CatWeaving/>}
   </main>
 
   return <main className="trial-page">

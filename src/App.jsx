@@ -58,7 +58,7 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [currentPage])
 
-  const isTrial = ['trial', 'weave-camellia', 'programming-knots'].includes(currentPage)
+  const isTrial = ['trial', 'weave-camellia', 'programming-knots', 'knitting-blocks'].includes(currentPage)
 
   return (
     <div className="min-h-screen bg-white">
@@ -73,7 +73,7 @@ function App() {
 
       {/* 主要内容 - 单页布局 */}
       {isTrial ? (
-        <TrialPage demo={currentPage === 'weave-camellia' ? 'weave' : currentPage === 'programming-knots' ? 'code' : null} />
+        <TrialPage demo={currentPage === 'knitting-blocks' ? 'blocks' : currentPage === 'weave-camellia' ? 'weave' : currentPage === 'programming-knots' ? 'code' : null} />
       ) : currentPage === 'sketchmind' ? (
         <SketchMindPost />
       ) : (

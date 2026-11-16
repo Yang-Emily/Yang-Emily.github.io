@@ -301,3 +301,13 @@
 .trial-demo-nav .trial-demo-back:hover { background: #f0e6d4; text-decoration: none; }
 .trial-demo-nav .trial-demo-back:focus-visible { outline: 2px solid #8b9c75; outline-offset: 3px; }
 .trial-demo-nav { align-items: center; }
+
+.trial-page .garden-photo-line .garden-knit-card:has(~ .garden-blocks-card) { left: 20%; }
+.trial-page .garden-photo-line .garden-code-card:has(~ .garden-blocks-card) { left: 43%; }
+.trial-page .garden-photo-line .garden-blocks-card { left: 66%; animation-delay: -1.5s; }
+@media (max-width: 600px) {
+  .trial-page .garden-photo-line .garden-knit-card:has(~ .garden-blocks-card) { left: 3%; width: 90px; }
+  .trial-page .garden-photo-line .garden-code-card:has(~ .garden-blocks-card) { left: 36%; }
+  .trial-page .garden-photo-line .garden-blocks-card { left: 69%; width: 90px; }
+  .garden-photo-line .garden-blocks-card .garden-code-photo { width: 74px; }
+}
