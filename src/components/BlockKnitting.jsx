@@ -112,6 +112,8 @@ export default function BlockKnitting() {
           {visible.map((cell, i) => <g key={i} role="button" tabIndex="0" aria-label={`Inspect row ${cell.y + 1}, column ${cell.x + 1}`} aria-pressed={!showAll && i === step} onClick={() => inspect(i)} onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); inspect(i) } }} transform={`translate(${cell.x * 30} ${cell.y * 30})`}><rect x=".5" y=".5" width="29" height="29" rx="3" fill={cell.color}/><path d="M5 5Q4 19 15 26Q26 19 25 5M15 26V12" fill="none" stroke="#000" strokeOpacity=".13" strokeWidth="5" strokeLinecap="round"/><path d="M7 5Q6 17 15 24Q24 17 23 5" fill="none" stroke="#fff" strokeOpacity=".55" strokeWidth="3" strokeLinecap="round"/>{!showAll && i === step && <rect x="1.5" y="1.5" width="27" height="27" rx="3" fill="none" stroke="#66512a" strokeWidth="2.5"/>}</g>)}
         </svg></div>
         <div className="bk-playback"><button disabled={!result.cells.length} onClick={() => { setStep(0); setProgress(0); setShowAll(false); setPlaying(true) }}>▶ Play stitches</button><button disabled={!playing} onClick={() => setPlaying(false)}>Pause</button><button onClick={() => { setPlaying(false); setStep(0); setProgress(0); setShowAll(true); setActive(null) }}>Show all</button><span aria-live="polite">{playing ? 'Knitting…' : 'Select a stitch to inspect its knot'}</span></div>
+        {result.overflow && <p className="bk-notice" role="status">Your pattern extends beyond this canvas. Add more rows or columns to see more.</p>}
+      </section>
         {state && <section className="bk-hands" aria-labelledby="bk-hands-title">
           <div className="pk-label"><h2 id="bk-hands-title">Run it with your hands</h2><span>{step * MOVES.length + move + 1} / {result.cells.length * MOVES.length} steps</span></div>
           <p className="bk-hint">Each block stitch is demonstrated as a double knot on a base string. Rows alternate direction.</p>
@@ -124,8 +126,6 @@ export default function BlockKnitting() {
           </div>
           <label className="bk-knot-slider">Knot {step + 1} / {result.cells.length}<input type="range" min="0" max={result.cells.length - 1} value={step} aria-label="Inspect knot" onChange={e => inspect(Number(e.target.value))}/></label>
         </section>}
-        {result.overflow && <p className="bk-notice" role="status">Your pattern extends beyond this canvas. Add more rows or columns to see more.</p>}
-      </section>
     </div>
   </div>
 }
